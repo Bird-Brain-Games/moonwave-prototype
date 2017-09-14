@@ -1,0 +1,15 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+syntax: glob
+.DS_Store
+*.sln
+*.userprefs
+*.csproj
+*.pdb
+*.unitypackage
+*.meta
+*.exe
+
+syntax: regexp
+^Build/.*
+^Library/.*
+^Temp/.*
