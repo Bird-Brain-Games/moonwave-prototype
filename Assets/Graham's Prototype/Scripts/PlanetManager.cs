@@ -34,12 +34,14 @@ public class PlanetManager : MonoBehaviour {
         return m_GravitationalConstant * ((mPlanet * mObject) / distSquared);
     }
 
-    public Vector3 GetGravity(Vector3 objectPos, float objectMass)
+    public Vector3 GetGravity(Vector3 objectPos, float objectMass, out Vector3 closestPlanetDir)
     {
         Vector3 result, distance, direction;
-        float distSquared;
+        float distSquared, closestDistance;
         int numActingForces = 0;
         result = new Vector3();
+        closestDistance = Mathf.Infinity;
+        closestPlanetDir = new Vector3();
 
         // Find if the position is within the radius of a planet,
         // And calculate the gravity force based on all the planets it is close to.
@@ -54,7 +56,14 @@ public class PlanetManager : MonoBehaviour {
                 result += direction * CalculateGravitationalForce(
                     m_GravityList[i].gravityStrength, objectMass, distSquared); // Acting as if gravity strength is the mass
                 numActingForces++;
-                Debug.Log(result);
+                //Debug.Log(result);
+
+                // Set the closest planet position
+                if (closestDistance > distSquared)
+                {
+                    closestPlanetDir = direction;
+                    closestDistance = distSquared;
+                }
             }
         }
 
