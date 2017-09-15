@@ -6,7 +6,6 @@ syntax: glob
 *.csproj
 *.pdb
 *.unitypackage
-*.meta
 *.exe
 
 syntax: regexp

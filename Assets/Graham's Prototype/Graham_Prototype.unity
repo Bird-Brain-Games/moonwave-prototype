@@ -571,6 +571,7 @@ GameObject:
   - component: {fileID: 2070638784}
   - component: {fileID: 2070638789}
   - component: {fileID: 2070638790}
+  - component: {fileID: 2070638791}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -591,7 +592,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 8
+  m_Constraints: 24
   m_CollisionDetection: 0
 --- !u!23 &2070638785
 MeshRenderer:
@@ -671,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlanetManager: {fileID: 110670556}
   m_ClosestPlanetDir: {x: 0, y: 0, z: 0}
+  m_ClosestPlanetGravity: {x: 0, y: 0, z: 0}
 --- !u!114 &2070638790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,3 +685,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 250
+--- !u!114 &2070638791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070638783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1273cfc2d3c3e004c92a5dd749cb05f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WalkSpeed: 50
