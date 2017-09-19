@@ -27,19 +27,17 @@ public class ObjectGravity : MonoBehaviour {
 
         // If it's grounded, only apply the gravity of the planet
         m_IsGrounded = FindIfGrounded();
+        if (m_IsGrounded)
+        {
+            Debug.Log("Grounded");
+            m_RigidBody.AddForce(m_ClosestPlanetGravity);
+        }
+        else
+        {
+            m_RigidBody.AddForce(gravity);
+        }
 
-        //if (IsGrounded())
-        //{
-        //    m_RigidBody.AddForce(m_ClosestPlanetGravity);
-        //    Debug.Log(m_ClosestPlanetGravity);
-        //}
-        //else
-        //{
-        //    m_RigidBody.AddForce(gravity);
-        //    //Debug.Log(gravity);
-        //}
-
-        m_RigidBody.AddForce(gravity);
+        
         m_RigidBody.transform.up = -gravity.normalized;
         
         //Debug.Log(gravity);
@@ -47,6 +45,7 @@ public class ObjectGravity : MonoBehaviour {
 
 
 	}
+
     bool FindIfGrounded()
     {
         // Inspiration from http://answers.unity3d.com/questions/196381/how-do-i-check-if-my-rigidbody-player-is-grounded.html

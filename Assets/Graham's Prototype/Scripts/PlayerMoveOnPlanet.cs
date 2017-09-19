@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoveOnPlanet : MonoBehaviour {
 
     public float m_WalkSpeed;
+    public float m_MaxWalkSpeed;
     Rigidbody m_RigidBody;
     ObjectGravity m_Gravity;
     float m_hAxis;
@@ -25,7 +26,18 @@ public class PlayerMoveOnPlanet : MonoBehaviour {
     {
         if (m_hAxis != 0.0f && m_Gravity.IsGrounded())
         {
-            m_RigidBody.AddForce(transform.forward * m_WalkSpeed * m_hAxis, ForceMode.VelocityChange);
+            m_RigidBody.AddForce(transform.right * m_WalkSpeed * m_hAxis, ForceMode.VelocityChange);
+            m_RigidBody.velocity = Vector3.ClampMagnitude(m_RigidBody.velocity, m_MaxWalkSpeed);
+            
         }
+        else if (m_hAxis == 0.0f && m_Gravity.IsGrounded() && m_RigidBody.velocity != Vector3.zero)
+        {
+            m_RigidBody.velocity += -m_RigidBody.velocity * 0.2f;
+            if (m_RigidBody.velocity.magnitude < 0.1f)
+            {
+                m_RigidBody.velocity.Set(0, 0, 0);
+            }
+        }
+        Debug.Log(m_RigidBody.velocity);
     }
 }
