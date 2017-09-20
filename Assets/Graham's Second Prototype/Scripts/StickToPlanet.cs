@@ -20,7 +20,8 @@ public class StickToPlanet : MonoBehaviour {
     Quaternion m_PreviousRotation;
 
     float linkDistance = 100.0f;
-    bool isGrounded;
+    bool m_IsGrounded;
+    float m_DistanceToGround;
 
     [Tooltip("How large the turning angle of the player can be")]  
     public float m_TurningSpeed = 5.0f;
@@ -32,41 +33,8 @@ public class StickToPlanet : MonoBehaviour {
         m_Collider = GetComponent<Collider>();
         m_CurrentPlanet = null;
         m_PlanetsAffecting = new List<Collider>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        // If it's inside a trigger, apply the stick to planet
-        // That way you can jump and still stick to the planet
-        // If it's outside of a trigger, then it should not apply gravity (Needs to be implemented)
-
-        if (InPlanetRange())
-        {
-            // If there is more than one planet, shoot a ray towards each planet
-            // And figure out which one is closer and orient towards that one?
-            // That could be a lot of rays
-            // For now, assume that there is only one planet
-            // Why don't we assume that if it enters a trigger, then it sets that as the new planet?
-
-            // Shoot a ray out of the foot of the character, 
-            // Orient the player according to the normal they just casted to,
-            // apply gravity to the down vector
-
-            //RaycastHit hit1;
-            //if (Physics.Raycast(transform.position, -transform.up, out hit1, linkDistance))
-            //{
-            //    // Rotate the player
-            //    transform.rotation = Quaternion.FromToRotation(transform.up, hit1.normal) * transform.rotation;
-            //}
-
-            // Apply Gravy
-            
-            
-
-
-            
-        }
-	}
+        m_DistanceToGround = m_Collider.bounds.extents.y;
+    }
 
     void ApplyGravity(RaycastHit hit1)
     {
@@ -75,22 +43,22 @@ public class StickToPlanet : MonoBehaviour {
         Vector3 rotationDirection = hit1.normal;
         if (Vector3.Angle(transform.up, hit1.normal) > 5.0f)
         {
-            // Needs to be refined, doesn't do what it should yet
             rotationDirection = Vector3.RotateTowards(transform.up, hit1.normal, m_TurningSpeed * Time.fixedDeltaTime, 1.0f);
-
         }
 
 
         m_PreviousRotation = Quaternion.LookRotation(transform.forward, rotationDirection);
         transform.rotation = m_PreviousRotation;
 
+        // Apply Gravity
+        float distSquared = (hit1.transform.position - transform.position).sqrMagnitude;
+        float gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
+            m_RigidBody.mass, distSquared);
 
+        m_RigidBody.AddForce(gravityForce * -rotationDirection);
 
-        // If the distance is small enough, consider grounded (TBI)
-
-        // Apply Gravy
-        m_RigidBody.AddForce(-transform.up * m_CurrentPlanet.m_GravityStrength, ForceMode.Force);
-        //m_RigidBody.tor
+        //Debug.Log(gravityForce * -rotationDirection);
+        Debug.Log(distSquared);
     }
 
     void FixedUpdate()
@@ -98,30 +66,30 @@ public class StickToPlanet : MonoBehaviour {
         if (InPlanetRange())
         {
             RaycastHit hit1;
-            bool hitPlanet = Physics.Raycast(transform.position, -transform.up, out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+            bool hitPlanet = Physics.Raycast(transform.position, -transform.up, 
+                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
             
-
+            // Apply gravity if it finds a planet
             if (hitPlanet)
             {
                 ApplyGravity(hit1);
                 Debug.DrawLine(transform.position, hit1.point);
             }
+
             // Shoot ray directed towards the center of the planet
-            else if (Physics.Raycast(transform.position, (m_CurrentPlanet.transform.position - transform.position).normalized, out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+            else if (Physics.Raycast(transform.position, (m_CurrentPlanet.transform.position - transform.position).normalized, 
+                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
             {
                 ApplyGravity(hit1);
                 Debug.DrawLine(transform.position, hit1.point);
                 Debug.Log("Backup Gravity");
-
-                // Shoot out two other rays, at slight angles from the target. If either of these hit, do the calculations
-                // Put the calculations in a function
-
-                // 
-                //m_RigidBody.AddForce(
-                //    Vector3.Normalize(m_CurrentPlanet.transform.position - transform.position)
-                //    * m_CurrentPlanet.m_GravityStrength, ForceMode.Force);
             }
         }
+
+        m_IsGrounded = FindIfGrounded();
+
+        //Debug.Log(m_IsGrounded);
+        //Debug.Log(m_RigidBody.velocity);
     }
 
     void OnTriggerEnter(Collider other)
@@ -151,7 +119,7 @@ public class StickToPlanet : MonoBehaviour {
         if (!InPlanetRange())
         {
             m_CurrentPlanet = null;
-            //Debug.Log("Drifting");
+            Debug.Log("Drifting");
         }
     }
 
@@ -159,4 +127,16 @@ public class StickToPlanet : MonoBehaviour {
     {
         return (m_PlanetsAffecting.Count > 0);
     }
+
+    public bool IsGrounded()
+    {
+        return m_IsGrounded;
+    }
+
+    bool FindIfGrounded()
+    {
+        // Inspiration from http://answers.unity3d.com/questions/196381/how-do-i-check-if-my-rigidbody-player-is-grounded.html
+        return Physics.Raycast(transform.position, -transform.up, m_DistanceToGround + 0.1f);
+    }
+
 }

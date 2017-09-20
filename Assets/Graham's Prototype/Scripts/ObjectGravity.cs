@@ -40,7 +40,7 @@ public class ObjectGravity : MonoBehaviour {
         
         m_RigidBody.transform.up = -gravity.normalized;
         
-        //Debug.Log(gravity);
+        Debug.Log(gravity);
         //Debug.Log(m_ClosestPlanetDir);
 
 

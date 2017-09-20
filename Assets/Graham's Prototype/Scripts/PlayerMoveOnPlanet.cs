@@ -38,6 +38,6 @@ public class PlayerMoveOnPlanet : MonoBehaviour {
                 m_RigidBody.velocity.Set(0, 0, 0);
             }
         }
-        Debug.Log(m_RigidBody.velocity);
+        //Debug.Log(m_RigidBody.velocity);
     }
 }
