@@ -58,7 +58,7 @@ public class StickToPlanet : MonoBehaviour {
         m_RigidBody.AddForce(gravityForce * -rotationDirection);
 
         //Debug.Log(gravityForce * -rotationDirection);
-        Debug.Log(distSquared);
+        //Debug.Log(distSquared);
     }
 
     void FixedUpdate()
@@ -88,8 +88,7 @@ public class StickToPlanet : MonoBehaviour {
 
         m_IsGrounded = FindIfGrounded();
 
-        //Debug.Log(m_IsGrounded);
-        //Debug.Log(m_RigidBody.velocity);
+        Debug.Log(m_IsGrounded);
     }
 
     void OnTriggerEnter(Collider other)
@@ -136,7 +135,13 @@ public class StickToPlanet : MonoBehaviour {
     bool FindIfGrounded()
     {
         // Inspiration from http://answers.unity3d.com/questions/196381/how-do-i-check-if-my-rigidbody-player-is-grounded.html
-        return Physics.Raycast(transform.position, -transform.up, m_DistanceToGround + 0.1f);
+        RaycastHit hit;
+        if (!Physics.Raycast(transform.position, -transform.up, out hit, m_DistanceToGround + 0.1f,
+            LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+            return false;
+
+        return (hit.transform.tag == "Planet");
+        
     }
 
 }
