@@ -88,7 +88,7 @@ public class StickToPlanet : MonoBehaviour {
 
         m_IsGrounded = FindIfGrounded();
 
-        Debug.Log(m_IsGrounded);
+        //Debug.Log(m_IsGrounded);
     }
 
     void OnTriggerEnter(Collider other)
@@ -99,7 +99,12 @@ public class StickToPlanet : MonoBehaviour {
             {
                 m_PlanetsAffecting.Add(other);
                 m_CurrentPlanet = other.GetComponent<PlanetGravityField>();
-                Debug.Log(m_CurrentPlanet.name);
+                Debug.Log("Entering " + m_CurrentPlanet.name);
+
+                // Want to smoothly rotate towards new planet, this will do for now
+                Vector3 planetDir = (transform.position - m_CurrentPlanet.transform.position).normalized;
+                Quaternion lookAtPlanet = Quaternion.LookRotation(transform.forward, planetDir);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f);
             }
         }
     }
@@ -110,7 +115,7 @@ public class StickToPlanet : MonoBehaviour {
         {
             if (m_PlanetsAffecting.Contains(other))
             {
-                //Debug.Log("Left " + other.name);
+                Debug.Log("Leaving " + other.name);
                 m_PlanetsAffecting.Remove(other);
             }
         }
