@@ -13,11 +13,15 @@ public class StickToPlanet : MonoBehaviour {
 
     Rigidbody m_RigidBody;
     Collider m_Collider;
+    PlayerStats m_PlayerStats;
 
     Vector3 m_CurrentGravityDirection;
     PlanetGravityField m_CurrentPlanet;
     List<Collider> m_PlanetsAffecting;
     Quaternion m_PreviousRotation;
+
+    Collider m_PreviousPlanet;  // For use when multiple gravities are in effect (bad name, I know)
+    float m_PreviousGravityFieldStrength;
 
     float linkDistance = 100.0f;
     bool m_IsGrounded;
@@ -31,48 +35,63 @@ public class StickToPlanet : MonoBehaviour {
     void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<Collider>();
+        m_PlayerStats = GetComponent<PlayerStats>();
         m_CurrentPlanet = null;
+        m_PreviousPlanet = null;
         m_PlanetsAffecting = new List<Collider>();
         m_DistanceToGround = m_Collider.bounds.extents.y;
     }
 
-    void ApplyGravity(RaycastHit hit1)
+    void ApplyGravity(RaycastHit hit1, float gravityForce)
     {
         // Rotate the player
-        // TODO: Make it only able to move a certain amount
         Vector3 rotationDirection = hit1.normal;
         if (Vector3.Angle(transform.up, hit1.normal) > 5.0f)
         {
+            // Probably don't need the if check, the turning speed does it for us
             rotationDirection = Vector3.RotateTowards(transform.up, hit1.normal, m_TurningSpeed * Time.fixedDeltaTime, 1.0f);
         }
-
-
         m_PreviousRotation = Quaternion.LookRotation(transform.forward, rotationDirection);
         transform.rotation = m_PreviousRotation;
 
         // Apply Gravity
-        float distSquared = (hit1.transform.position - transform.position).sqrMagnitude;
-        float gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
-            m_RigidBody.mass, distSquared);
-
-        m_RigidBody.AddForce(gravityForce * -rotationDirection);
-
-        //Debug.Log(gravityForce * -rotationDirection);
-        //Debug.Log(distSquared);
+        if (m_PlayerStats.m_PlayerState == PlayerState.Grounded)
+        {
+            //transform.position = hit1.point + hit1.normal * m_DistanceToGround;
+            //transform.Translate(hit1.point - transform.position);
+            m_RigidBody.AddForce(gravityForce * -rotationDirection);
+        }
+        else if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
+        {
+            float distSquared = (hit1.transform.position - transform.position).sqrMagnitude;
+            //float gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
+            //m_RigidBody.mass, distSquared);
+            m_RigidBody.AddForce(gravityForce * -rotationDirection);
+        }
     }
 
     void FixedUpdate()
     {
-        if (InPlanetRange())
+        // Find if the player is grounded
+        m_IsGrounded = FindIfGrounded();
+        if (IsGrounded())
+            m_PlayerStats.m_PlayerState = PlayerState.Grounded;
+        else if (!IsGrounded() && m_PlayerStats.m_PlayerState == PlayerState.Grounded)
+            m_PlayerStats.m_PlayerState = PlayerState.Drifting;
+
+        Debug.Log(m_PlayerStats.m_PlayerState);
+
+        if (PlanetInRange() && OnlyOnePlanetInRange())
         {
+            // Try to hit directly below the player
             RaycastHit hit1;
             bool hitPlanet = Physics.Raycast(transform.position, -transform.up, 
                 out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
             
-            // Apply gravity if it finds a planet
+            // Apply gravity if it finds a planet directly below the player
             if (hitPlanet)
             {
-                ApplyGravity(hit1);
+                ApplyGravity(hit1, m_CurrentPlanet.m_GravityStrength);
                 Debug.DrawLine(transform.position, hit1.point);
             }
 
@@ -80,15 +99,30 @@ public class StickToPlanet : MonoBehaviour {
             else if (Physics.Raycast(transform.position, (m_CurrentPlanet.transform.position - transform.position).normalized, 
                 out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
             {
-                ApplyGravity(hit1);
+                ApplyGravity(hit1, m_CurrentPlanet.m_GravityStrength);
                 Debug.DrawLine(transform.position, hit1.point);
                 Debug.Log("Backup Gravity");
             }
         }
-
-        m_IsGrounded = FindIfGrounded();
-
-        //Debug.Log(m_IsGrounded);
+        else if (PlanetInRange())
+        {
+            RaycastHit hit;
+            foreach (Collider planet in m_PlanetsAffecting)
+            {
+                if (Physics.Raycast(transform.position, (planet.transform.position - transform.position).normalized,
+                out hit, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+                {
+                    if (hit.collider != m_PreviousPlanet)
+                    {
+                        m_PreviousPlanet = hit.collider;
+                        m_PreviousGravityFieldStrength = hit.transform.GetComponent<PlanetGravityField>().m_GravityStrength;
+                    }
+                    ApplyGravity(hit, m_PreviousGravityFieldStrength);
+                    Debug.DrawLine(transform.position, hit.point);
+                    
+                }
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -102,9 +136,9 @@ public class StickToPlanet : MonoBehaviour {
                 Debug.Log("Entering " + m_CurrentPlanet.name);
 
                 // Want to smoothly rotate towards new planet, this will do for now
-                Vector3 planetDir = (transform.position - m_CurrentPlanet.transform.position).normalized;
-                Quaternion lookAtPlanet = Quaternion.LookRotation(transform.forward, planetDir);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f);
+                //Vector3 planetDir = (transform.position - m_CurrentPlanet.transform.position).normalized;
+                //Quaternion lookAtPlanet = Quaternion.LookRotation(transform.forward, planetDir);
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f);
             }
         }
     }
@@ -120,16 +154,21 @@ public class StickToPlanet : MonoBehaviour {
             }
         }
 
-        if (!InPlanetRange())
+        if (!PlanetInRange())
         {
             m_CurrentPlanet = null;
             Debug.Log("Drifting");
         }
     }
 
-    bool InPlanetRange()
+    bool PlanetInRange()
     {
         return (m_PlanetsAffecting.Count > 0);
+    }
+
+    bool OnlyOnePlanetInRange()
+    {
+        return (m_PlanetsAffecting.Count == 1);
     }
 
     public bool IsGrounded()
