@@ -30,7 +30,6 @@ public class StickToPlanet : MonoBehaviour {
     [Tooltip("How large the turning angle of the player can be")]  
     public float m_TurningSpeed = 5.0f;
 
-
     // Use this for initialization
     void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
@@ -64,7 +63,7 @@ public class StickToPlanet : MonoBehaviour {
         else if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
         {
             float distSquared = (hit1.transform.position - transform.position).sqrMagnitude;
-            //float gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
+            //gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
             //m_RigidBody.mass, distSquared);
             m_RigidBody.AddForce(gravityForce * -rotationDirection);
         }
@@ -107,21 +106,39 @@ public class StickToPlanet : MonoBehaviour {
         else if (PlanetInRange())
         {
             RaycastHit hit;
+            Vector3 gravityForce = Vector3.zero;
+
             foreach (Collider planet in m_PlanetsAffecting)
             {
-                if (Physics.Raycast(transform.position, (planet.transform.position - transform.position).normalized,
-                out hit, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+                Vector3 diff = (planet.transform.position - transform.position);
+                float distance = diff.sqrMagnitude;
+                Vector3 direction = diff.normalized;
+                Debug.DrawLine(transform.position, transform.position + direction * 2.0f);
+                if (Physics.Raycast(transform.position, direction, out hit, 
+                    linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore) &&
+                    hit.transform.tag == "Planet")
                 {
-                    if (hit.collider != m_PreviousPlanet)
-                    {
-                        m_PreviousPlanet = hit.collider;
-                        m_PreviousGravityFieldStrength = hit.transform.GetComponent<PlanetGravityField>().m_GravityStrength;
-                    }
-                    ApplyGravity(hit, m_PreviousGravityFieldStrength);
-                    Debug.DrawLine(transform.position, hit.point);
-                    
+                    gravityForce += direction * planet.GetComponent<PlanetGravityField>().
+                        CalculateGravitationalForce(m_RigidBody.mass, distance);
+
+                    //if (hit.collider != m_PreviousPlanet)
+                    //{
+                    //    m_PreviousPlanet = hit.collider;
+                    //    m_PreviousGravityFieldStrength = hit.transform.GetComponent<PlanetGravityField>().m_GravityStrength;
+                    //}
+                    //ApplyGravity(hit, m_PreviousGravityFieldStrength);
+                    //Debug.DrawLine(transform.position, hit.point);
                 }
             }
+
+            // Rotate player towards the gravity
+            Vector3 rotationDirection = Vector3.RotateTowards(transform.up, gravityForce.normalized, 100, 1.0f);
+            Debug.DrawLine(transform.position, transform.position + gravityForce.normalized * 2.0f, Color.green);
+            m_PreviousRotation = Quaternion.LookRotation(transform.forward, -gravityForce.normalized);
+            transform.rotation = m_PreviousRotation;
+
+            // Apply the gravity
+            m_RigidBody.AddForce(gravityForce);
         }
     }
 
