@@ -32,4 +32,13 @@ public class ControlStrings : MonoBehaviour
     {
 
     }
+    public string get_name() { return m_name; }
+    public string get_jump() { return m_jump; }
+    public string get_shoot() { return m_shoot; }
+    public string get_joystickH() { return m_joystickH; }
+    public string get_joystickV() { return m_joystickV; }
+    public string get_aimH() { return m_aimH; }
+    public string get_aimV() { return m_aimV; }
+
+
 }

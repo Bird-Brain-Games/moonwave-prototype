@@ -16,19 +16,21 @@ public class PlayerMoveOnPlanet : MonoBehaviour
 
     Vector3 m_JoyStick;
     Vector3 m_PlanetToPlayer;
+    ControlStrings controls;
 
     // Use this for initialization
     void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Gravity = GetComponent<ObjectGravity>();
+        controls = GetComponent<ControlStrings>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_hAxis = Input.GetAxis("Horizontal");
-        m_vAxis = Input.GetAxis("Vertical");
+        m_hAxis = Input.GetAxis(controls.get_aimH());
+        m_vAxis = Input.GetAxis(controls.get_aimV());
     }
 
     // Update called once per physics update

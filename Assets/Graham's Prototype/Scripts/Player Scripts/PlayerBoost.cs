@@ -15,9 +15,11 @@ public class PlayerBoost : MonoBehaviour
     Rigidbody m_RigidBody;
     ObjectGravity m_Gravity;
     Renderer m_Rend;
+    ControlStrings controls;
 
     float m_hAxis;
     float m_vAxis;
+    bool m_jump;
     Vector3 m_Direction;
     int m_boost;
 
@@ -32,6 +34,7 @@ public class PlayerBoost : MonoBehaviour
         m_RigidBody = GetComponent<Rigidbody>();
         m_Gravity = GetComponent<ObjectGravity>();
         m_Rend = GetComponent<Renderer>();
+        controls = GetComponent<ControlStrings>();
         m_boost = 0;
 
     }
@@ -39,8 +42,9 @@ public class PlayerBoost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_hAxis = Input.GetAxis("Horizontal");
-        m_vAxis = Input.GetAxis("Vertical");
+        m_hAxis = Input.GetAxis(controls.get_joystickH());
+        m_vAxis = Input.GetAxis(controls.get_joystickV());
+        m_jump = Input.GetButtonDown(controls.get_jump());
         m_Direction = new Vector3(m_hAxis, m_vAxis, 0.0f);
 
         // Gain your boosts back after touching ground. variable number of boosts.
@@ -50,7 +54,7 @@ public class PlayerBoost : MonoBehaviour
             {
                 m_boost = boostCharges;
             }
-            else if (Input.GetButtonDown("Boost") && m_boost > 0)
+            else if (m_jump && m_boost > 0)
             {
 
                 if (m_hAxis != 0.0f || m_vAxis != 0.0f)
@@ -65,7 +69,7 @@ public class PlayerBoost : MonoBehaviour
         //Your boost is on a timer.
         else if (m_type == 1)
         {
-            if (Input.GetButtonDown("Boost") && m_Gravity.IsGrounded())
+            if (m_jump && m_Gravity.IsGrounded())
             {
                 m_RigidBody.AddForce(JumpForce * transform.up, ForceMode.Impulse);
                 Debug.Log("Jump!");
@@ -93,7 +97,7 @@ public class PlayerBoost : MonoBehaviour
                     //Debug.Log("Cooldown pass: " + (m_cooldownDuration - m_cooldownStart));
                 }
             }
-            else if (Input.GetButtonDown("Boost") && m_boost > 0)
+            else if (m_jump && m_boost > 0)
             {
 
                 if (m_hAxis != 0.0f || m_vAxis != 0.0f)
