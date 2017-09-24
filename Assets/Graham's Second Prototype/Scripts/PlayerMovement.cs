@@ -25,11 +25,17 @@ public class PlayerMovement : MonoBehaviour {
     // FixedUpdate called once per physics update
     void FixedUpdate()
     {
-        if (m_hAxis != 0.0f && m_Gravity.IsGrounded())
+        //m_RigidBody.velocity = Vector3.zero;
+        if (m_hAxis != 0.0 && m_Gravity.IsGrounded())
         {
-            m_RigidBody.AddForce(transform.right * m_WalkSpeed * m_hAxis, ForceMode.VelocityChange);
-            m_RigidBody.velocity = Vector3.ClampMagnitude(m_RigidBody.velocity, m_MaxWalkSpeed);
-            
+            m_RigidBody.velocity = transform.right * m_hAxis * m_WalkSpeed;
         }
+
+        //if (m_hAxis != 0.0f && m_Gravity.IsGrounded())
+        //{
+        //    m_RigidBody.AddForce(transform.right * m_WalkSpeed * m_hAxis, ForceMode.VelocityChange);
+        //    m_RigidBody.velocity = Vector3.ClampMagnitude(m_RigidBody.velocity, m_MaxWalkSpeed);
+            
+        //}
     }
 }

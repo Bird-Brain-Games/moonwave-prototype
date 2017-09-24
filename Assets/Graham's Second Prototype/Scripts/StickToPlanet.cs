@@ -54,13 +54,7 @@ public class StickToPlanet : MonoBehaviour {
         transform.rotation = m_PreviousRotation;
 
         // Apply Gravity
-        if (m_PlayerStats.m_PlayerState == PlayerState.Grounded)
-        {
-            //transform.position = hit1.point + hit1.normal * m_DistanceToGround;
-            //transform.Translate(hit1.point - transform.position);
-            m_RigidBody.AddForce(gravityForce * -rotationDirection);
-        }
-        else if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
+        if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
         {
             float distSquared = (hit1.transform.position - transform.position).sqrMagnitude;
             //gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
@@ -71,16 +65,49 @@ public class StickToPlanet : MonoBehaviour {
 
     void FixedUpdate()
     {
+
         // Find if the player is grounded
-        m_IsGrounded = FindIfGrounded();
-        if (IsGrounded())
-            m_PlayerStats.m_PlayerState = PlayerState.Grounded;
-        else if (!IsGrounded() && m_PlayerStats.m_PlayerState == PlayerState.Grounded)
-            m_PlayerStats.m_PlayerState = PlayerState.Drifting;
+        //if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
+        //{
+        //    m_IsGrounded = FindIfGrounded();
+        //}
+        
+        //if (IsGrounded())
+            //m_PlayerStats.m_PlayerState = PlayerState.Grounded;
+        //else if (!IsGrounded() && m_PlayerStats.m_PlayerState == PlayerState.Grounded)
+        //    m_PlayerStats.m_PlayerState = PlayerState.Drifting;
 
         Debug.Log(m_PlayerStats.m_PlayerState);
 
-        if (PlanetInRange() && OnlyOnePlanetInRange())
+        if (PlanetInRange() && IsGrounded())
+        {
+            RaycastHit hit1;
+            bool hitPlanet = Physics.Raycast(transform.position, -transform.up,
+                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+
+            // Stick to planet if it finds a planet directly below the player
+            if (hitPlanet)
+            {
+                if (hit1.distance > m_DistanceToGround)
+                {
+                    transform.position = transform.position + (-transform.up * (hit1.distance - m_DistanceToGround));
+                }
+                transform.rotation = Quaternion.LookRotation(transform.forward, hit1.normal);
+                m_RigidBody.AddForce(m_CurrentPlanet.m_GravityStrength * -transform.up);
+            }
+            // Shoot ray directed towards the center of the planet
+            else if (Physics.Raycast(transform.position, (m_CurrentPlanet.transform.position - transform.position).normalized,
+                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+            {
+                if (hit1.distance > m_DistanceToGround)
+                {
+                    transform.position = transform.position + (-transform.up * (hit1.distance - m_DistanceToGround));
+                    transform.rotation = Quaternion.LookRotation(transform.forward, hit1.normal);
+                    m_RigidBody.AddForce(m_CurrentPlanet.m_GravityStrength * -transform.up);
+                }
+            }
+        }
+        else if (PlanetInRange() && OnlyOnePlanetInRange())
         {
             // Try to hit directly below the player
             RaycastHit hit1;
@@ -120,14 +147,6 @@ public class StickToPlanet : MonoBehaviour {
                 {
                     gravityForce += direction * planet.GetComponent<PlanetGravityField>().
                         CalculateGravitationalForce(m_RigidBody.mass, distance);
-
-                    //if (hit.collider != m_PreviousPlanet)
-                    //{
-                    //    m_PreviousPlanet = hit.collider;
-                    //    m_PreviousGravityFieldStrength = hit.transform.GetComponent<PlanetGravityField>().m_GravityStrength;
-                    //}
-                    //ApplyGravity(hit, m_PreviousGravityFieldStrength);
-                    //Debug.DrawLine(transform.position, hit.point);
                 }
             }
 
@@ -140,6 +159,8 @@ public class StickToPlanet : MonoBehaviour {
             // Apply the gravity
             m_RigidBody.AddForce(gravityForce);
         }
+
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -190,7 +211,7 @@ public class StickToPlanet : MonoBehaviour {
 
     public bool IsGrounded()
     {
-        return m_IsGrounded;
+        return m_PlayerStats.m_PlayerState == PlayerState.Grounded;
     }
 
     bool FindIfGrounded()
@@ -203,6 +224,17 @@ public class StickToPlanet : MonoBehaviour {
 
         return (hit.transform.tag == "Planet");
         
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Planet")
+        {
+            if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
+            {
+                m_PlayerStats.m_PlayerState = PlayerState.Grounded;
+            }
+        }
     }
 
 }
