@@ -29,8 +29,8 @@ public class PlayerMoveOnPlanet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_hAxis = Input.GetAxis(controls.get_aimH());
-        m_vAxis = Input.GetAxis(controls.get_aimV());
+        m_hAxis = Input.GetAxis(controls.get_joystickH());
+        m_vAxis = Input.GetAxis(controls.get_joystickV());
     }
 
     // Update called once per physics update
