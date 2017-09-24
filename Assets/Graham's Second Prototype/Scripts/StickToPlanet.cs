@@ -30,6 +30,9 @@ public class StickToPlanet : MonoBehaviour {
     [Tooltip("How large the turning angle of the player can be")]  
     public float m_TurningSpeed = 5.0f;
 
+    [Tooltip("If the equation used for resolving gravity between\n multiple planets is constant or Newtonian")]
+    public bool constantGravity = true;
+
     // Use this for initialization
     void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
@@ -65,21 +68,7 @@ public class StickToPlanet : MonoBehaviour {
 
     void FixedUpdate()
     {
-
-        // Find if the player is grounded
-        //if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
-        //{
-        //    m_IsGrounded = FindIfGrounded();
-        //}
-        
-        //if (IsGrounded())
-            //m_PlayerStats.m_PlayerState = PlayerState.Grounded;
-        //else if (!IsGrounded() && m_PlayerStats.m_PlayerState == PlayerState.Grounded)
-        //    m_PlayerStats.m_PlayerState = PlayerState.Drifting;
-
-        //Debug.Log(m_PlayerStats.m_PlayerState);
-
-        if (PlanetInRange() && IsGrounded())
+        if (PlanetInRange() && IsGrounded())    // Grounded on the planet
         {
             RaycastHit hit1;
             bool hitPlanet = Physics.Raycast(transform.position, -transform.up,
@@ -108,7 +97,7 @@ public class StickToPlanet : MonoBehaviour {
                 Debug.Log("Backup Gravity");
             }
         }
-        else if (PlanetInRange() && OnlyOnePlanetInRange())
+        else if (PlanetInRange() && OnlyOnePlanetInRange())     // Only one planet
         {
             // Try to hit directly below the player
             RaycastHit hit1;
@@ -131,7 +120,7 @@ public class StickToPlanet : MonoBehaviour {
                 Debug.Log("Backup Gravity");
             }
         }
-        else if (PlanetInRange())
+        else if (PlanetInRange())   // Multiple planets
         {
             RaycastHit hit;
             Vector3 gravityForce = Vector3.zero;
@@ -143,25 +132,32 @@ public class StickToPlanet : MonoBehaviour {
                 Vector3 direction = diff.normalized;
                 Debug.DrawLine(transform.position, transform.position + direction * 2.0f);
 
-                //gravityForce += direction * planet.GetComponent<PlanetGravityField>().m_GravityStrength;  // Constant gravity
-                gravityForce += direction * planet.GetComponent<PlanetGravityField>().
+                if (constantGravity)
+                {
+                    gravityForce += direction * planet.GetComponent<PlanetGravityField>().m_GravityStrength;  // Constant gravity
+                }
+                else
+                {
+                    gravityForce += direction * planet.GetComponent<PlanetGravityField>().
                         CalculateGravitationalForce(m_RigidBody.mass, distance);    // Newton Gravity
+                }
+
 
                 //if (Physics.Raycast(transform.position, direction, out hit,
                 //    linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
                 //{
-                    
+
                 //}
             }
 
             // Rotate player towards the gravity
-            Vector3 rotationDirection = Vector3.RotateTowards(transform.up, gravityForce.normalized, 100, 1.0f);
-            Debug.DrawLine(transform.position, transform.position + gravityForce.normalized * 2.0f, Color.green);
-            m_PreviousRotation = Quaternion.LookRotation(transform.forward, -gravityForce.normalized);
-            transform.rotation = m_PreviousRotation;
+            //Vector3 rotationDirection = Vector3.RotateTowards(transform.up, gravityForce.normalized, 100, 1.0f);
+            //m_PreviousRotation = Quaternion.LookRotation(transform.forward, -gravityForce.normalized);
+            //transform.rotation = m_PreviousRotation;
 
             // Apply the gravity
             m_RigidBody.AddForce(gravityForce);
+            Debug.DrawLine(transform.position, transform.position + gravityForce.normalized * 2.0f, Color.green);
         }
 
 
@@ -179,10 +175,7 @@ public class StickToPlanet : MonoBehaviour {
                 if (OnlyOnePlanetInRange())
                     m_CurrentPlanet = other.gameObject.GetComponent<PlanetGravityField>();
 
-                // Want to smoothly rotate towards new planet, this will do for now
-                Vector3 planetDir = (transform.position - m_CurrentPlanet.transform.position).normalized;
-                Quaternion lookAtPlanet = Quaternion.LookRotation(transform.forward, planetDir);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f);
+                RotateTowardsCurrentPlanet();
             }
         }
     }
@@ -208,6 +201,7 @@ public class StickToPlanet : MonoBehaviour {
         {
             m_CurrentPlanet = m_PlanetsAffecting[0].GetComponent<PlanetGravityField>();
             Debug.Log("Current Planet: " + m_CurrentPlanet.name);
+            RotateTowardsCurrentPlanet();
         }
     }
 
@@ -247,6 +241,11 @@ public class StickToPlanet : MonoBehaviour {
                 m_PlayerStats.m_PlayerState = PlayerState.Grounded;
                 m_CurrentPlanet = collision.gameObject.GetComponent<PlanetGravityField>();
                 Debug.Log("Player Collided with " + collision.gameObject.name);
+
+                // Rotate player towards planet
+                Vector3 planetDir = (transform.position - m_CurrentPlanet.transform.position).normalized;
+                Quaternion lookAtPlanet = Quaternion.LookRotation(transform.forward, planetDir);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f);
             }
         }
     }
@@ -258,6 +257,14 @@ public class StickToPlanet : MonoBehaviour {
             return hit.collider.GetComponent<PlanetGravityField>().m_GravityStrength;
         }
         return -1.0f;
+    }
+
+    void RotateTowardsCurrentPlanet()
+    {
+        // Want to smoothly rotate towards new planet, this will do for now
+        Vector3 planetDir = (transform.position - m_CurrentPlanet.transform.position).normalized;
+        Quaternion lookAtPlanet = Quaternion.LookRotation(transform.forward, planetDir);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f);
     }
 
 }
