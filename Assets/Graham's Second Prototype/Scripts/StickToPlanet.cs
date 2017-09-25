@@ -267,4 +267,10 @@ public class StickToPlanet : MonoBehaviour {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f);
     }
 
+    public Vector3 GetDirectionOfCurrentPlanet()
+    {
+        if (m_CurrentPlanet)
+            return (transform.position - m_CurrentPlanet.transform.position).normalized;
+        return Vector3.zero;
+    }
 }

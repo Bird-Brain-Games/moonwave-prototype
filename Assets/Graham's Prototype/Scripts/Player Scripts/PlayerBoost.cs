@@ -14,7 +14,8 @@ public class PlayerBoost : MonoBehaviour
     public int m_type;
 
     Rigidbody m_RigidBody;
-    ObjectGravity m_Gravity;
+    StickToPlanet m_Gravity;
+    PlayerStats m_PlayerStats;
     Renderer m_Rend;
     ControlStrings controls;
 
@@ -33,7 +34,8 @@ public class PlayerBoost : MonoBehaviour
     void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
-        m_Gravity = GetComponent<ObjectGravity>();
+        m_Gravity = GetComponent<StickToPlanet>();
+        m_PlayerStats = GetComponent<PlayerStats>();
         m_Rend = GetComponent<Renderer>();
         controls = GetComponent<ControlStrings>();
         m_boost = 1;
@@ -73,6 +75,7 @@ public class PlayerBoost : MonoBehaviour
             if (m_jump && m_Gravity.IsGrounded())
             {
                 m_RigidBody.AddForce(JumpForce * transform.up, ForceMode.Impulse);
+                m_PlayerStats.m_PlayerState = PlayerState.Drifting;
                 //Debug.Log("Jump!");
             }
             else if (m_boost == 0)

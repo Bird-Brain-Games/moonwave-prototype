@@ -6,12 +6,11 @@ public class PlayerMoveOnPlanet : MonoBehaviour
 {
 
     public float m_WalkSpeed;
-    public float m_MaxWalkSpeed;
     Rigidbody m_RigidBody;
-    ObjectGravity m_Gravity;
+    StickToPlanet m_Gravity;
     float m_hAxis;
     float m_vAxis;
-    int m_MovementType = 1;
+    public int m_MovementType = 1;
     float dotProduct;
 
     Vector3 m_JoyStick;
@@ -22,7 +21,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
     void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
-        m_Gravity = GetComponent<ObjectGravity>();
+        m_Gravity = GetComponent<StickToPlanet>();
         controls = GetComponent<ControlStrings>();
     }
 
@@ -39,19 +38,9 @@ public class PlayerMoveOnPlanet : MonoBehaviour
 
         if (m_MovementType == 0)
         {
-            if (m_hAxis != 0.0f && m_Gravity.IsGrounded())
+            if (m_hAxis != 0.0 && m_Gravity.IsGrounded())
             {
-                m_RigidBody.AddForce(transform.right * m_WalkSpeed * m_hAxis, ForceMode.VelocityChange);
-                m_RigidBody.velocity = Vector3.ClampMagnitude(m_RigidBody.velocity, m_MaxWalkSpeed);
-
-            }
-            else if (m_hAxis == 0.0f && m_Gravity.IsGrounded() && m_RigidBody.velocity != Vector3.zero)
-            {
-                m_RigidBody.velocity += -m_RigidBody.velocity * 0.2f;
-                if (m_RigidBody.velocity.magnitude < 0.1f)
-                {
-                    m_RigidBody.velocity.Set(0, 0, 0);
-                }
+                m_RigidBody.velocity = transform.right * m_hAxis * m_WalkSpeed;
             }
         }
         else if (m_MovementType == 1)
@@ -67,7 +56,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
 
                 //dot the joystick and player up vector
 
-                m_PlanetToPlayer = -m_Gravity.m_ClosestPlanetDir;//new Vector3 (transform.position - )
+                m_PlanetToPlayer = -m_Gravity.GetDirectionOfCurrentPlanet();//new Vector3 (transform.position - )
                 dotProduct = Vector3.Dot(m_JoyStick, m_PlanetToPlayer);
                 //Debug.Log("Dot product " + Vector3.Dot(m_JoyStick, transform.up));
                 if (dotProduct < 0.95f || dotProduct > 1.05f)
@@ -75,39 +64,16 @@ public class PlayerMoveOnPlanet : MonoBehaviour
                     if (m_JoyStick.y * m_PlanetToPlayer.x > m_JoyStick.x * m_PlanetToPlayer.y)
                     {
                         //Debug.Log("Move counter clockwise");
-                        m_RigidBody.AddForce(transform.right * m_WalkSpeed *  -1, ForceMode.VelocityChange);
-                        m_RigidBody.velocity = Vector3.ClampMagnitude(m_RigidBody.velocity, m_MaxWalkSpeed);
+                        m_RigidBody.velocity = transform.right * m_hAxis * m_WalkSpeed * -1.0f;
                     }
                     else
                     {
                         //Debug.Log("Move clockwise");
-                        m_RigidBody.AddForce(transform.right * m_WalkSpeed * 1, ForceMode.VelocityChange);
-                        m_RigidBody.velocity = Vector3.ClampMagnitude(m_RigidBody.velocity, m_MaxWalkSpeed);
-                    }
-                }
-                else
-                {
-                    m_RigidBody.velocity += -m_RigidBody.velocity * 0.2f;
-                    if (m_RigidBody.velocity.magnitude < 0.1f)
-                    {
-                        m_RigidBody.velocity.Set(0, 0, 0);
+                        m_RigidBody.velocity = transform.right * m_hAxis * m_WalkSpeed * 1.0f;
                     }
                 }
 
             }
-            //IF the player isnt moving apply friction
-            else if (m_hAxis == 0.0f && m_Gravity.IsGrounded() && m_RigidBody.velocity != Vector3.zero)
-            {
-                m_RigidBody.velocity += -m_RigidBody.velocity * 0.2f;
-                if (m_RigidBody.velocity.magnitude < 0.1f)
-                {
-                    m_RigidBody.velocity.Set(0, 0, 0);
-                }
-            }
-        }
-        else
-        {
-
         }
        // Debug.Log(m_RigidBody.velocity);
        // Debug.Log(m_hAxis);
