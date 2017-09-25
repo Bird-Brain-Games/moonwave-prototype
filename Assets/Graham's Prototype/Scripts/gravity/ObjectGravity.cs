@@ -29,7 +29,7 @@ public class ObjectGravity : MonoBehaviour {
         m_IsGrounded = FindIfGrounded();
         if (m_IsGrounded)
         {
-            Debug.Log("Grounded");
+            //Debug.Log("Grounded");
             m_RigidBody.AddForce(m_ClosestPlanetGravity);
         }
         else
@@ -40,7 +40,7 @@ public class ObjectGravity : MonoBehaviour {
         
         m_RigidBody.transform.up = -gravity.normalized;
         
-        Debug.Log(gravity);
+        //Debug.Log(gravity);
         //Debug.Log(m_ClosestPlanetDir);
 
 
