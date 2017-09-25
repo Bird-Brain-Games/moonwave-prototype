@@ -41,6 +41,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
             if (m_hAxis != 0.0 && m_Gravity.IsGrounded())
             {
                 m_RigidBody.velocity = transform.right * m_hAxis * m_WalkSpeed;
+                //m_RigidBody.AddForce(transform.right * m_hAxis * m_WalkSpeed, ForceMode.VelocityChange);
             }
         }
         else if (m_MovementType == 1)
