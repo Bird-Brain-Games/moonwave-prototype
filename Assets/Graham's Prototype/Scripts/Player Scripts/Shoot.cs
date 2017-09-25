@@ -13,10 +13,10 @@ public class Shoot : MonoBehaviour {
     bool m_shoot;
     ControlStrings controls;
 
-    float m_bulletDelay;
+    public float m_bulletDelay;
     float m_timer;
     float m_startTime;
-
+    bool m_shootStatus;
 	void Start () {
         controls = GetComponent<ControlStrings>();
 
@@ -31,8 +31,9 @@ public class Shoot : MonoBehaviour {
         m_aimV = Input.GetAxis(controls.get_aimV());
         //Debug.Log("Horizontal axis "+ m_aimH.ToString());
         //Debug.Log("Vertical axis " + m_aimV.ToString());
-        if (m_shoot && m_timer == 0)
+        if (m_shoot && m_shootStatus)
         {
+            m_shootStatus = false;
             m_timer = Time.time;
             m_startTime = Time.time;
 
@@ -40,14 +41,27 @@ public class Shoot : MonoBehaviour {
             forward.Normalize();
 
             Rigidbody clone;
-            clone = Instantiate(bullet, transform.position + (forward*1.5f), Quaternion.identity);
+            clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
 
-            Debug.Log(forward.ToString());
-            clone.velocity = forward * 15.0f; 
+            forward /= 5000.0f;
+            //Debug.Log(forward.ToString());
+
+            clone.AddForce(forward, ForceMode.Force);
+            //Debug.Log(clone.velocity.ToString());
+            clone.GetComponent<Owner>().setOwner(gameObject);
         }
-        else if (m_bulletDelay > m_timer - m_startTime)
+        else if (m_bulletDelay > m_timer - m_startTime && !m_shootStatus)
         {
-
+            m_timer = Time.time;
+            //Debug.Log("start Time: " + m_startTime);
+            //Debug.Log("Time: " + m_timer);
+        }
+        else if (m_bulletDelay < m_timer - m_startTime && !m_shootStatus)
+        {
+            //Debug.Log("shoot recharged");
+            m_shootStatus = true;
+            m_timer = 0;
+            m_startTime = 0;
         }
 	}
 }

@@ -15,6 +15,16 @@ public class ControlStrings : MonoBehaviour
     string m_aimH;
     string m_aimV;
 
+    bool boost;
+    
+
+
+
+    //temp variables to differentiate players
+    public Color colour;
+    public Color colourdull;
+
+
     // Use this for initialization
     void Start()
     {
@@ -25,6 +35,7 @@ public class ControlStrings : MonoBehaviour
         m_joystickV = append +"joystickV";
         m_aimH = append +"aimH";
         m_aimV = append + "aimV";
+
     }
 
     // Update is called once per frame
@@ -39,6 +50,7 @@ public class ControlStrings : MonoBehaviour
     public string get_joystickV() { return m_joystickV; }
     public string get_aimH() { return m_aimH; }
     public string get_aimV() { return m_aimV; }
-
+    public bool get_boost() { return boost; }
+    public void set_boost(bool set) { boost = set; }
 
 }

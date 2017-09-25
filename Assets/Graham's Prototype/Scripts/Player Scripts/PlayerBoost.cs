@@ -10,6 +10,7 @@ public class PlayerBoost : MonoBehaviour
     public float MoveForce;
     public int boostCharges;
     public float boostRecharge;
+    public float boostKnockbackDuration;
     public int m_type;
 
     Rigidbody m_RigidBody;
@@ -35,7 +36,7 @@ public class PlayerBoost : MonoBehaviour
         m_Gravity = GetComponent<ObjectGravity>();
         m_Rend = GetComponent<Renderer>();
         controls = GetComponent<ControlStrings>();
-        m_boost = 0;
+        m_boost = 1;
 
     }
 
@@ -72,20 +73,28 @@ public class PlayerBoost : MonoBehaviour
             if (m_jump && m_Gravity.IsGrounded())
             {
                 m_RigidBody.AddForce(JumpForce * transform.up, ForceMode.Impulse);
-                Debug.Log("Jump!");
+                //Debug.Log("Jump!");
             }
             else if (m_boost == 0)
             {
                 if (m_cooldownDuration == 0)
                 {
-                    m_Rend.material.color = new Color(1, 0, 0);
+                    //transform.localScale *= 1.5f;
+                    m_Rend.material.color = controls.colourdull;
                     m_cooldownDuration = Time.time;
                     m_cooldownStart = Time.time;
-                   // Debug.Log("Initial Cooldown: " +( m_cooldownDuration - m_cooldownStart));
+                    // Debug.Log("Initial Cooldown: " +( m_cooldownDuration - m_cooldownStart));
+                    controls.set_boost(true);
+                }
+                else if (boostKnockbackDuration < m_cooldownDuration - m_cooldownStart && controls.get_boost() == true)
+                {
+                    controls.set_boost(false);
+                    //transform.localScale /= 1.5f;
+                    m_cooldownDuration = Time.time;
                 }
                 else if (boostRecharge < m_cooldownDuration - m_cooldownStart)
                 {
-                    m_Rend.material.color = new Color(0, 1, 0);
+                    m_Rend.material.color = controls.colour;
                     //Debug.Log("Cooldown reset: " + (m_cooldownDuration - m_cooldownStart));
                     m_cooldownDuration = 0;
                     m_cooldownStart = 0;
