@@ -19,8 +19,7 @@ public class StickToPlanet : MonoBehaviour {
     PlanetGravityField m_CurrentPlanet;
     List<Collider> m_PlanetsAffecting;
     Quaternion m_PreviousRotation;
-
-    Collider m_PreviousPlanet;  // For use when multiple gravities are in effect (bad name, I know)
+    
     float m_PreviousGravityFieldStrength;
 
     float linkDistance = 100.0f;
@@ -39,7 +38,6 @@ public class StickToPlanet : MonoBehaviour {
         m_Collider = GetComponent<Collider>();
         m_PlayerStats = GetComponent<PlayerStats>();
         m_CurrentPlanet = null;
-        m_PreviousPlanet = null;
         m_PlanetsAffecting = new List<Collider>();
         m_DistanceToGround = m_Collider.bounds.extents.y;
     }
@@ -122,7 +120,7 @@ public class StickToPlanet : MonoBehaviour {
         }
         else if (PlanetInRange())   // Multiple planets
         {
-            RaycastHit hit;
+            //RaycastHit hit;
             Vector3 gravityForce = Vector3.zero;
 
             foreach (Collider planet in m_PlanetsAffecting)
