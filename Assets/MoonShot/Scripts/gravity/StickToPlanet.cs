@@ -260,7 +260,7 @@ public class StickToPlanet : MonoBehaviour {
         // Want to smoothly rotate towards new planet, this will do for now
         Vector3 planetDir = (m_RigidBody.position - m_CurrentPlanet.transform.position).normalized;
         Quaternion lookAtPlanet = Quaternion.LookRotation(transform.forward, planetDir);
-        m_RigidBody.MoveRotation(Quaternion.RotateTowards(transform.rotation, lookAtPlanet, 180.0f));
+        transform.rotation = Quaternion.RotateTowards(m_RigidBody.rotation, lookAtPlanet, 180.0f);
     }
 
     public Vector3 GetDirectionOfCurrentPlanet()
