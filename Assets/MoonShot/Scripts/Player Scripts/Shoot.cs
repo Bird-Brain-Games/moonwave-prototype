@@ -43,12 +43,13 @@ public class Shoot : MonoBehaviour {
             Rigidbody clone;
             clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
 
-            forward /= 5000.0f;
+            forward *= 50.0f;
             //Debug.Log(forward.ToString());
 
-            clone.AddForce(forward, ForceMode.Force);
+            clone.velocity = forward;
             //Debug.Log(clone.velocity.ToString());
             clone.GetComponent<Owner>().setOwner(gameObject);
+            clone.GetComponent<Owner>().setVelocity(clone.velocity);
         }
         else if (m_bulletDelay > m_timer - m_startTime && !m_shootStatus)
         {

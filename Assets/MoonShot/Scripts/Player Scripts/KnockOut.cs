@@ -20,6 +20,7 @@ public class KnockOut : MonoBehaviour {
             || transform.position.y < -34)
         {
             Debug.Log("knockout");
+            Debug.Log("bullet V: " + m_rigidBody.velocity);
             transform.position = new Vector3(9, 11, 0);
             m_rigidBody.velocity = new Vector3();
         }
