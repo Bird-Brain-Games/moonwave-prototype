@@ -250,7 +250,7 @@ Prefab:
     - target: {fileID: 114809217847592258, guid: a2c0116bbc7c7034c913b1da6153f89b,
         type: 2}
       propertyPath: JumpForce
-      value: 450
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1285666640904414, guid: a2c0116bbc7c7034c913b1da6153f89b, type: 2}
       propertyPath: m_Layer
@@ -289,7 +289,7 @@ Prefab:
     - target: {fileID: 114809217847592258, guid: a2c0116bbc7c7034c913b1da6153f89b,
         type: 2}
       propertyPath: BoostForce
-      value: 350
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114809217847592258, guid: a2c0116bbc7c7034c913b1da6153f89b,
         type: 2}
@@ -390,7 +390,7 @@ Prefab:
     - target: {fileID: 114809217847592258, guid: a2c0116bbc7c7034c913b1da6153f89b,
         type: 2}
       propertyPath: BoostForce
-      value: 350
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114809217847592258, guid: a2c0116bbc7c7034c913b1da6153f89b,
         type: 2}
@@ -405,7 +405,12 @@ Prefab:
     - target: {fileID: 114499895907561676, guid: a2c0116bbc7c7034c913b1da6153f89b,
         type: 2}
       propertyPath: m_MovementType
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114809217847592258, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: JumpForce
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2c0116bbc7c7034c913b1da6153f89b, type: 2}
@@ -556,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
-  m_bulletDelay: 0.25
+  m_bulletDelay: 0.0625
 --- !u!114 &704745408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,7 +1358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
-  m_bulletDelay: 0.25
+  m_bulletDelay: 0.0625
 --- !u!114 &1867573096
 MonoBehaviour:
   m_ObjectHideFlags: 0

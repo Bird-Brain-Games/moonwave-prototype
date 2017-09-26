@@ -29,8 +29,8 @@ public class Shoot : MonoBehaviour {
 
         m_aimH = Input.GetAxis(controls.get_aimH());
         m_aimV = Input.GetAxis(controls.get_aimV());
-        Debug.Log("Horizontal axis "+ m_aimH.ToString());
-        Debug.Log("Vertical axis " + m_aimV.ToString());
+        //Debug.Log("Horizontal axis "+ m_aimH.ToString());
+        //Debug.Log("Vertical axis " + m_aimV.ToString());
         if (m_shoot && m_shootStatus)
         {
             m_shootStatus = false;
