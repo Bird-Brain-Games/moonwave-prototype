@@ -128,7 +128,7 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 0
-  impact: 25000
+  impact: 5000
 --- !u!114 &114919158606769896
 MonoBehaviour:
   m_ObjectHideFlags: 1

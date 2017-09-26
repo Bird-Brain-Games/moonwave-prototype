@@ -20,7 +20,8 @@ public class bulletTime : MonoBehaviour
             || transform.position.y > 34
             || transform.position.y < -34)
         {
-            //Debug.Log("bullet out of bounds");
+            Debug.Log("bullet out of bounds");
+            Debug.Log("bullet V: " + gameObject.GetComponent<Rigidbody>().velocity);
             Destroy(gameObject, 0.0f);
         }
 
