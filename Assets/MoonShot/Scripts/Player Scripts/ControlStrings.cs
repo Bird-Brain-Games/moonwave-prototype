@@ -41,7 +41,8 @@ public class ControlStrings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
     public string get_name() { return m_name; }
     public string get_jump() { return m_jump; }
