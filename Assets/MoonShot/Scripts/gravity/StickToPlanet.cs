@@ -33,8 +33,8 @@ public class StickToPlanet : MonoBehaviour {
     public bool constantGravity = true;
 
     // Logging: l_ is used to indicate a variable used in logging
-    float l_groundTime;
-    float l_hangTime;
+    public float l_groundTime;
+    public float l_hangTime;
 
     // Use this for initialization
     void Start () {

@@ -29,7 +29,7 @@ public class PlayerBoost : MonoBehaviour
     float m_cooldownStart;
 
     // Logging  l_ is used to indicate a variable is for logging
-    int l_boosts;
+    public int l_boosts;
 
 
     
@@ -125,6 +125,8 @@ public class PlayerBoost : MonoBehaviour
                     m_RigidBody.AddForce(BoostForce * m_Direction, ForceMode.Impulse);
                     m_boost -= 1;
                     Debug.Log("boost!");
+                    // Log Boosts
+                    l_boosts++;
                 }
             }
         }

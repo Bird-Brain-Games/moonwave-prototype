@@ -562,6 +562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
   m_bulletDelay: 0.0625
+  l_bullets: 0
 --- !u!114 &704745408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +693,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1028900092}
+  - component: {fileID: 1028900093}
   m_Layer: 0
   m_Name: Players
   m_TagString: Untagged
@@ -714,6 +716,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1028900093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1028900091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a6bcf83df132141bd9c1006c63e289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1049996603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,6 +1372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
   m_bulletDelay: 0.0625
+  l_bullets: 0
 --- !u!114 &1867573096
 MonoBehaviour:
   m_ObjectHideFlags: 0

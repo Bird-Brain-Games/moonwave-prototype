@@ -8,7 +8,7 @@ public class KnockOut : MonoBehaviour {
     Rigidbody m_rigidBody;
 
     // Logging    l_ is used to indicate a variable is a logging variable
-    int l_deaths;
+    public int l_deaths;
 	// Use this for initialization
 	void Start () {
         m_rigidBody = gameObject.GetComponent<Rigidbody>();

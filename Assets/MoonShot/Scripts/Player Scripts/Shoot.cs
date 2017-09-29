@@ -19,11 +19,11 @@ public class Shoot : MonoBehaviour {
     bool m_shootStatus;
 
     // Logging
-    int l_bullets = 0; // using l_ to indicate this data is for logging
+    public int l_bullets; // using l_ to indicate this data is for logging
 
     void Start () {
         controls = GetComponent<ControlStrings>();
-
+        l_bullets = 0;
     }
 	
 	// Update is called once per frame
@@ -56,7 +56,7 @@ public class Shoot : MonoBehaviour {
             clone.GetComponent<Owner>().setVelocity(clone.velocity);
 
             // Log total shots fired
-            l_shotsFired++; // Take a note of how many player shots
+            l_bullets++; // Take a note of how many player shots
         }
         else if (m_bulletDelay > m_timer - m_startTime && !m_shootStatus)
         {
