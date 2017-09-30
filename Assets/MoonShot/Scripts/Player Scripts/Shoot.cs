@@ -17,9 +17,13 @@ public class Shoot : MonoBehaviour {
     float m_timer;
     float m_startTime;
     bool m_shootStatus;
-	void Start () {
-        controls = GetComponent<ControlStrings>();
 
+    // Logging
+    public int l_bullets; // using l_ to indicate this data is for logging
+
+    void Start () {
+        controls = GetComponent<ControlStrings>();
+        l_bullets = 0;
     }
 	
 	// Update is called once per frame
@@ -50,6 +54,9 @@ public class Shoot : MonoBehaviour {
             //Debug.Log(clone.velocity.ToString());
             clone.GetComponent<Owner>().setOwner(gameObject);
             clone.GetComponent<Owner>().setVelocity(clone.velocity);
+
+            // Log total shots fired
+            l_bullets++; // Take a note of how many player shots
         }
         else if (m_bulletDelay > m_timer - m_startTime && !m_shootStatus)
         {

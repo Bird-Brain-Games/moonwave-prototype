@@ -32,6 +32,10 @@ public class StickToPlanet : MonoBehaviour {
     [Tooltip("If the equation used for resolving gravity between\n multiple planets is constant or Newtonian")]
     public bool constantGravity = true;
 
+    // Logging: l_ is used to indicate a variable used in logging
+    public float l_groundTime;
+    public float l_hangTime;
+
     // Use this for initialization
     void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
@@ -40,6 +44,9 @@ public class StickToPlanet : MonoBehaviour {
         m_CurrentPlanet = null;
         m_PlanetsAffecting = new List<Collider>();
         m_DistanceToGround = m_Collider.bounds.extents.y;
+
+        l_hangTime = 0.0f;
+        l_groundTime = 0.0f;
     }
 
     void ApplyGravity(RaycastHit hit1, float gravityForce)
@@ -66,6 +73,16 @@ public class StickToPlanet : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (IsGrounded())
+        {
+            // Log ground time
+            l_groundTime += Time.deltaTime;
+        }
+        else
+        {
+            l_hangTime += Time.deltaTime;
+        }
+
         if (PlanetInRange() && IsGrounded())    // Grounded on the planet
         {
             RaycastHit hit1;

@@ -28,6 +28,9 @@ public class PlayerBoost : MonoBehaviour
     float m_cooldownDuration;
     float m_cooldownStart;
 
+    // Logging  l_ is used to indicate a variable is for logging
+    public int l_boosts;
+
 
     
     // Use this for initialization
@@ -39,6 +42,7 @@ public class PlayerBoost : MonoBehaviour
         m_Rend = GetComponent<Renderer>();
         controls = GetComponent<ControlStrings>();
         m_boost = 1;
+        l_boosts = 0;
 
     }
 
@@ -65,6 +69,9 @@ public class PlayerBoost : MonoBehaviour
                     m_RigidBody.AddForce(JumpForce * m_Direction, ForceMode.Impulse);
                     m_boost -= 1;
                     Debug.Log("boost!");
+
+                    // Log Boosts
+                    l_boosts++;
                 }
             }
         }
@@ -118,6 +125,8 @@ public class PlayerBoost : MonoBehaviour
                     m_RigidBody.AddForce(BoostForce * m_Direction, ForceMode.Impulse);
                     m_boost -= 1;
                     Debug.Log("boost!");
+                    // Log Boosts
+                    l_boosts++;
                 }
             }
         }

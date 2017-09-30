@@ -54,6 +54,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
             if (m_Gravity.IsGrounded())
             {
 
+
                 if ((m_hAxis != 0.0f || m_vAxis != 0.0f))
                 {
                     //create joystick vector and normalize it
