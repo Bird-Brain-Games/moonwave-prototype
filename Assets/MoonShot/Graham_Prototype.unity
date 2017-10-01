@@ -296,7 +296,38 @@ Prefab:
       propertyPath: boostKnockbackDuration
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: shoot.key
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: jump.key
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: boost.key
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: jump.altKey
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114314123256638248, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: colourdull.b
+      value: 0.21568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 114314123256638248, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: colour.b
+      value: 0.60784316
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a2c0116bbc7c7034c913b1da6153f89b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &354281993
@@ -411,6 +442,66 @@ Prefab:
         type: 2}
       propertyPath: JumpForce
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: playerNumber
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: aimControls.aimY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: moveControls.moveX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: moveControls.moveY
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: shoot.key
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: jump.key
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: jump.detection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: boost.key
+      value: 8192
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: boost.altKey
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400869821856310, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: boost.detection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114314123256638248, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: colourdull.g
+      value: 0.21568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 114314123256638248, guid: a2c0116bbc7c7034c913b1da6153f89b,
+        type: 2}
+      propertyPath: colour.g
+      value: 0.60784316
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2c0116bbc7c7034c913b1da6153f89b, type: 2}
@@ -1359,6 +1450,36 @@ GameObject:
   m_PrefabParentObject: {fileID: 1285666640904414, guid: a2c0116bbc7c7034c913b1da6153f89b,
     type: 2}
   m_PrefabInternal: {fileID: 327614077}
+--- !u!114 &1867573086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1867573085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3254170856fc6fa4dbf7c3e33ea4dc82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 1
+  aimControls:
+    aimX: 0
+    aimY: 1
+  moveControls:
+    moveX: 2
+    moveY: 3
+  shoot:
+    key: 512
+    altKey: 0
+    detection: 0
+  jump:
+    key: 4096
+    altKey: 0
+    detection: 0
+  boost:
+    key: 8192
+    altKey: 256
+    detection: 0
 --- !u!114 &1867573095
 MonoBehaviour:
   m_ObjectHideFlags: 0

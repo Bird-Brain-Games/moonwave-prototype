@@ -13,9 +13,21 @@ public enum PlayerState
 public class PlayerStats : MonoBehaviour {
 
     public PlayerState m_PlayerState;
-
+    public Color colourdull;
+    public Color colour;
+    bool m_boostState; 
 	// Use this for initialization
 	void Start () {
         m_PlayerState = PlayerState.Drifting;
 	}
+
+    public bool GetBoostState()
+    {
+        return m_boostState;
+    }
+    
+    public void SetBoostState(bool p_state)
+    {
+        m_boostState = p_state;
+    }
 }
