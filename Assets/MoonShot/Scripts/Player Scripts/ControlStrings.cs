@@ -16,7 +16,7 @@ public class ControlStrings : MonoBehaviour
     string m_aimV;
 
     bool boost;
-    
+
 
 
 
@@ -28,12 +28,12 @@ public class ControlStrings : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_name = append +"name";
-        m_jump = append +"jump";
-        m_shoot = append +"shoot";
-        m_joystickH = append +"joystickH";
-        m_joystickV = append +"joystickV";
-        m_aimH = append +"aimH";
+        m_name = append + "name";
+        m_jump = append + "jump";
+        m_shoot = append + "shoot";
+        m_joystickH = append + "joystickH";
+        m_joystickV = append + "joystickV";
+        m_aimH = append + "aimH";
         m_aimV = append + "aimV";
 
     }

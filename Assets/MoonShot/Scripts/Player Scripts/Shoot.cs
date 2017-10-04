@@ -8,10 +8,9 @@ public class Shoot : MonoBehaviour {
 
     public Rigidbody bullet;
 
-    float m_aimH;
-    float m_aimV;
+    Vector2 m_aim;
     bool m_shoot;
-    ControlStrings controls;
+    Controls controls;
 
     public float m_bulletDelay;
     float m_timer;
@@ -22,26 +21,23 @@ public class Shoot : MonoBehaviour {
     public int l_bullets; // using l_ to indicate this data is for logging
 
     void Start () {
-        controls = GetComponent<ControlStrings>();
+        controls = GetComponent<Controls>();
         l_bullets = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        m_shoot = Input.GetButton(controls.get_shoot());
+        m_shoot = controls.GetShoot();
+        m_aim = controls.GetAim();
 
-        m_aimH = Input.GetAxis(controls.get_aimH());
-        m_aimV = Input.GetAxis(controls.get_aimV());
-        //Debug.Log("Horizontal axis "+ m_aimH.ToString());
-        //Debug.Log("Vertical axis " + m_aimV.ToString());
         if (m_shoot && m_shootStatus)
         {
             m_shootStatus = false;
             m_timer = Time.time;
             m_startTime = Time.time;
 
-            Vector3 forward = new Vector3(m_aimH, m_aimV, 0.0f);
+            Vector3 forward = new Vector3(m_aim.x, m_aim.y);
             forward.Normalize();
 
             Rigidbody clone;
