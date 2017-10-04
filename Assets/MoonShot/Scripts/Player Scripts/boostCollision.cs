@@ -8,13 +8,13 @@ public class boostCollision : MonoBehaviour
     public float boostImpact;
     LayerMask player;
     int m_layer;
-    ControlStrings controls;
+    Controls controls;
     Rigidbody m_rigidbody;
     // Use this for initialization
     void Start()
     {
         player = 9;
-        controls = gameObject.GetComponent<ControlStrings>();
+        controls = gameObject.GetComponent<Controls>();
         m_rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -28,7 +28,7 @@ public class boostCollision : MonoBehaviour
     {
 
         m_layer = collision.gameObject.layer;
-        if (m_layer == player && controls.get_boost())
+        if (m_layer == player && controls.GetBoost())
         {
 
             var force = collision.transform.position - transform.position;
