@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour {
 	void Update () {
         // Reduce the timer
         m_Time -= Time.deltaTime;
+        if (m_Time < 0.0f) m_Time = 0.0f;
 
         // Update the timer text
         if (((int)m_Time) % 60 < 10)
