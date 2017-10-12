@@ -12,19 +12,11 @@ public class bulletTime : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void BulletOutOfBounds()
     {
-
-        if (transform.position.x < -60
-            || transform.position.x > 60
-            || transform.position.y > 34
-            || transform.position.y < -34)
-        {
             Debug.Log("bullet out of bounds");
             Debug.Log("bullet V: " + gameObject.GetComponent<Rigidbody>().velocity);
-            Destroy(gameObject, 0.0f);
-        }
-
+            Destroy(gameObject, 0.0f); 
     }
 }
 

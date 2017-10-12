@@ -16,21 +16,14 @@ public class KnockOut : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        
-        if (transform.position.x < -60
-            || transform.position.x >  60
-            || transform.position.y >  34
-            || transform.position.y < -34)
-        {
-            Debug.Log("knockout");
-            Debug.Log("bullet V: " + m_rigidBody.velocity);
-            transform.position = new Vector3(9, 11, 0);
-            m_rigidBody.velocity = new Vector3();
+	public void PlayerKnockedOut ()
+    { 
+        Debug.Log("KNOCKOUT!!!!1!!!!!");
+        Debug.Log("player V: " + m_rigidBody.velocity);
+        transform.position = new Vector3(9, 11, 0);
+        m_rigidBody.velocity = new Vector3();
 
-            // Logging
-            l_deaths++;
-        }
-
-	}
+        // Logging
+        l_deaths++;
+    }
 }
