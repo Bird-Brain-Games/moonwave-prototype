@@ -11,7 +11,9 @@ public class bulletTime : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Destroys the bullet and logs
+    /// </summary>
     public void BulletOutOfBounds()
     {
             Debug.Log("bullet out of bounds");

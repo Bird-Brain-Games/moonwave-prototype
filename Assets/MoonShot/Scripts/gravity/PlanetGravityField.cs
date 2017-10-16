@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlanetGravityField : MonoBehaviour {
 
+    /*
+     * The attributes and functions for a basic planet
+     */
+
     public float m_GravityStrength;
-    static float m_GravitationalConstant = 15;
+    static float m_GravitationalConstant = 15;  // Used for the gravitational force equation
 
     float m_OrbitDistance;
     Collider m_GravityTrigger;
@@ -20,6 +24,12 @@ public class PlanetGravityField : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Uses the gravitational force equation to calculate accurate gravity between planets
+    /// </summary>
+    /// <param name="objectMass"></param>
+    /// <param name="distSquared"></param>
+    /// <returns></returns>
     public float CalculateGravitationalForce(float objectMass, float distSquared)
     {
         return m_GravitationalConstant * ((m_GravityStrength * objectMass) / distSquared);

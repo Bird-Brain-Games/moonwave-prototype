@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
 
-    Text m_Text;
-    bool m_OutOfTime;
-    public float m_MaxTime;
-    float m_Time;
+    /*
+     * Used for the timer in the corner
+     */
+
+    Text m_Text;            // The text for the timer
+    bool m_OutOfTime;       // If the timer is out of time
+    public float m_MaxTime; // The starting time on the timer
+    float m_Time;           // The current timer value
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +23,9 @@ public class Timer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // Reduce the timer
-        if (!m_OutOfTime)
+        // If the timer is still running, decrease the timer
+        // If it is out of time, tell the program the timer is done.
+        if (!OutOfTime())
         {
             m_Time -= Time.deltaTime;
             if (m_Time < 1.0f)

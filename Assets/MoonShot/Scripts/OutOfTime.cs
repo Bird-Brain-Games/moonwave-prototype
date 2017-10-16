@@ -5,20 +5,25 @@ using UnityEngine.UI;
 
 public class OutOfTime : MonoBehaviour {
 
-    public Text timerText;
-    Text m_Text;
-    Timer m_Timer;
+    /*
+     * Used for the large "Out of time" text
+     */
+
+    public Text timerText;  // Reference to the UI element of the timer
+    Text m_Text;    // The text component of the game object
+    Timer timer;  // Reference to the Timer component of the timer
 
 	// Use this for initialization
 	void Start () {
-        m_Timer = timerText.GetComponent<Timer>();
+        timer = timerText.GetComponent<Timer>();
         m_Text = GetComponent<Text>();
-        m_Text.enabled = false;
+        m_Text.enabled = false;     // Disable the ending text when the game is playing
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (m_Timer.OutOfTime() && !m_Text.enabled)
+        // If the timer is out of time, trigger the end of game text
+        if (timer.OutOfTime() && !m_Text.enabled)
         {
             m_Text.enabled = true;
 

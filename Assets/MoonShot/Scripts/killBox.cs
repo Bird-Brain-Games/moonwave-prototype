@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class killBox : MonoBehaviour
 {
-    // Logging    l_ is used to indicate a variable is a logging variable
-    public int l_deaths;
-    
-    void Start()
-    {
-        l_deaths = 0;
-    }
-
     private void OnTriggerExit(Collider other)
     {
         // When player leaves kill box, call player's knockout funciton
@@ -20,7 +12,8 @@ public class killBox : MonoBehaviour
             other.gameObject.GetComponent<KnockOut>().PlayerKnockedOut();
         }
 
-        if (other.gameObject.CompareTag("Bullet"))
+        // When the bullet leaves the kill box, call the bullet OutOfBounds function
+        else if (other.gameObject.CompareTag("Bullet"))
         {
             other.gameObject.GetComponent<bulletTime>().BulletOutOfBounds();
         }

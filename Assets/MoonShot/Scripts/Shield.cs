@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class Shield : MonoBehaviour
 {
 
@@ -14,9 +11,8 @@ public class Shield : MonoBehaviour
         shotgun = 1
     }
 
-    //self explanitory
     public int m_shieldHealth;
-    public int mm_axShieldHealth;
+    public int mm_axShieldHealth;   // CLARIFY
 
     public float m_rechargeDelay;
     public int m_rechargeRatePerSecond;
