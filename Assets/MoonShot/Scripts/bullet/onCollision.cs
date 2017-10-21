@@ -19,11 +19,6 @@ public class onCollision : MonoBehaviour
         player = 9;
         m_rigidBody = GetComponent<Rigidbody>();
         Debug.Log("bullet V: " + m_rigidBody.velocity);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         owner = GetComponent<Owner>();
     }
 
