@@ -11,14 +11,15 @@ public class Shoot : MonoBehaviour {
     Vector2 m_aim;
     bool m_shoot;
     Controls controls;
+    public float m_bulletSpeed;
 
     public float m_bulletDelay;
     float m_timer;
     float m_startTime;
     bool m_shootStatus;
 
-    //Variables for Bullet spread [Jack]
-    int m_stray;
+    //Variables for Bullet spread [Jack, Robbie]
+    public int m_stray;  // Control the variable for the spread, a higher number is greater variance
     float m_randomX;
     float m_randomY;
 
@@ -28,9 +29,6 @@ public class Shoot : MonoBehaviour {
     void Start () {
         controls = GetComponent<Controls>();
         l_bullets = 0;
-
-        // Control the variable for the spread, a higher number is greater variance
-        m_stray = 10;
     }
 	
 	// Update is called once per frame
@@ -58,7 +56,7 @@ public class Shoot : MonoBehaviour {
             Rigidbody clone;
             clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
 
-            forward *= 50.0f;
+            forward *= m_bulletSpeed;
             //Debug.Log(forward.ToString());
 
             clone.velocity = forward;

@@ -26,11 +26,18 @@ public class onCollision : MonoBehaviour
     {
 
         m_layer = collision.gameObject.layer;
-        if (m_layer == planet)
+        //if (m_layer == planet)
+        //{
+        //    owner.setVelocity(m_rigidBody.velocity);
+        //}
+
+        // Robbie changed this
+        if (collision.gameObject.tag == "Planet") // If the object is a planet
         {
-            owner.setVelocity(m_rigidBody.velocity);
+            Destroy(gameObject, 0);  // Destorys bullets when they hit a planet
         }
-        else if (m_layer == player && collision.gameObject != owner.getOwner())
+
+        if (m_layer == player && collision.gameObject != owner.getOwner())
         {
 
             //needs to shift this to a function call so all the variables are private instead of public.
