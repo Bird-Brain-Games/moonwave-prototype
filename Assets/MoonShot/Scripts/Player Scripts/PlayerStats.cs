@@ -15,10 +15,13 @@ public class PlayerStats : MonoBehaviour {
     public PlayerState m_PlayerState;
     public Color colourdull;
     public Color colour;
-    bool m_boostState; 
+    bool m_boostState;
+    int m_Score;
+
 	// Use this for initialization
 	void Start () {
         m_PlayerState = PlayerState.Drifting;
+        m_Score = 0;
 	}
 
     public bool GetBoostState()
@@ -29,5 +32,10 @@ public class PlayerStats : MonoBehaviour {
     public void SetBoostState(bool p_state)
     {
         m_boostState = p_state;
+    }
+
+    public int getScore()
+    {
+        return m_Score;
     }
 }
