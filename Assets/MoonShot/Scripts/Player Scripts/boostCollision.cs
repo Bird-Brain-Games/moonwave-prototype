@@ -8,13 +8,13 @@ public class boostCollision : MonoBehaviour
     public float boostImpact;
     LayerMask player;
     int m_layer;
-    Controls controls;
+    PlayerStats m_PlayerStats;
     Rigidbody m_rigidbody;
     // Use this for initialization
     void Start()
     {
         player = 9;
-        controls = gameObject.GetComponent<Controls>();
+        m_PlayerStats = gameObject.GetComponent<PlayerStats>();
         m_rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -28,15 +28,21 @@ public class boostCollision : MonoBehaviour
     {
 
         m_layer = collision.gameObject.layer;
-        if (m_layer == player && controls.GetBoost())
+        //detects collision between players and boosting state
+        if (m_layer == player && m_PlayerStats.GetBoostState())
         {
 
+            Debug.Log("collide");
+            //sets the direction of the force
             var force = collision.transform.position - transform.position;
-
             force.Normalize();
 
-            collision.rigidbody.AddForce(force * boostImpact);
-            m_rigidbody.AddForce(-force * boostImpact);
+            //Adds the force to the player we collided with
+            
+            collision.rigidbody.AddForce(force * boostImpact * collision.transform.GetComponent<PlayerStats>().GetCriticalMultiplyer());
+
+            //adds inverse force to us to signifiy knockback.
+            //m_rigidbody.AddForce(-force * boostImpact);
 
         }
 

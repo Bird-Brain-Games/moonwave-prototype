@@ -4,50 +4,67 @@ using UnityEngine;
 
 public class onCollision : MonoBehaviour
 {
+    //layermasks to detect what we hit
+    public LayerMask m_planet;
+    public LayerMask m_player;
 
-    public LayerMask planet;
-    public LayerMask player;
-    public float impact;
+    //how strong bullet knockback is.
+ 
     int m_layer;
 
     Rigidbody m_rigidBody;
     Shield m_shield;
-    Owner owner;
+    Owner m_owner;
     void Start()
     {
-        planet = 8;
-        player = 9;
+        //setting up layers.
+        m_planet = 8;
+        m_player = 9;
+
+        //get the bullets rigidbody
         m_rigidBody = GetComponent<Rigidbody>();
-        Debug.Log("bullet V: " + m_rigidBody.velocity);
-        owner = GetComponent<Owner>();
+
+
+        //Debug.Log("bullet V: " + m_rigidBody.velocity);
+        //set the bullets owner.
+        m_owner = GetComponent<Owner>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
 
+        //sets what layer we have collided with
         m_layer = collision.gameObject.layer;
-        if (m_layer == planet)
+
+        //if it collides with a planet
+        if (m_layer == m_planet)
         {
-            owner.setVelocity(m_rigidBody.velocity);
+            m_owner.setVelocity(m_rigidBody.velocity);
         }
-        else if (m_layer == player && collision.gameObject != owner.getOwner())
+        //if we have collided with a player.
+        else if (m_layer == m_player && collision.gameObject != m_owner.getOwner())
         {
 
             //needs to shift this to a function call so all the variables are private instead of public.
             m_shield = collision.rigidbody.GetComponentInChildren<Shield>();
 
-            var force = owner.getVelocity();
-            Debug.Log("bullet V: " + force);
+            var force = m_owner.getVelocity();
             force.Normalize();
 
-            Debug.Log("collision V: " + collision.rigidbody.velocity);
-
             if (m_shield.m_shieldHealth == 0)
-                collision.rigidbody.AddForce(force * impact * 10);
+            {
+                Debug.Log("bullet criticaly hit player");
+                Vector3 temp = force * m_owner.GetImpact() * m_owner.GetCriticalMultiplyer();
+                Debug.Log(force + " applied to enemy");
+                collision.rigidbody.AddForce(temp, ForceMode.Impulse);
+            }
             else
-                collision.rigidbody.AddForce(force);
+            {
+                Debug.Log("bullet hit player");
+                Vector3 temp = force * m_owner.GetImpact();
+                collision.rigidbody.AddForce(temp, ForceMode.Impulse);
+            }
 
-            Debug.Log("collision V after: " + collision.rigidbody.velocity);
 
            
             m_shield.ShieldHit(Shield.BULLET_TYPE.plasma);

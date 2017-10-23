@@ -44,8 +44,6 @@ public struct Button
 {
     public BUTTONS key;
     public BUTTONS altKey;
-    [HideInInspector]
-    public BUTTON_DETECTION detection;
 
 }
 
@@ -188,26 +186,26 @@ public class Controls : MonoBehaviour
         return result;
     }
     //returns true or false using the shoot controls.
-    public bool GetShoot()
+    public bool GetShoot(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
     {
-        return GetButtonStruct(shoot);
+        return GetButtonStruct(shoot, detect);
     }
     //returns true or false using the jump controls.
-    public bool GetJump()
+    public bool GetJump(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
     {
-        return GetButtonStruct(jump);
+        return GetButtonStruct(jump, detect);
     }
     //returns true or false using the boost controls.
-    public bool GetBoost()
+    public bool GetBoost(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
     {
-        return GetButtonStruct(boost);
+        return GetButtonStruct(boost, detect);
     }
 
     //Uses the Button struct to detimine what buttons to query the state of and in what manner
-    bool GetButtonStruct(Button button)
+    bool GetButtonStruct(Button button, BUTTON_DETECTION detect)
     {
         //uses the detection enum to find what method of detection.
-        switch (button.detection)
+        switch (detect)
         {
             case BUTTON_DETECTION.GET_BUTTON:
                 if (GetButton(button.key) || GetButton(button.altKey))
@@ -239,9 +237,6 @@ public class Controls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        shoot.detection = BUTTON_DETECTION.GET_BUTTON;
-        jump.detection = BUTTON_DETECTION.GET_BUTTON_DOWN;
-        boost.detection = BUTTON_DETECTION.GET_BUTTON_DOWN;
 
         if (!CreateController(playerNumber))
             Debug.Log("error this controller already exists");
