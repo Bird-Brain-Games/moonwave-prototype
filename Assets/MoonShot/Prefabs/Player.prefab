@@ -194,6 +194,8 @@ MonoBehaviour:
   m_PlayerState: 1
   colourdull: {r: 0, g: 0, b: 0, a: 0}
   colour: {r: 0, g: 0, b: 0, a: 0}
+  m_shieldState: 0
+  m_CriticalMultiplyer: 10
 --- !u!114 &114097281429128976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,7 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d0935b4f50e1645bdd7f72b94c3728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostImpact: 5000
+  m_boostBaseImpact: 5000
+  m_boostAddedCharge: 1000
 --- !u!114 &114482691866668444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,6 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
+  m_bulletImpact: 10
   m_bulletDelay: 0.0625
   l_bullets: 0
 --- !u!114 &114703778630650314

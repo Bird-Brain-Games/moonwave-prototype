@@ -30,6 +30,7 @@ public class PlayerBoost : MonoBehaviour
     PlayerStats m_PlayerStats;
     Renderer m_Rend;
     Controls m_controls;
+    boostCollision m_boostCollision;
 
     //the direction of analogue movement
     Vector2 m_move;
@@ -76,7 +77,7 @@ public class PlayerBoost : MonoBehaviour
         m_PlayerStats = GetComponent<PlayerStats>();
         m_Rend = GetComponent<Renderer>();
         m_controls = GetComponent<Controls>();
-
+        m_boostCollision = GetComponent<boostCollision>();
         //The number of boosts you have
         m_boostAmount = 1;
         l_boosts = 0;
@@ -119,6 +120,7 @@ public class PlayerBoost : MonoBehaviour
                 m_cooldownStart = Time.time;
                 m_PlayerStats.SetBoostState(true);
             }
+
             //If the player boost knockback druation has ended.
             else if ((m_boostKnockbackDuration + m_boostChargedTime) < (m_cooldownDuration - m_cooldownStart) && m_PlayerStats.GetBoostState() == true)
             {
@@ -127,6 +129,7 @@ public class PlayerBoost : MonoBehaviour
                 m_cooldownDuration = Time.time;
                 m_boostChargedTime = 0;
             }
+
             //If the boost has recharged.
             else if (m_boostRecharge < m_cooldownDuration - m_cooldownStart)
             {
@@ -141,6 +144,7 @@ public class PlayerBoost : MonoBehaviour
                 m_cooldownDuration = Time.time;
             }
         }
+
         //if we have boost's available and we have pressed jump
         else if (m_boostAmount > 0)
         {
@@ -151,6 +155,7 @@ public class PlayerBoost : MonoBehaviour
                 m_charging = true;
 
             }
+
             //When we have released the boost
             else if (m_controls.GetBoost(BUTTON_DETECTION.GET_BUTTON_UP))
             {
@@ -172,19 +177,25 @@ public class PlayerBoost : MonoBehaviour
                 m_charging = false;
                 m_boostAmount -= 1;
                 m_BoostForce = m_boostForceReset;
-
+                m_boostCollision.SetBoostDuration(m_boostChargedTime);
 
                 Debug.Log("Boost fired!");
 
                 //Log Boosts
                 l_boosts++;
             }
+
+            //When we are holding down the boost button.
             else if (m_charging)
             {
+                Debug.Log("Boost charging");
+
                 //increase boost force
                 m_BoostForce += m_boostForceChargePerSecond * Time.deltaTime;
+                //increase the time that the boost has charged for
                 m_boostChargedTime += Time.deltaTime;
-                Debug.Log("Boost charging");
+
+                //Setup Inertia canceling.
                 Vector3 l_Inertia = (-1 * m_RigidBody.velocity);
                 l_Inertia.Normalize();
                 l_Inertia = l_Inertia *= m_inertiaForce;
