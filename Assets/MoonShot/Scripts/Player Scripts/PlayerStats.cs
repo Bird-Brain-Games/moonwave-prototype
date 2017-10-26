@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour {
     public Color colourdull;
     public Color colour;
     bool m_boostState;
-    int m_Score;
+    public int m_Score;
 
 	// Use this for initialization
 	void Start () {

@@ -1,31 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowResultsAnim : StateMachineBehaviour {
 
-	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
 
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Text resultText = animator.GetComponent<Text>();
+		PlayerManager players = GameObject.Find("Players").GetComponent<PlayerManager>();
+        
+		int maxPlayerScore = -1;	// Keep track of the highest score so we can find out how many players won [Graham]
+		int[] playerScores = players.GetPlayerScores();
 
-	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+		// Find the highest player score [Graham]
+		for (int i = 0; i < players.GetNumPlayers(); i++)
+		{
+			if (playerScores[i] > maxPlayerScore)
+				maxPlayerScore = playerScores[i];
+		}
 
-	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
-	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+		// Find which players have that score [Graham]
+		bool[] winningPlayers = new bool[players.GetNumPlayers()];
+		for (int i = 0; i < players.GetNumPlayers(); i++)
+		{
+			if (playerScores[i] == maxPlayerScore)
+				winningPlayers[i] = true;
+		}
 
-	// OnStateIK is called right after Animator.OnAnimatorIK(). Code that sets up animation IK (inverse kinematics) should be implemented here.
-	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+		// Build the results string [Graham]
+		string resultString = "";
+		for (int i = 0; i < players.GetNumPlayers(); i++)
+		{
+			if (winningPlayers[i])
+			{
+				if (resultString.Length > 0)
+					resultString += " and ";
+				resultString += "p" + (i + 1).ToString();
+			}
+		}
+
+		// Put "win" or "wins" depending on how many people won [Graham]
+		if (resultString.Length > 2)
+			resultString += " win";
+		else
+		{
+			int winningNum = int.Parse(resultString[1].ToString());
+			resultString += " wins";
+			//resultText.color = players.GetPlayerColours()[winningNum - 1];	// Colour is bugged
+		}
+
+		// Change the text to show the winner(s) [Graham]	
+		resultText.text = resultString;
+    }
 }
