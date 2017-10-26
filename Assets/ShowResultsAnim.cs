@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class ShowResultsAnim : StateMachineBehaviour {
 
+	public UnityEngine.UI.Button backToMenuPrefab;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Text resultText = animator.GetComponent<Text>();
 		PlayerManager players = GameObject.Find("Players").GetComponent<PlayerManager>();
+
+		// Enable the "back to menu" button
+		//UnityEngine.UI.Button backToMenu = Instantiate(backToMenuPrefab, resultText.transform);
         
 		int maxPlayerScore = -1;	// Keep track of the highest score so we can find out how many players won [Graham]
 		int[] playerScores = players.GetPlayerScores();

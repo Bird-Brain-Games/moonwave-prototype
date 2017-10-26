@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class CountIn : StateMachineBehaviour {
 
-    public Timer timer;
     Text countText;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         countText = animator.GetComponent<Text>();
-        timer = animator.GetComponentInChildren<Timer>();
         countText.enabled = true;
     }
 
@@ -42,6 +40,6 @@ public class CountIn : StateMachineBehaviour {
         countText.text = "Time!";
         countText.enabled = false;
         animator.ResetTrigger("Start Match");
-        timer.Show();
+        animator.SetBool("InGame", true);
     }
 }
