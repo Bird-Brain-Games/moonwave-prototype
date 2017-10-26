@@ -8,11 +8,11 @@ public class ScoreDisplay : MonoBehaviour {
     public Text playerScorePrefab;
 
     int[] playerScores;
-    Color[] playerColours;
+    public Color[] playerColours;
     Text[] playerScoreText;
     int numPlayers;
     PlayerManager manager;
-
+    
     // Use this for initialization
     void Start () {
         manager = GameObject.Find("Players").GetComponent<PlayerManager>();   // COULD BE RISKY

@@ -12,3 +12,5 @@ syntax: regexp
 ^Build/.*
 ^Library/.*
 ^Temp/.*
+^.vscode/.*
+^.vs/.*

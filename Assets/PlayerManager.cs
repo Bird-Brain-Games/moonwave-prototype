@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     PlayerStats[] players;
-    int[] playerScores;
+    public int[] playerScores;
     Color[] playerColours;
     int numPlayers;
-
+    
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         players = GetComponentsInChildren<PlayerStats>();
         numPlayers = players.Length;
         playerScores = new int[numPlayers];
