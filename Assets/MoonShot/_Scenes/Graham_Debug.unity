@@ -1081,6 +1081,26 @@ Prefab:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 22890791}
+    - target: {fileID: 114129986997213628, guid: dd0503115b3f82249ae75bee8ed1c86c,
+        type: 2}
+      propertyPath: m_MaxTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114746149637051626, guid: dd0503115b3f82249ae75bee8ed1c86c,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114888213658784402, guid: dd0503115b3f82249ae75bee8ed1c86c,
+        type: 2}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114888213658784402, guid: dd0503115b3f82249ae75bee8ed1c86c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd0503115b3f82249ae75bee8ed1c86c, type: 2}
   m_IsPrefabParent: 0

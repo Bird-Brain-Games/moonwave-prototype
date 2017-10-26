@@ -87,7 +87,7 @@ public class StickToPlanet : MonoBehaviour {
         {
             RaycastHit hit1;
             bool hitPlanet = Physics.Raycast(m_RigidBody.position, -transform.up,
-                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore);
 
             // Stick to planet if it finds a planet directly below the player
             if (hitPlanet)
@@ -101,7 +101,7 @@ public class StickToPlanet : MonoBehaviour {
             }
             // Shoot ray directed towards the center of the planet
             else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized, 
-                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
             {
                 if (hit1.distance > m_DistanceToGround)
                 {
@@ -117,7 +117,7 @@ public class StickToPlanet : MonoBehaviour {
             // Try to hit directly below the player
             RaycastHit hit1;
             bool hitPlanet = Physics.Raycast(m_RigidBody.position, -transform.up, 
-                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore);
             
             // Apply gravity if it finds a planet directly below the player
             if (hitPlanet)
@@ -128,7 +128,7 @@ public class StickToPlanet : MonoBehaviour {
 
             // Shoot ray directed towards the center of the planet
             else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized, 
-                out hit1, linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
             {
                 ApplyGravity(hit1, m_CurrentPlanet.m_GravityStrength);
                 Debug.DrawLine(m_RigidBody.position, hit1.point);
@@ -159,7 +159,7 @@ public class StickToPlanet : MonoBehaviour {
 
 
                 //if (Physics.Raycast(transform.position, direction, out hit,
-                //    linkDistance, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+                //    linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
                 //{
 
                 //}
@@ -240,7 +240,7 @@ public class StickToPlanet : MonoBehaviour {
         // Inspiration from http://answers.unity3d.com/questions/196381/how-do-i-check-if-my-rigidbody-player-is-grounded.html
         RaycastHit hit;
         if (!Physics.Raycast(m_RigidBody.position, -transform.up, out hit, m_DistanceToGround + 0.1f,
-            LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+            LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
             return false;
 
         return (hit.transform.tag == "Planet");
