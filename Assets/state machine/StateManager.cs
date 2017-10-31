@@ -6,40 +6,52 @@ public class StateManager : MonoBehaviour
 {
 
     //Holds all of our items in it.
-    
-    public Dictionary<string, State> states;
+
+    State currentState;
+    State defaultState;
     TestState testState;
     MainState mainState;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-        states = new Dictionary<string, State>();
-        testState = new TestState(gameObject);
-        mainState = new MainState(gameObject);
-
-        states.Add("main state", mainState);
-        states.Add("test state", testState);
+        testState = gameObject.AddComponent<TestState>();
+        mainState = gameObject.AddComponent<MainState>();
+        //testState = new TestState(gameObject);
+        //mainState = new MainState(gameObject);
         
     }
 
-    public State GetStates(string name)
+    void Start()
     {
-        if (states.ContainsKey(name))
-        {
-            return states[name];
-        }
-        else
-            return null;
+        currentState = testState;
+        defaultState = testState;
     }
 
+    // Make sure to only change state in the late update of the state
+    // So that all the updates can call first [G, C]
+    public void ChangeState(State a_State)
+    {
+        currentState.Exit();
+        currentState = a_State;
+        currentState.Enter();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (State element in states.Values)
-        {
-            if (element.GetIsOn())
-                element.StateUpdate();
-        }
+        currentState.StateUpdate();
+    }
+
+    // Update called each physics update
+    void FixedUpdate()
+    {
+        currentState.StateFixedUpdate();
+    }
+
+    // Update called after other updates
+    void LateUpdate()
+    {
+        currentState.StateLateUpdate();
+        currentState.ChangeStateUpdate();
     }
 }

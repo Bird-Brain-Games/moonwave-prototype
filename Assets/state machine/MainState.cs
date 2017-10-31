@@ -18,7 +18,6 @@ public class MainState : State {
         if (Input.GetKey(KeyCode.KeypadEnter))
         {
             SetIsOn(false);
-            SetOtherStateIsOn("test state", true);
         }
     }
 }

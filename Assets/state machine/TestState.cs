@@ -16,7 +16,6 @@ public class TestState : State {
         if (Input.GetKey(KeyCode.Space))
         {
             SetIsOn(false);
-            SetOtherStateIsOn("main state", true);
         }
     }
 }

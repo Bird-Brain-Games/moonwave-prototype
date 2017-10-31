@@ -2,49 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State
+public class State : MonoBehaviour
 {
+    // Keeping track of the next state to change to
+    bool changingState;
+    State nextState;
 
-    bool m_isON;
     StateManager stateManager;
     // Use this for initialization
-    public State(GameObject a_accesser)
+    public State()
     {
-        Debug.Log("base created");
-        m_isON = false;
-        stateManager = a_accesser.GetComponent<StateManager>();
+        Debug.Log("Base State created");
+        stateManager = GetComponent<StateManager>();
     }
 
-
+#region Virtual States
+    
     public virtual void StateUpdate()
     {
-        Debug.Log("base class updater");
+
     }
-    public virtual void SetIsOn(bool a_paused)
+
+    public virtual void StateFixedUpdate()
     {
-        m_isON = a_paused;
+
     }
-    public bool GetIsOn()
+
+    public virtual void StateLateUpdate()
     {
-        return m_isON;
+
     }
+
+    public virtual void Enter()
+    {
+
+    }
+
+    public virtual void Exit()
+    {
+
+    }
+
     public virtual StateManager GetManager()
     {
         return stateManager;
     }
+#endregion
 
-    public void SetOtherStateIsOn(string a_name, bool a_pause)
+    public void ChangeStateUpdate()
     {
-        State temp = stateManager.GetStates(a_name);
-        if (temp != null)
+        if (changingState)
         {
-            Debug.Log(a_name + " Has been set to " + a_pause);
-            temp.SetIsOn(a_pause);
+            stateManager.ChangeState(nextState);
+            changingState = false;
         }
-        else
-        {
-            Debug.Log("State does not exist");
-        }
+        
+    }
+    
+    public void ChangeState(State a_State)
+    {
+        nextState = a_State;
+        changingState = true;
     }
 
 }
