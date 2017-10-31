@@ -20,7 +20,7 @@ public class Owner : MonoBehaviour {
 	}
     public float GetCriticalMultiplyer()
     {
-        return m_playerStats.GetCriticalMultiplyer();
+        return m_playerStats.GetCriticalMultiplier();
     }
 
     public GameObject getOwner() { return m_owner; }

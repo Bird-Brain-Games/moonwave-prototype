@@ -6,7 +6,7 @@ public class State : MonoBehaviour
 {
     // Keeping track of the next state to change to
     bool changingState;
-    State nextState;
+    string nextState;
 
     StateManager stateManager;
     // Use this for initialization
@@ -59,7 +59,7 @@ public class State : MonoBehaviour
         
     }
     
-    public void ChangeState(State a_State)
+    public void ChangeState(string a_State)
     {
         nextState = a_State;
         changingState = true;

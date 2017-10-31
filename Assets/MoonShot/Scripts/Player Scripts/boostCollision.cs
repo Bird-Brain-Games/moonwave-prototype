@@ -53,7 +53,7 @@ public class boostCollision : MonoBehaviour
             //Adds the force to the player we collided with
             collision.rigidbody.AddForce(force 
                 * (m_boostBaseImpact + (m_boostAddedCharge * m_boostDuration) ) 
-                * m_PlayerStats.GetCriticalMultiplyer());
+                * m_PlayerStats.GetCriticalMultiplier());
 
             //adds inverse force to us to signifiy knockback.
             //m_rigidbody.AddForce(-force * boostImpact);

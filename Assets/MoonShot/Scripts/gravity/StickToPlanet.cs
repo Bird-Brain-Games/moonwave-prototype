@@ -23,7 +23,7 @@ public class StickToPlanet : MonoBehaviour {
     float m_PreviousGravityFieldStrength;
 
     float linkDistance = 100.0f;
-    bool m_IsGrounded;
+    bool m_CollidedWithPlanet;
     float m_DistanceToGround;
 
     [Tooltip("How large the turning angle of the player can be")]  
@@ -62,57 +62,18 @@ public class StickToPlanet : MonoBehaviour {
         m_RigidBody.MoveRotation(m_PreviousRotation);
 
         // Apply Gravity
-        if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
-        {
-            float distSquared = (hit1.transform.position - transform.position).sqrMagnitude;
-            //gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
-            //m_RigidBody.mass, distSquared);
-            m_RigidBody.AddForce(gravityForce * -rotationDirection);
-        }
+        float distSquared = (hit1.transform.position - transform.position).sqrMagnitude;
+        //gravityForce = m_CurrentPlanet.CalculateGravitationalForce(
+        //m_RigidBody.mass, distSquared);
+        m_RigidBody.AddForce(gravityForce * -rotationDirection);
+    
     }
 
-    void FixedUpdate()
+    public bool DriftingUpdate()
     {
-        if (IsGrounded())
-        {
-            // Log ground time
-            l_groundTime += Time.deltaTime;
-        }
-        else
-        {
-            l_hangTime += Time.deltaTime;
-        }
+        l_hangTime += Time.deltaTime;
 
-        if (PlanetInRange() && IsGrounded())    // Grounded on the planet
-        {
-            RaycastHit hit1;
-            bool hitPlanet = Physics.Raycast(m_RigidBody.position, -transform.up,
-                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore);
-
-            // Stick to planet if it finds a planet directly below the player
-            if (hitPlanet)
-            {
-                if (hit1.distance > m_DistanceToGround)
-                {
-                    m_RigidBody.MovePosition(m_RigidBody.position + (-transform.up * (hit1.distance - m_DistanceToGround)));
-                }
-                m_RigidBody.MoveRotation(Quaternion.LookRotation(transform.forward, hit1.normal));
-                m_RigidBody.AddForce(m_CurrentPlanet.m_GravityStrength * -transform.up);
-            }
-            // Shoot ray directed towards the center of the planet
-            else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized, 
-                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
-            {
-                if (hit1.distance > m_DistanceToGround)
-                {
-                    m_RigidBody.MovePosition(m_RigidBody.position + (-transform.up * (hit1.distance - m_DistanceToGround)));
-                }
-                m_RigidBody.MoveRotation(Quaternion.LookRotation(transform.forward, hit1.normal));
-                m_RigidBody.AddForce(m_CurrentPlanet.m_GravityStrength * -transform.up);
-                Debug.Log("Backup Gravity");
-            }
-        }
-        else if (PlanetInRange() && OnlyOnePlanetInRange())     // Only one planet
+        if (PlanetInRange() && OnlyOnePlanetInRange())     // Only one planet
         {
             // Try to hit directly below the player
             RaycastHit hit1;
@@ -175,7 +136,48 @@ public class StickToPlanet : MonoBehaviour {
             Debug.DrawLine(m_RigidBody.position, m_RigidBody.position + gravityForce.normalized * 2.0f, Color.green);
         }
 
+        return m_CollidedWithPlanet;
+    }
 
+    public void GroundedUpdate()
+    {
+        l_groundTime += Time.deltaTime;
+
+        if (PlanetInRange())    // Grounded on the planet
+        {
+            RaycastHit hit1;
+            bool hitPlanet = Physics.Raycast(m_RigidBody.position, -transform.up,
+                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore);
+
+            // Stick to planet if it finds a planet directly below the player
+            if (hitPlanet)
+            {
+                if (hit1.distance > m_DistanceToGround)
+                {
+                    m_RigidBody.MovePosition(m_RigidBody.position + (-transform.up * (hit1.distance - m_DistanceToGround)));
+                }
+                m_RigidBody.MoveRotation(Quaternion.LookRotation(transform.forward, hit1.normal));
+                m_RigidBody.AddForce(m_CurrentPlanet.m_GravityStrength * -transform.up);
+            }
+            // Shoot ray directed towards the center of the planet
+            else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized, 
+                out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
+            {
+                if (hit1.distance > m_DistanceToGround)
+                {
+                    m_RigidBody.MovePosition(m_RigidBody.position + (-transform.up * (hit1.distance - m_DistanceToGround)));
+                }
+                m_RigidBody.MoveRotation(Quaternion.LookRotation(transform.forward, hit1.normal));
+                m_RigidBody.AddForce(m_CurrentPlanet.m_GravityStrength * -transform.up);
+                Debug.Log("Backup Gravity");
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // Reset the collision check
+        m_CollidedWithPlanet = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -230,11 +232,6 @@ public class StickToPlanet : MonoBehaviour {
         return (m_PlanetsAffecting.Count == 1);
     }
 
-    public bool IsGrounded()
-    {
-        return m_PlayerStats.m_PlayerState == PlayerState.Grounded;
-    }
-
     bool FindIfGrounded()
     {
         // Inspiration from http://answers.unity3d.com/questions/196381/how-do-i-check-if-my-rigidbody-player-is-grounded.html
@@ -251,15 +248,14 @@ public class StickToPlanet : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Planet")
         {
-            if (m_PlayerStats.m_PlayerState == PlayerState.Drifting)
-            {
-                m_PlayerStats.m_PlayerState = PlayerState.Grounded;
-                m_CurrentPlanet = collision.gameObject.GetComponent<PlanetGravityField>();
-                Debug.Log("Player Collided with " + collision.gameObject.name);
+            m_CollidedWithPlanet = true;
 
-                // Rotate player towards planet
-                RotateTowardsCurrentPlanet();
-            }
+            m_CurrentPlanet = collision.gameObject.GetComponent<PlanetGravityField>();
+            Debug.Log("Player Collided with " + collision.gameObject.name);
+
+            // Rotate player towards planet
+            RotateTowardsCurrentPlanet();
+            
         }
     }
 

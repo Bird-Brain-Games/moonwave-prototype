@@ -10,15 +10,9 @@ public class Shoot : MonoBehaviour {
 
     //The impact a bullet has on a player
     public float m_bulletImpact;
-   
-    //The vector we store our joystick axis's in
-    Vector2 m_aim;
-
-    //whether we are pressing the shoot button or not.
-    bool m_shoot;
 
     //Whether we can shoot on this frame, is affected by m_bulletDelay
-    bool m_shootStatus;
+    bool m_shootTimer;
     
     //The accessers to our controller script
     Controls controls;
@@ -51,12 +45,27 @@ public class Shoot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        m_shoot = controls.GetShoot(BUTTON_DETECTION.GET_BUTTON);
-        m_aim = controls.GetAim();
-
-        if (m_shoot && m_shootStatus)
+        if (m_bulletDelay > m_timer - m_startTime && !m_shootTimer)
         {
-            m_shootStatus = false;
+            m_timer = Time.time;
+            //Debug.Log("start Time: " + m_startTime);
+            //Debug.Log("Time: " + m_timer);
+        }
+        else if (m_bulletDelay < m_timer - m_startTime && !m_shootTimer)
+        {
+            //Debug.Log("shoot recharged");
+            m_shootTimer = true;
+            m_timer = 0;
+            m_startTime = 0;
+        }
+	}
+
+    public void ShootLaser(Vector3 a_Aim)
+    {
+        // If the timer allows us to shoot again
+        if (m_shootTimer)
+        {
+            m_shootTimer = false;
             m_timer = Time.time;
             m_startTime = Time.time;
 
@@ -67,7 +76,7 @@ public class Shoot : MonoBehaviour {
             m_randomX = m_randomX / 100;
 
             // Bullet Spread applied by adding the random values to the aim
-            Vector3 forward = new Vector3(m_aim.x + m_randomX, m_aim.y + m_randomY);
+            Vector3 forward = new Vector3(a_Aim.x + m_randomX, a_Aim.y + m_randomY);
             forward.Normalize();
 
             //creating the bullet
@@ -87,18 +96,5 @@ public class Shoot : MonoBehaviour {
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots
         }
-        else if (m_bulletDelay > m_timer - m_startTime && !m_shootStatus)
-        {
-            m_timer = Time.time;
-            //Debug.Log("start Time: " + m_startTime);
-            //Debug.Log("Time: " + m_timer);
-        }
-        else if (m_bulletDelay < m_timer - m_startTime && !m_shootStatus)
-        {
-            //Debug.Log("shoot recharged");
-            m_shootStatus = true;
-            m_timer = 0;
-            m_startTime = 0;
-        }
-	}
+    }
 }

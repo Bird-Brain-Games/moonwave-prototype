@@ -6,33 +6,38 @@ public class StateManager : MonoBehaviour
 {
 
     //Holds all of our items in it.
+    PlayerStats playerStats;
 
     State currentState;
     State defaultState;
-    TestState testState;
-    MainState mainState;
+
+    Dictionary<string, State> states;
+    PlayerDriftState driftState;
+    PlayerOnPlanetState onPlanetState;
+
     // Use this for initialization
     void Awake()
     {
-        testState = gameObject.AddComponent<TestState>();
-        mainState = gameObject.AddComponent<MainState>();
-        //testState = new TestState(gameObject);
-        //mainState = new MainState(gameObject);
-        
+        driftState = gameObject.AddComponent<PlayerDriftState>();
+        onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
+        playerStats = GetComponent<PlayerStats>();        
     }
 
     void Start()
     {
-        currentState = testState;
-        defaultState = testState;
+        states.Add(playerStats.PlayerDriftStateString, driftState);
+        states.Add(playerStats.PlayerMovementOnPlanetString, onPlanetState);
+
+        currentState = driftState;
+        defaultState = driftState;
     }
 
     // Make sure to only change state in the late update of the state
     // So that all the updates can call first [G, C]
-    public void ChangeState(State a_State)
+    public void ChangeState(string a_State)
     {
         currentState.Exit();
-        currentState = a_State;
+        currentState = states[a_State];
         currentState.Enter();
     }
 
