@@ -14,6 +14,8 @@ public class Shield : MonoBehaviour
         shotgun = 1
     }
 
+    PlayerStats m_playerStats;
+
     //self explanitory
     public int m_shieldHealth;
     public int mm_axShieldHealth;
@@ -37,6 +39,7 @@ public class Shield : MonoBehaviour
     {
         m_canRecharge = false;
         m_shieldHealth = mm_axShieldHealth;
+        m_playerStats = GetComponentInParent<PlayerStats>();
     }
 
     //this is called whenever a player is hit and basically resets the shield recharge variables.
@@ -52,14 +55,13 @@ public class Shield : MonoBehaviour
                 case BULLET_TYPE.shotgun:
                     m_shieldHealth -= 5;
                     break;
-
             }
-
 
         }
         if (m_shieldHealth <= 0)
         {
             GetComponent<MeshRenderer>().enabled = false;
+            m_playerStats.SetShieldState(false);
         }
         m_timeSinceLastHit = Time.time;
         m_hitUpdate = Time.time;
@@ -102,6 +104,7 @@ public class Shield : MonoBehaviour
                     Debug.Log("shield recharge");
                     m_shieldHealth += m_rechargeRatePerSecond;
                     GetComponent<MeshRenderer>().enabled = true;
+                    m_playerStats.SetShieldState(true);
                     m_timeSinceLastRecharge = Time.time;
                 }
             }

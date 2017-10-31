@@ -15,7 +15,6 @@ public class bulletTime : MonoBehaviour
     public void BulletOutOfBounds()
     {
             Debug.Log("bullet out of bounds");
-            Debug.Log("bullet V: " + gameObject.GetComponent<Rigidbody>().velocity);
             Destroy(gameObject, 0.0f); 
     }
 }

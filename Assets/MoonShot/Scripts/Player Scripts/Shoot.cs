@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour {
 
-    // Use this for initialization
-
+    #region variables 
+    //players rigidBody
     public Rigidbody bullet;
 
+    //The impact a bullet has on a player
+    public float m_bulletImpact;
+   
+    //The vector we store our joystick axis's in
     Vector2 m_aim;
+
+    //whether we are pressing the shoot button or not.
     bool m_shoot;
+
+    //Whether we can shoot on this frame, is affected by m_bulletDelay
+    bool m_shootStatus;
+    
+    //The accessers to our controller script
     Controls controls;
     public float m_bulletSpeed;
 
+    //Variable used to control how fast bullets can be shot
     public float m_bulletDelay;
+    //Timer variables
     float m_timer;
     float m_startTime;
-    bool m_shootStatus;
 
     //Variables for Bullet spread [Jack, Robbie]
     public int m_stray;  // Control the variable for the spread, a higher number is greater variance
@@ -26,15 +38,20 @@ public class Shoot : MonoBehaviour {
     // Logging [Jack]
     public int l_bullets; // using l_ to indicate this data is for logging
 
+    PlayerStats m_playerStats;
+
+#endregion
+
     void Start () {
         controls = GetComponent<Controls>();
+        m_playerStats = gameObject.GetComponent<PlayerStats>();
         l_bullets = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        m_shoot = controls.GetShoot();
+        m_shoot = controls.GetShoot(BUTTON_DETECTION.GET_BUTTON);
         m_aim = controls.GetAim();
 
         if (m_shoot && m_shootStatus)
@@ -53,17 +70,19 @@ public class Shoot : MonoBehaviour {
             Vector3 forward = new Vector3(m_aim.x + m_randomX, m_aim.y + m_randomY);
             forward.Normalize();
 
+            //creating the bullet
             Rigidbody clone;
             clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
 
+            //setting the bullets speed
             forward *= m_bulletSpeed;
-            //Debug.Log(forward.ToString());
-
             clone.velocity = forward;
 
-            //Debug.Log(clone.velocity.ToString());
+            //probably should set these to be more effecient.
             clone.GetComponent<Owner>().setOwner(gameObject);
+            clone.GetComponent<Owner>().SetPlayerStats(m_playerStats);
             clone.GetComponent<Owner>().setVelocity(clone.velocity);
+            clone.GetComponent<Owner>().SetImpact(m_bulletImpact);
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots
