@@ -12,6 +12,7 @@ public class PlayerBoost : MonoBehaviour
     public float boostRecharge;
     public float boostKnockbackDuration;
     public int m_type;
+    
 
     Rigidbody m_RigidBody;
     StickToPlanet m_Gravity;
@@ -20,6 +21,7 @@ public class PlayerBoost : MonoBehaviour
     Controls controls;
 
     Vector2 m_move;
+    
     bool m_boost;
     bool m_jump;
     Vector3 m_Direction;
@@ -42,6 +44,7 @@ public class PlayerBoost : MonoBehaviour
         m_Rend = GetComponent<Renderer>();
         controls = GetComponent<Controls>();
         m_boostAmount = 1;
+        
         l_boosts = 0;
 
     }
