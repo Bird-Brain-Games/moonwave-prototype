@@ -191,12 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8605ee84a1158b642b7c6b9baa24a880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerState: 1
+  PlayerDriftStateString: drift
+  PlayerOnPlanetStateString: onPlanet
   colourdull: {r: 0, g: 0, b: 0, a: 0}
   colour: {r: 0, g: 0, b: 0, a: 0}
   m_Score: 0
   m_shieldState: 0
-  m_CriticalMultiplyer: 0
+  m_CriticalMultipier: 0
+  driftMoveForce: 0
+  walkMoveForce: 0
+  jumpForce: 0
 --- !u!114 &114097281429128976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,6 +274,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_boostBaseImpact: 0
   m_boostAddedCharge: 0
+  m_boostDuration: 0
+  m_player:
+    m_Bits: 0
+  m_layer: 0
+  m_PlayerStats: {fileID: 0}
+  m_rigidbody: {fileID: 0}
 --- !u!114 &114482691866668444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,10 +324,26 @@ MonoBehaviour:
   m_BoostForce: 0
   m_inertiaForce: 0
   m_boostForceChargePerSecond: 0
+  m_boostForceReset: 0
   m_MoveForce: 0
   m_boostCharges: 0
   m_boostRecharge: 0
   m_boostKnockbackDuration: 0
+  m_RigidBody: {fileID: 0}
+  m_Gravity: {fileID: 0}
+  m_PlayerStats: {fileID: 0}
+  m_Rend: {fileID: 0}
+  m_controls: {fileID: 0}
+  m_boostCollision: {fileID: 0}
+  m_move: {x: 0, y: 0}
+  m_boost: 0
+  m_charging: 0
+  m_jump: 0
+  m_Direction: {x: 0, y: 0, z: 0}
+  m_boostAmount: 0
+  m_cooldownDuration: 0
+  m_cooldownStart: 0
+  m_boostChargedTime: 0
   l_boosts: 0
 --- !u!114 &114715620829579938
 MonoBehaviour:
@@ -330,7 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1273cfc2d3c3e004c92a5dd749cb05f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkSpeed: 25
   m_MovementType: 1
 --- !u!136 &136973922298270704
 CapsuleCollider:

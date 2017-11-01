@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMoveOnPlanet : MonoBehaviour
 {
-
-    public float m_WalkSpeed;
     Rigidbody m_RigidBody;
     StickToPlanet m_Gravity;
     Vector2 m_move;
@@ -15,6 +13,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
     Vector3 m_JoyStick;
     Vector3 m_PlanetToPlayer;
     Controls controls;
+    PlayerStats m_PlayerStats;
 
     // Use this for initialization
     void Start()
@@ -22,6 +21,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
         m_RigidBody = GetComponent<Rigidbody>();
         m_Gravity = GetComponent<StickToPlanet>();
         controls = GetComponent<Controls>();
+        m_PlayerStats = GetComponent<PlayerStats>();
     }
 
 
@@ -31,8 +31,8 @@ public class PlayerMoveOnPlanet : MonoBehaviour
         m_move = controls.GetMove();
         if (m_MovementType == 0)
         {
-                m_RigidBody.velocity = transform.right * m_move.x * m_WalkSpeed;
-                //m_RigidBody.AddForce(transform.right * m_hAxis * m_WalkSpeed, ForceMode.VelocityChange);
+                m_RigidBody.velocity = transform.right * m_move.x * m_PlayerStats.walkMoveForce;
+                //m_RigidBody.AddForce(transform.right * m_hAxis * controls.walkMoveForce, ForceMode.VelocityChange);
         }
         else if (m_MovementType == 1)
         {
@@ -53,17 +53,17 @@ public class PlayerMoveOnPlanet : MonoBehaviour
                 if (m_JoyStick.y * m_PlanetToPlayer.x > m_JoyStick.x * m_PlanetToPlayer.y)
                 {
 
-                    //m_RigidBody.AddForce(transform.right * m_WalkSpeed * -1, ForceMode.VelocityChange);
+                    //m_RigidBody.AddForce(transform.right * controls.walkMoveForce * -1, ForceMode.VelocityChange);
                     //m_RigidBody.velocity = Vector3.ClampMagnitude(m_RigidBody.velocity, m_MaxWalkSpeed);
 
 
                     //Debug.Log("Move counter clockwise");
-                    m_RigidBody.velocity = transform.right * m_WalkSpeed * 1.0f;
+                    m_RigidBody.velocity = transform.right * m_PlayerStats.walkMoveForce * 1.0f;
                 }
                 else
                 {
                     //Debug.Log("Move clockwise");
-                    m_RigidBody.velocity = transform.right * m_WalkSpeed * -1.0f;
+                    m_RigidBody.velocity = transform.right * m_PlayerStats.walkMoveForce * -1.0f;
                 }
             }
             else

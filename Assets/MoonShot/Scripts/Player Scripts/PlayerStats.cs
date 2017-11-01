@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour {
 
     [HideInInspector]
-    public string PlayerDriftStateString = "1";     // Making them small strings, easier to compare
+    public string PlayerDriftStateString = "drift";     // Making them small strings, easier to compare
     [HideInInspector]
-    public string PlayerMovementOnPlanetString = "2";   // Making them small strings, easier to compare (probably change to ints) [Graham]
+    public string PlayerOnPlanetStateString = "onPlanet";   // Making them small strings, easier to compare (probably change to ints) [Graham]
 
 
     public Color colourdull;

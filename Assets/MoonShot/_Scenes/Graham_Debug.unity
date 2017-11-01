@@ -389,7 +389,7 @@ Prefab:
     - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
         type: 2}
       propertyPath: m_Score
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114563655088194838, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
         type: 2}
@@ -419,6 +419,26 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
+        type: 2}
+      propertyPath: driftMoveForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
+        type: 2}
+      propertyPath: walkMoveForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
+        type: 2}
+      propertyPath: jumpForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
+        type: 2}
+      propertyPath: PlayerDriftStateString
+      value: drift
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114703778630650314, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
@@ -1115,7 +1135,7 @@ Prefab:
     - target: {fileID: 114129986997213628, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_MaxTime
-      value: 2
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 114746149637051626, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
@@ -1503,7 +1523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1273cfc2d3c3e004c92a5dd749cb05f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkSpeed: 25
   m_MovementType: 1
 --- !u!114 &1867573090
 MonoBehaviour:
@@ -1534,7 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerDriftStateString: 1
-  PlayerMovementOnPlanetString: 2
+  PlayerOnPlanetStateString: onPlanet
   colourdull: {r: 0, g: 0, b: 0.21568628, a: 0}
   colour: {r: 0, g: 0, b: 0.60784316, a: 0}
   m_Score: 0

@@ -20,17 +20,20 @@ public class StateManager : MonoBehaviour
     {
         driftState = gameObject.AddComponent<PlayerDriftState>();
         onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
+        
         playerStats = GetComponent<PlayerStats>();
+
+        
     }
 
     void Start()
     {
         currentState = driftState;
         defaultState = onPlanetState;
-        
 
-        //states.Add(playerStats.PlayerDriftStateString, driftState);
-        //states.Add(playerStats.PlayerMovementOnPlanetString, onPlanetState);
+        states = new Dictionary<string, State>();
+        states.Add(playerStats.PlayerDriftStateString, driftState);
+        states.Add(playerStats.PlayerOnPlanetStateString, onPlanetState);
 
     }
 
@@ -39,9 +42,10 @@ public class StateManager : MonoBehaviour
     public void ChangeState(string a_State)
     {
         currentState.Exit();
-        //currentState = states[a_State];
-        currentState = defaultState;
+        currentState = states[a_State];
         currentState.Enter();
+
+        Debug.Log("Changing to " + a_State);
     }
 
     // Update is called once per frame

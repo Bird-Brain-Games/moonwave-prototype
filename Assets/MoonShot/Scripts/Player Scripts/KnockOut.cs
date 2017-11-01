@@ -20,7 +20,7 @@ public class KnockOut : MonoBehaviour {
     { 
         Debug.Log("KNOCKOUT!!!!1!!!!!");
         transform.position = new Vector3(9, 11, 0);
-        m_rigidBody.velocity = new Vector3();
+        m_rigidBody.velocity = new Vector3(0f, 0f, 0f);
 
         // Logging
         l_deaths++;

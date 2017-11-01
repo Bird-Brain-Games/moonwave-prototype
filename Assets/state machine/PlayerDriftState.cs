@@ -42,7 +42,7 @@ public class PlayerDriftState : State {
 		if(m_CollidedWithPlanet)
 		{
 			// Change the state to the "Moving on planet" state
-			ChangeState(m_PlayerStats.PlayerMovementOnPlanetString);
+			ChangeState(m_PlayerStats.PlayerOnPlanetStateString);
 		}
 	}
 }

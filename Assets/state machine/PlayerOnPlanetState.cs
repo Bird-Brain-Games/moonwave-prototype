@@ -29,6 +29,9 @@ public class PlayerOnPlanetState : State {
         //set the players direction based off of the analog stick
         m_Direction = new Vector3(m_Controls.GetMove().x, m_Controls.GetMove().y, 0.0f);
 
+		// Update the gravity [G, C]
+		m_Gravity.GroundedUpdate();
+
 		// If the stick is being moved, add the force [G, C]
 		if (m_Direction.sqrMagnitude > 0.0f)
 			m_Move.MoveOnPlanet();
@@ -45,8 +48,5 @@ public class PlayerOnPlanetState : State {
 			m_RigidBody.AddForce(m_PlayerStats.jumpForce * transform.up, ForceMode.Impulse);
 			ChangeState(m_PlayerStats.PlayerDriftStateString);
 		}
-
-		// Update the gravity [G, C]
-		m_Gravity.GroundedUpdate();
 	}
 }
