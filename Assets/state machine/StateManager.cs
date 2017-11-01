@@ -20,16 +20,18 @@ public class StateManager : MonoBehaviour
     {
         driftState = gameObject.AddComponent<PlayerDriftState>();
         onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
-        playerStats = GetComponent<PlayerStats>();        
+        playerStats = GetComponent<PlayerStats>();
     }
 
     void Start()
     {
-        states.Add(playerStats.PlayerDriftStateString, driftState);
-        states.Add(playerStats.PlayerMovementOnPlanetString, onPlanetState);
-
         currentState = driftState;
-        defaultState = driftState;
+        defaultState = onPlanetState;
+        
+
+        //states.Add(playerStats.PlayerDriftStateString, driftState);
+        //states.Add(playerStats.PlayerMovementOnPlanetString, onPlanetState);
+
     }
 
     // Make sure to only change state in the late update of the state
@@ -37,7 +39,8 @@ public class StateManager : MonoBehaviour
     public void ChangeState(string a_State)
     {
         currentState.Exit();
-        currentState = states[a_State];
+        //currentState = states[a_State];
+        currentState = defaultState;
         currentState.Enter();
     }
 

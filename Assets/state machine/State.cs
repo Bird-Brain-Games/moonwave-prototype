@@ -10,7 +10,7 @@ public class State : MonoBehaviour
 
     StateManager stateManager;
     // Use this for initialization
-    public State()
+    void Awake()
     {
         Debug.Log("Base State created");
         stateManager = GetComponent<StateManager>();

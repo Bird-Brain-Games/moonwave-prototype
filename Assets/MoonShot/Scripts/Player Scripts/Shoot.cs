@@ -16,6 +16,7 @@ public class Shoot : MonoBehaviour {
     
     //The accessers to our controller script
     Controls controls;
+    Vector2 aimDir;
     public float m_bulletSpeed;
 
     //Variable used to control how fast bullets can be shot
@@ -58,9 +59,11 @@ public class Shoot : MonoBehaviour {
             m_timer = 0;
             m_startTime = 0;
         }
+
+        aimDir = controls.GetAim();
 	}
 
-    public void ShootLaser(Vector3 a_Aim)
+    public void ShootLaser()
     {
         // If the timer allows us to shoot again
         if (m_shootTimer)
@@ -76,7 +79,7 @@ public class Shoot : MonoBehaviour {
             m_randomX = m_randomX / 100;
 
             // Bullet Spread applied by adding the random values to the aim
-            Vector3 forward = new Vector3(a_Aim.x + m_randomX, a_Aim.y + m_randomY);
+            Vector3 forward = new Vector3(aimDir.x + m_randomX, aimDir.y + m_randomY);
             forward.Normalize();
 
             //creating the bullet

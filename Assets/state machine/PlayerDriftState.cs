@@ -34,7 +34,7 @@ public class PlayerDriftState : State {
 		// If the shoot button is pressed, FIRE THE LASER
 		if (m_Controls.GetShoot(BUTTON_DETECTION.GET_BUTTON))
 		{
-			m_Shoot.ShootLaser(m_Direction);
+			m_Shoot.ShootLaser();
 		}
 
 		// Update the gravity [G, C]
