@@ -44,5 +44,12 @@ public class PlayerDriftState : State {
 			// Change the state to the "Moving on planet" state
 			ChangeState(m_PlayerStats.PlayerOnPlanetStateString);
 		}
+
+		// Check if boosting
+		if (m_Controls.GetBoost(BUTTON_DETECTION.GET_BUTTON))
+		{
+			// Change the state to the "Boost Charge" state
+			ChangeState(m_PlayerStats.PlayerBoostChargeString);
+		}
 	}
 }

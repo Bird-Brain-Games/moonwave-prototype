@@ -14,12 +14,16 @@ public class StateManager : MonoBehaviour
     Dictionary<string, State> states;
     PlayerDriftState driftState;
     PlayerOnPlanetState onPlanetState;
+    PlayerBoostChargeState boostChargeState;
+    PlayerBoostActiveState boostActiveState;
 
     // Use this for initialization
     void Awake()
     {
         driftState = gameObject.AddComponent<PlayerDriftState>();
         onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
+        boostChargeState = gameObject.AddComponent<PlayerBoostChargeState>();
+        boostActiveState = gameObject.AddComponent<PlayerBoostActiveState>();
         
         playerStats = GetComponent<PlayerStats>();
 
@@ -34,6 +38,8 @@ public class StateManager : MonoBehaviour
         states = new Dictionary<string, State>();
         states.Add(playerStats.PlayerDriftStateString, driftState);
         states.Add(playerStats.PlayerOnPlanetStateString, onPlanetState);
+        states.Add(playerStats.PlayerBoostActiveString, boostActiveState);
+        states.Add(playerStats.PlayerBoostChargeString, boostChargeState);
 
     }
 

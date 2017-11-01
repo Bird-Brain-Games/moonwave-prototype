@@ -193,6 +193,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerDriftStateString: drift
   PlayerOnPlanetStateString: onPlanet
+  PlayerBoostChargeString: boostCharge
+  PlayerBoostActiveString: boostActive
   colourdull: {r: 0, g: 0, b: 0, a: 0}
   colour: {r: 0, g: 0, b: 0, a: 0}
   m_Score: 0
@@ -201,6 +203,8 @@ MonoBehaviour:
   driftMoveForce: 0
   walkMoveForce: 0
   jumpForce: 0
+  boostBaseImpact: 0
+  boostAddedCharge: 0
 --- !u!114 &114097281429128976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,26 +328,10 @@ MonoBehaviour:
   m_BoostForce: 0
   m_inertiaForce: 0
   m_boostForceChargePerSecond: 0
-  m_boostForceReset: 0
   m_MoveForce: 0
   m_boostCharges: 0
   m_boostRecharge: 0
   m_boostKnockbackDuration: 0
-  m_RigidBody: {fileID: 0}
-  m_Gravity: {fileID: 0}
-  m_PlayerStats: {fileID: 0}
-  m_Rend: {fileID: 0}
-  m_controls: {fileID: 0}
-  m_boostCollision: {fileID: 0}
-  m_move: {x: 0, y: 0}
-  m_boost: 0
-  m_charging: 0
-  m_jump: 0
-  m_Direction: {x: 0, y: 0, z: 0}
-  m_boostAmount: 0
-  m_cooldownDuration: 0
-  m_cooldownStart: 0
-  m_boostChargedTime: 0
   l_boosts: 0
 --- !u!114 &114715620829579938
 MonoBehaviour:
