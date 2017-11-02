@@ -2,61 +2,83 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState
+[System.Serializable]
+public struct Boost
 {
-    Drifting = 1,
-    Grounded = 2,
-    Stunned = 4,
-    Orbiting = 8
+    //The default boost force
+    public float BaseForce;
+    //The force that is added for every second of charge
+    public float AddedForcePerSecond;
+    //The max force a boost can have
+    public float MaxForce;
+    //The default boost duration
+    public float BaseDuration;
+    //the added time a boost lasts for, for every second of charge
+    public float AddedDurationPerSecond;
+    //The max duration a boost can last for
+    public float MaxDuration;
+    //The time it takes for a boost to be ready agian.
+    public float Cooldown;
 }
-
 public class PlayerStats : MonoBehaviour {
 
-
-    public PlayerState m_PlayerState;
+#region  StateStrings
+    public string PlayerOnPlanetStateString {get; set;}   
+    public string PlayerDriftStateString {get; set;}
+    public string PlayerBoostChargeString {get; set;}
+    public string PlayerBoostActiveString {get; set;}
+#endregion
 
     public Color colourdull;
     public Color colour;
-<<<<<<< working copy
-    bool m_boostState;
+
     public int m_Score;
-
-	// Use this for initialization
-=======
-
-    bool m_boostState;
     public bool m_shieldState;
 
-    public float m_CriticalMultiplyer;
+    public float m_CriticalMultipier;
 
->>>>>>> merge rev
-	void Start () {
-        m_PlayerState = PlayerState.Drifting;
-<<<<<<< working copy
+    // Drift based variables
+    public float driftMoveForce;
+    public float walkMoveForce;
+
+    // Grounded based variables
+    public float jumpForce;
+
+
+    public Boost m_boost;
+
+    //Determines whether we can boost or not.
+    public bool CanBoost { get; set; }
+
+    // Stunned variables [Graham]
+    public bool stunTrigger {get; set;}
+	public float maxStunTime;
+
+
+
+	void Awake () {
         m_Score = 0;
-	}
-=======
         m_shieldState = true;
+<<<<<<< working copy
+        stunTrigger = false;
+=======
+        CanBoost = true;
 >>>>>>> merge rev
 
+        // Making them small strings, easier to compare (probably change to ints) [Graham]
+        PlayerOnPlanetStateString = "onPlanet";
+        PlayerDriftStateString = "drift";
+        PlayerBoostActiveString = "boostActive";
+        PlayerBoostChargeString = "boostCharge";
     }
 
     //Getters and Setters
-    public bool GetBoostState()
-    {
-        return m_boostState;
-    }
-    
-    public void SetBoostState(bool p_state)
-    {
-        m_boostState = p_state;
-    }
 
-<<<<<<< working copy
     public int getScore()
     {
         return m_Score;
-=======
+    }
+    
     public bool GetShieldState()
     {
         return m_shieldState;
@@ -67,21 +89,20 @@ public class PlayerStats : MonoBehaviour {
         m_shieldState = p_state;
     }
 
-    public float GetCriticalMultiplyer()
+    public float GetCriticalMultiplier()
     {
-        //if shield is active return 1 as multiplyer
+        //if shield is active return 1 as multiplier
         
         if (m_shieldState == true)
         {
-            Debug.Log("Critical fail");
+            //Debug.Log("Critical fail");
             return 1;
         }
-        //if shield is deactivated return critical multiplayer.
+        //if shield is deactivated return critical multiplier.
         else
         {
             Debug.Log("Critical hit");
-            return m_CriticalMultiplyer;
+            return m_CriticalMultipier;
         }
->>>>>>> merge rev
     }
 }

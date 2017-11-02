@@ -48,7 +48,7 @@ public class PlayerDriftState : State {
 		}
 
 		// Check if boosting
-		if (m_Controls.GetBoost(BUTTON_DETECTION.GET_BUTTON) && m_Boost.canBoost())
+		if (m_Controls.GetBoost(BUTTON_DETECTION.GET_BUTTON) && m_PlayerStats.CanBoost == true)
 		{
 			// Change the state to the "Boost Charge" state
 			ChangeState(m_PlayerStats.PlayerBoostChargeString);
