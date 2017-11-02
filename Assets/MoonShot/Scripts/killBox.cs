@@ -22,7 +22,7 @@ public class killBox : MonoBehaviour
 
         if (other.gameObject.CompareTag("Bullet"))
         {
-            other.gameObject.GetComponent<bulletTime>().BulletOutOfBounds();
+            other.gameObject.GetComponent<Bullet>().BulletOutOfBounds();
         }
 
     }

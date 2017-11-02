@@ -6,43 +6,15 @@ public class StateManager : MonoBehaviour
 {
 
     //Holds all of our items in it.
-    PlayerStats playerStats;
-
     State currentState;
     State defaultState;
+    string defaultStateString;
 
     Dictionary<string, State> states;
-    PlayerDriftState driftState;
-    PlayerOnPlanetState onPlanetState;
-    PlayerBoostChargeState boostChargeState;
-    PlayerBoostActiveState boostActiveState;
 
-    // Use this for initialization
     void Awake()
     {
-        driftState = gameObject.AddComponent<PlayerDriftState>();
-        onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
-        boostChargeState = gameObject.AddComponent<PlayerBoostChargeState>();
-        boostActiveState = gameObject.AddComponent<PlayerBoostActiveState>();
-        
-        playerStats = GetComponent<PlayerStats>();
-
-        
-    }
-
-    void Start()
-    {
-        currentState = driftState;
-        defaultState = onPlanetState;
-
         states = new Dictionary<string, State>();
-        states.Add(playerStats.PlayerDriftStateString, driftState);
-        states.Add(playerStats.PlayerOnPlanetStateString, onPlanetState);
-        states.Add(playerStats.PlayerBoostActiveString, boostActiveState);
-        states.Add(playerStats.PlayerBoostChargeString, boostChargeState);
-
-        ChangeState(playerStats.PlayerDriftStateString);
-
     }
 
     // Make sure to only change state in the late update of the state
@@ -54,6 +26,29 @@ public class StateManager : MonoBehaviour
         currentState.Enter();
 
         Debug.Log("Changing to " + a_State);
+    }
+
+    public void AttachState(string key, State s)
+    {
+        if (states.ContainsKey(key))    return; // If it's already in the list, don't add it [Graham]
+
+        states.Add(key, s);
+        if (currentState == null)
+        {
+            currentState = states[key];
+        }
+    }
+
+    public void AttachDefaultState(string key, State s)
+    {
+        AttachState(key, s);
+        defaultState = states[key];
+        defaultStateString = key;
+    }
+
+    public void ResetToDefaultState()
+    {
+        ChangeState(defaultStateString);
     }
 
     // Update is called once per frame

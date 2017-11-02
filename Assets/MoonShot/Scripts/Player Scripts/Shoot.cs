@@ -83,18 +83,16 @@ public class Shoot : MonoBehaviour {
             forward.Normalize();
 
             //creating the bullet
-            Rigidbody clone;
-            clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
+            Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
 
             //setting the bullets speed
-            forward *= m_bulletSpeed;
-            clone.velocity = forward;
+            //forward *= m_bulletSpeed;
+            clone.velocity = forward * m_bulletSpeed;
 
             //probably should set these to be more effecient.
-            clone.GetComponent<Owner>().setOwner(gameObject);
-            clone.GetComponent<Owner>().SetPlayerStats(m_playerStats);
-            clone.GetComponent<Owner>().setVelocity(clone.velocity);
-            clone.GetComponent<Owner>().SetImpact(m_bulletImpact);
+            clone.GetComponent<Bullet>().playerNum = controls.playerNumber;
+            clone.GetComponent<Bullet>().force = m_bulletImpact;
+            clone.GetComponent<Bullet>().initialVelocity = clone.velocity;
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots

@@ -15,6 +15,7 @@ public class onCollision : MonoBehaviour
     Rigidbody m_rigidBody;
     Shield m_shield;
     Owner m_owner;
+    
     void Start()
     {
         //setting up layers.
@@ -45,10 +46,11 @@ public class onCollision : MonoBehaviour
         {
             Destroy(gameObject, 0);  // Destorys bullets when they hit a planet
         }
+
         //if we have collided with a player.
         else if (m_layer == m_player && collision.gameObject != m_owner.getOwner())
         {
-
+            
             //needs to shift this to a function call so all the variables are private instead of public.
             m_shield = collision.rigidbody.GetComponentInChildren<Shield>();
 
