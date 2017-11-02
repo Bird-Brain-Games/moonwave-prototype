@@ -41,6 +41,8 @@ public class StateManager : MonoBehaviour
         states.Add(playerStats.PlayerBoostActiveString, boostActiveState);
         states.Add(playerStats.PlayerBoostChargeString, boostChargeState);
 
+        ChangeState(playerStats.PlayerDriftStateString);
+
     }
 
     // Make sure to only change state in the late update of the state
