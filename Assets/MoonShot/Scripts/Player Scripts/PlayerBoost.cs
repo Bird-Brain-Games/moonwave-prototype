@@ -185,7 +185,9 @@ public class PlayerBoost : MonoBehaviour
 
     public bool canBoost()
     {
-        return (m_boostAmount == 1);    // I'd like this to be simplified if possible [Graham]
+        return (m_boostAmount == 1);    // I'd like this to be simplified if possible,
+                                        // Probably moved into playerStats like the other variables
+                                        // that need to be accessed. [Graham]
     }
 
     public float getChargeForce()

@@ -208,7 +208,7 @@ public class StickToPlanet : MonoBehaviour {
             }
         }
 
-        Debug.Log(m_PlanetsAffecting.Count);
+        //Debug.Log(m_PlanetsAffecting.Count);
         if (!PlanetInRange())
         {
             Debug.Log("Drifting");
@@ -257,6 +257,11 @@ public class StickToPlanet : MonoBehaviour {
             RotateTowardsCurrentPlanet();
             
         }
+    }
+
+    void OnCollision(Collision collision)
+    {
+        m_CollidedWithPlanet = true;
     }
 
     float GetGravityStrength(RaycastHit hit)

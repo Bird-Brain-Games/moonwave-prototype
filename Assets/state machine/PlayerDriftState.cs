@@ -12,6 +12,7 @@ public class PlayerDriftState : State {
 	Controls m_Controls;
 	Shoot m_Shoot;
 	StickToPlanet m_Gravity;
+	PlayerBoost m_Boost;	// To be removed [Graham]
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class PlayerDriftState : State {
 		m_Controls = GetComponent<Controls>();
 		m_Shoot = GetComponent<Shoot>();
 		m_Gravity = GetComponent<StickToPlanet>();
+		m_Boost = GetComponent<PlayerBoost>();
 	}
 
 	override public void StateUpdate()
@@ -29,7 +31,7 @@ public class PlayerDriftState : State {
 
 		// If the stick is being moved, add the force [G, C]
 		if (m_Direction.sqrMagnitude > 0.0f)
-			m_RigidBody.AddForce(m_PlayerStats.driftMoveForce * m_Direction * Time.deltaTime, ForceMode.Impulse);
+			m_RigidBody.AddForce(m_PlayerStats.driftMoveForce * m_Direction, ForceMode.Impulse);
 		
 		// If the shoot button is pressed, FIRE THE LASER
 		if (m_Controls.GetShoot(BUTTON_DETECTION.GET_BUTTON))
@@ -46,7 +48,7 @@ public class PlayerDriftState : State {
 		}
 
 		// Check if boosting
-		if (m_Controls.GetBoost(BUTTON_DETECTION.GET_BUTTON))
+		if (m_Controls.GetBoost(BUTTON_DETECTION.GET_BUTTON) && m_Boost.canBoost())
 		{
 			// Change the state to the "Boost Charge" state
 			ChangeState(m_PlayerStats.PlayerBoostChargeString);
