@@ -5,14 +5,10 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour {
 
 #region  StateStrings
-    [HideInInspector]   // Needs to be remedied, currently being changed in inspector [Graham]
-    public string PlayerDriftStateString;
-    [HideInInspector]
-    public string PlayerOnPlanetStateString;   
-    [HideInInspector]
-    public string PlayerBoostChargeString;
-    [HideInInspector]
-    public string PlayerBoostActiveString;
+    public string PlayerOnPlanetStateString {get; set;}   
+    public string PlayerDriftStateString {get; set;}
+    public string PlayerBoostChargeString {get; set;}
+    public string PlayerBoostActiveString {get; set;}
 #endregion
 
     public Color colourdull;

@@ -928,12 +928,12 @@ Prefab:
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 450
+      value: 563.5
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 337.5
+      value: 317
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
@@ -1023,32 +1023,7 @@ Prefab:
     - target: {fileID: 224542923380152850, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1841.2557
-      objectReference: {fileID: 0}
-    - target: {fileID: 114901049916935254, guid: dd0503115b3f82249ae75bee8ed1c86c,
-        type: 2}
-      propertyPath: eventSystem
-      value: 
-      objectReference: {fileID: 22890791}
-    - target: {fileID: 114129986997213628, guid: dd0503115b3f82249ae75bee8ed1c86c,
-        type: 2}
-      propertyPath: m_MaxTime
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 114746149637051626, guid: dd0503115b3f82249ae75bee8ed1c86c,
-        type: 2}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114888213658784402, guid: dd0503115b3f82249ae75bee8ed1c86c,
-        type: 2}
-      propertyPath: m_MatchWidthOrHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114888213658784402, guid: dd0503115b3f82249ae75bee8ed1c86c,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
+      value: 1773.8927
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd0503115b3f82249ae75bee8ed1c86c, type: 2}
@@ -1414,10 +1389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8605ee84a1158b642b7c6b9baa24a880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDriftStateString: 
-  PlayerOnPlanetStateString: 
-  PlayerBoostChargeString: 
-  PlayerBoostActiveString: 
   colourdull: {r: 0, g: 0, b: 0.21568628, a: 0}
   colour: {r: 0, g: 0, b: 0.60784316, a: 0}
   m_Score: 0
