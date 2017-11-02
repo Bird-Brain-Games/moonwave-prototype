@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 114482691866668444}
   - component: {fileID: 114218301735962494}
   - component: {fileID: 114563655088194838}
-  - component: {fileID: 114401941789327356}
+  - component: {fileID: 114301574753978850}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_timeSinceLastHit: 0
   m_hitUpdate: 0
   m_canRecharge: 0
---- !u!114 &114401941789327356
+--- !u!114 &114301574753978850
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -273,17 +273,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650582250571524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d0935b4f50e1645bdd7f72b94c3728, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ddc582bb9e2e8246821fd907dc5aa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_boostBaseImpact: 0
-  m_boostAddedCharge: 0
-  m_boostDuration: 0
-  m_player:
-    m_Bits: 0
-  m_layer: 0
-  m_PlayerStats: {fileID: 0}
-  m_rigidbody: {fileID: 0}
+  m_BoostForce: 0
+  m_inertiaForce: 0
+  m_boostForceChargePerSecond: 0
+  m_boostRecharge: 0
+  m_boostKnockbackDuration: 0
+  l_boosts: 0
 --- !u!114 &114482691866668444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,12 +322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddc582bb9e2e8246821fd907dc5aa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 0
   m_BoostForce: 0
   m_inertiaForce: 0
   m_boostForceChargePerSecond: 0
-  m_MoveForce: 0
-  m_boostCharges: 0
   m_boostRecharge: 0
   m_boostKnockbackDuration: 0
   l_boosts: 0
