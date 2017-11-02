@@ -8,6 +8,7 @@ public class StateManager : MonoBehaviour
     //Holds all of our items in it.
     State currentState;
     State defaultState;
+    string defaultStateString;
 
     Dictionary<string, State> states;
 
@@ -27,7 +28,7 @@ public class StateManager : MonoBehaviour
         Debug.Log("Changing to " + a_State);
     }
 
-    public void attachState(string key, State s)
+    public void AttachState(string key, State s)
     {
         if (states.ContainsKey(key))    return; // If it's already in the list, don't add it [Graham]
 
@@ -38,10 +39,16 @@ public class StateManager : MonoBehaviour
         }
     }
 
-    public void attachDefaultState(string key, State s)
+    public void AttachDefaultState(string key, State s)
     {
-        attachState(key, s);
+        AttachState(key, s);
         defaultState = states[key];
+        defaultStateString = key;
+    }
+
+    public void ResetToDefaultState()
+    {
+        ChangeState(defaultStateString);
     }
 
     // Update is called once per frame

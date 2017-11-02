@@ -251,7 +251,7 @@ public class StickToPlanet : MonoBehaviour {
             m_CollidedWithPlanet = true;
 
             m_CurrentPlanet = collision.gameObject.GetComponent<PlanetGravityField>();
-            Debug.Log("Player Collided with " + collision.gameObject.name);
+            //Debug.Log("Player Collided with " + collision.gameObject.name);
 
             // Rotate player towards planet
             RotateTowardsCurrentPlanet();

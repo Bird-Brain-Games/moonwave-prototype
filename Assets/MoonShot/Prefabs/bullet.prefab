@@ -23,9 +23,7 @@ GameObject:
   - component: {fileID: 135957889455337300}
   - component: {fileID: 23441147518977502}
   - component: {fileID: 54031750831577956}
-  - component: {fileID: 114260517704435962}
-  - component: {fileID: 114192234127859676}
-  - component: {fileID: 114919158606769896}
+  - component: {fileID: 114478968912662006}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Bullet
@@ -102,7 +100,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 72
   m_CollisionDetection: 0
---- !u!114 &114192234127859676
+--- !u!114 &114478968912662006
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -110,36 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1525999894464254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b12edb452a5fdcd49bc1f7a2084b8a5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114260517704435962
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1525999894464254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af585e9386f6f284496f4f15742b57df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planet:
-    serializedVersion: 2
-    m_Bits: 0
-  player:
-    serializedVersion: 2
-    m_Bits: 0
-  impact: 5000
---- !u!114 &114919158606769896
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1525999894464254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6cf9e7d5ab10bd4599a163b9866d897, type: 3}
+  m_Script: {fileID: 11500000, guid: bafb69d6397b8a94cae7c12e5042b63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135957889455337300

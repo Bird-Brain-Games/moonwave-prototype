@@ -31,10 +31,16 @@ public class PlayerStats : MonoBehaviour {
     //The force that is added for every second of charge
     public float boostAddedCharge;
 
+    // Stunned variables [Graham]
+    public bool stunTrigger {get; set;}
+	public float maxStunTime;
+
+
 
 	void Awake () {
         m_Score = 0;
         m_shieldState = true;
+        stunTrigger = false;
 
         // Making them small strings, easier to compare (probably change to ints) [Graham]
         PlayerOnPlanetStateString = "onPlanet";
@@ -66,7 +72,7 @@ public class PlayerStats : MonoBehaviour {
         
         if (m_shieldState == true)
         {
-            Debug.Log("Critical fail");
+            //Debug.Log("Critical fail");
             return 1;
         }
         //if shield is deactivated return critical multiplier.
