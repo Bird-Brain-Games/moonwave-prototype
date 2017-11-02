@@ -32,7 +32,7 @@ public class PlayerStats : MonoBehaviour {
     public float boostAddedCharge;
 
 
-	void Start () {
+	void Awake () {
         m_Score = 0;
         m_shieldState = true;
 
