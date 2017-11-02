@@ -21,6 +21,13 @@ public class PlayerManager : MonoBehaviour {
         {
             playerColours[i] = players[i].colour;
         }
+
+        // Set the player IDs, for scoring [Jack]
+        for (int i = 0; i < numPlayers; i++)
+        {
+            // i + 1 to make Player1 actually Player1, etc
+            players[i].m_PlayerID = i;
+        }
     }
 	
 	// Update is called once per frame

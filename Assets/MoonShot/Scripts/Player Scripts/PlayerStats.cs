@@ -14,7 +14,14 @@ public class PlayerStats : MonoBehaviour {
     public Color colourdull;
     public Color colour;
 
+    // Score Calculations
+    public int m_PlayerID;
+    public PlayerStats m_HitLastBy;
     public int m_Score;
+
+    // Killed by (Logging) [Jack]
+    public int[] l_killedBy;
+
     public bool m_shieldState;
 
     public float m_CriticalMultipier;
@@ -33,8 +40,10 @@ public class PlayerStats : MonoBehaviour {
 
 
 	void Awake () {
+        m_HitLastBy = null;
         m_Score = 0;
         m_shieldState = true;
+        l_killedBy = new int[4];
 
         // Making them small strings, easier to compare (probably change to ints) [Graham]
         PlayerOnPlanetStateString = "onPlanet";

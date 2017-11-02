@@ -52,6 +52,9 @@ public class onCollision : MonoBehaviour
             //needs to shift this to a function call so all the variables are private instead of public.
             m_shield = collision.rigidbody.GetComponentInChildren<Shield>();
 
+            // Stores who got the hit [Jack]
+            collision.rigidbody.GetComponent<PlayerStats>().m_HitLastBy = m_owner.getOwner().GetComponent<PlayerStats>();
+
             var force = m_owner.getVelocity();
             force.Normalize();
 
