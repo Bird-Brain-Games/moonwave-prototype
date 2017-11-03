@@ -93,6 +93,7 @@ public class Shoot : MonoBehaviour {
             clone.GetComponent<Bullet>().playerNum = controls.playerNumber;
             clone.GetComponent<Bullet>().force = m_bulletImpact;
             clone.GetComponent<Bullet>().initialVelocity = clone.velocity;
+            clone.GetComponent<Bullet>().m_PlayerStats = m_playerStats;
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots

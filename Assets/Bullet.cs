@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour {
 	public int playerNum {get; set;}
 	public float force {get; set;}
 	public Vector3 initialVelocity;
+	public PlayerStats m_PlayerStats {get; set;}
 
 	// Use this for initialization
 	void Start () {
@@ -53,8 +54,11 @@ public class Bullet : MonoBehaviour {
 	{
 		Shield m_shield = collision.gameObject.GetComponentInChildren<Shield>();
 		Vector3 direction = initialVelocity.normalized;
-		Debug.Log(m_Rigidbody.velocity);
+		//Debug.Log(m_Rigidbody.velocity);
 		Vector3 addForce;
+
+
+		collision.rigidbody.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
 
 		// If the shield has health, change how much force 
 		if (m_shield.m_shieldHealth == 0)
