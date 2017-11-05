@@ -44,12 +44,11 @@ public class Shotgun : MonoBehaviour {
 
 		ShotgunShot clone = Instantiate(shotgunShot, transform.position, Quaternion.Euler(aimDir));
 		clone.gameObject.transform.Rotate(new Vector3(0f, 90f, -180f));
-
+		clone.Init(transform.up, force, m_PlayerStats);
 		clone.duration = duration;
-		clone.playerNum = m_PlayerNum;
-		clone.m_PlayerStats = m_PlayerStats;
-		clone.direction = clone.gameObject.transform.rotation.eulerAngles;	// Not sure
-		clone.force = force;
+		Physics.IgnoreCollision(
+                clone.GetComponent<Collider>(), 
+                GetComponent<Collider>());
 
 		// Reset the cooldown
 		currentCooldown = maxCooldown;

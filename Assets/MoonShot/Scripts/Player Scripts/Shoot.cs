@@ -91,11 +91,12 @@ public class Shoot : MonoBehaviour {
             //forward *= m_bulletSpeed;
             clone.velocity = forward * m_bulletSpeed;
 
-            //probably should set these to be more effecient.
-            clone.GetComponent<Bullet>().playerNum = controls.playerNumber;
-            clone.GetComponent<Bullet>().force = m_bulletImpact;
-            clone.GetComponent<Bullet>().initialVelocity = clone.velocity;
-            clone.GetComponent<Bullet>().m_PlayerStats = m_playerStats;
+            // Initialize the bullet
+            clone.GetComponent<Bullet>().Init(
+                forward, m_bulletImpact, m_playerStats);
+            Physics.IgnoreCollision(
+                clone.GetComponent<Collider>(), 
+                GetComponent<Collider>());
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots
