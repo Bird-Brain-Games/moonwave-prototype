@@ -5,6 +5,11 @@ using UnityEngine;
 public class Bullet : Projectile {
 	public Vector3 m_InitialVelocity;
 
+	void Start()
+	{
+		m_Rigidbody = GetComponent<Rigidbody>();
+	}
+
 	public void BulletOutOfBounds()
     {
             //Debug.Log("bullet out of bounds");

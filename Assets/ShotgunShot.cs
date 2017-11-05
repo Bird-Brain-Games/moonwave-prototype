@@ -8,7 +8,8 @@ public class ShotgunShot : Projectile {
 	float currentDuration {get; set;}
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		currentDuration = duration;
 	}
 	
