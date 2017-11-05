@@ -5,6 +5,7 @@ using UnityEngine;
 //Primary coder campbell.
 public class PlayerBoost : MonoBehaviour
 {
+   
 
     #region Variables
 
@@ -24,6 +25,7 @@ public class PlayerBoost : MonoBehaviour
     PlayerStats m_PlayerStats;
     Renderer m_Rend;
     Controls m_controls;
+    GameObject m_bigHit;
 
     //the direction of analogue movement
     Vector2 m_move;
@@ -114,6 +116,11 @@ public class PlayerBoost : MonoBehaviour
         }
         else
             m_Direction = new Vector3(m_move.x, m_move.y, 0.0f);
+
+        if (m_BoostForce == m_PlayerStats.m_boost.MaxForce)
+        {
+            Instantiate<>
+        }
 
         //Adding boost velocity.
         m_RigidBody.AddForce(m_BoostForce * m_Direction, ForceMode.Impulse);
