@@ -771,6 +771,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114218301735962494, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
+        type: 2}
+      propertyPath: shootShotgun.sensitivity
+      value: 0.34
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
   m_IsPrefabParent: 0
@@ -900,12 +905,12 @@ Prefab:
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 481
+      value: 479
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 270.5
+      value: 264.5
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}

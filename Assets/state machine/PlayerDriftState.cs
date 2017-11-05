@@ -40,7 +40,7 @@ public class PlayerDriftState : State {
 		}
 
 		// If the "fire shotgun" button is pressed, shoot it. [Graham]
-		if (m_Controls.GetRightTrigger() > 0.5f)	// TO BE CHANGED
+		if (m_Controls.GetShootShotgun())	// TO BE CHANGED
 		{
 			m_Shoot.ShootShotgun();
 		}

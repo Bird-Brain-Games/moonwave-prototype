@@ -24,6 +24,12 @@ public enum BUTTONS
     Y = 0x8000
 }
 
+public enum TRIGGERS
+{
+    RIGHT,
+    LEFT
+}
+
 public enum BUTTON_DETECTION
 {
     GET_BUTTON,
@@ -45,6 +51,15 @@ public struct Button
     public BUTTONS key;
     public BUTTONS altKey;
 
+}
+
+[System.Serializable]
+public struct Trigger
+{
+    //The sensitivity we need to be above to return true
+    [Range(0.0f, 1.0f)]
+    public float sensitivity;
+    public TRIGGERS trigger;
 }
 
 [System.Serializable]
@@ -145,9 +160,20 @@ public class Controls : MonoBehaviour
         return GetRightTrigger(playerNumber);
     }
     //returns a value between 0 and 1 for the left trigger
-    float GetLeftTrigger()
+    public float GetLeftTrigger()
     {
         return GetLeftTrigger(playerNumber);
+    }
+    public float GetTrigger(TRIGGERS triggers)
+    {
+        if (triggers == TRIGGERS.LEFT)
+        {
+            return GetLeftTrigger();
+        }
+        else
+        {
+            return GetRightTrigger();
+        }
     }
     //sets the rumble of the controller. NOTE to self could overload the function to have a duration version.
     public void SetRumble(float leftRumble, float rightRumble)
@@ -163,9 +189,9 @@ public class Controls : MonoBehaviour
     public Aim aimControls;
     public Move moveControls;
     public Button shootLaser;
-    public Button shootShotgun;
     public Button jump;
     public Button boost;
+    public Trigger shootShotgun;
 
     //This region uses the above variables to fetch the controller state
     #region controls
@@ -191,10 +217,19 @@ public class Controls : MonoBehaviour
     {
         return GetButtonStruct(shootLaser, detect);
     }
-    //returns true or false using the shoot shotgun controls.
-    public bool GetShootShotgun(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
+    //returns true or false using the shotgun controls
+    public bool GetShootShotgun()
     {
-        return GetButtonStruct(shootShotgun, detect);
+        if (shootShotgun.sensitivity < GetTrigger(shootShotgun.trigger))
+        {
+            return true;
+        }
+        return false;
+    }
+    //Return the pressure of trigger
+    public float GetShootShotgunFloat()
+    {
+        return GetTrigger(shootShotgun.trigger);
     }
     //returns true or false using the jump controls.
     public bool GetJump(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
@@ -206,6 +241,8 @@ public class Controls : MonoBehaviour
     {
         return GetButtonStruct(boost, detect);
     }
+
+
 
     //Uses the Button struct to detimine what buttons to query the state of and in what manner
     bool GetButtonStruct(Button button, BUTTON_DETECTION detect)
