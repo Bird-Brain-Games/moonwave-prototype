@@ -2,25 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct Boost
-{
-    //The default boost force
-    public float BaseForce;
-    //The force that is added for every second of charge
-    public float AddedForcePerSecond;
-    //The max force a boost can have
-    public float MaxForce;
-    //The default boost duration
-    public float BaseDuration;
-    //the added time a boost lasts for, for every second of charge
-    public float AddedDurationPerSecond;
-    //The max duration a boost can last for
-    public float MaxDuration;
-    //The time it takes for a boost to be ready agian.
-    public float Cooldown;
-}
 public class PlayerStats : MonoBehaviour {
+
+    [System.Serializable]
+    public struct Boost
+    {
+        //The default boost force
+        public float BaseForce;
+        //The force that is added for every second of charge
+        public float AddedForcePerSecond;
+        //The max force a boost can have
+        public float MaxForce;
+        //The default boost duration
+        public float BaseDuration;
+        //the added time a boost lasts for, for every second of charge
+        public float AddedDurationPerSecond;
+        //The max duration a boost can last for
+        public float MaxDuration;
+        //The time it takes for a boost to be ready agian.
+        public float Cooldown;
+    }
+
+    [System.Serializable]
+    public struct Shoot
+    {
+        // Shotgun based variables
+        [Tooltip("The length of time (s) that the shotgun blast hitbox is on screen")]
+        public float shotgunDuration;
+        [Tooltip("The length of time (s) between shotgun shots")]
+        public float shotgunCooldown;
+        public float shotgunForce;
+    }
 
 #region  StateStrings
     public string PlayerOnPlanetStateString {get; set;}   
@@ -50,8 +62,9 @@ public class PlayerStats : MonoBehaviour {
 
     // Grounded based variables
     public float jumpForce;
+	public float maxStunTime;
 
-
+    public Shoot m_Shoot;
     public Boost m_boost;
 
     //Determines whether we can boost or not.
@@ -59,7 +72,6 @@ public class PlayerStats : MonoBehaviour {
 
     // Stunned variables [Graham]
     public bool stunTrigger {get; set;}
-	public float maxStunTime;
 
 
 

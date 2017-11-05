@@ -58,7 +58,7 @@ public class Bullet : MonoBehaviour {
 		Vector3 addForce;
 
 
-		collision.rigidbody.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
+		collision.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
 
 		// If the shield has health, change how much force 
 		if (m_shield.m_shieldHealth == 0)
@@ -75,7 +75,7 @@ public class Bullet : MonoBehaviour {
 		}
 
 		// Add the force [Graham]
-		collision.rigidbody.AddForce(addForce, ForceMode.Impulse);
+		collision.gameObject.GetComponent<Rigidbody>().AddForce(addForce, ForceMode.Impulse);
 		//Debug.Log(addForce + " applied to player");
 
 		// Tell the shield to be hit

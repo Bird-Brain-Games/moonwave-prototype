@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class State : MonoBehaviour
 {
+    public string m_Name;
     // Keeping track of the next state to change to
     bool changingState;
     string nextState;

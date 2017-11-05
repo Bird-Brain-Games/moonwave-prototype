@@ -232,7 +232,7 @@ public class StickToPlanet : MonoBehaviour {
         return (m_PlanetsAffecting.Count == 1);
     }
 
-    bool FindIfGrounded()
+    public bool FindIfGrounded()
     {
         // Inspiration from http://answers.unity3d.com/questions/196381/how-do-i-check-if-my-rigidbody-player-is-grounded.html
         RaycastHit hit;
@@ -259,9 +259,12 @@ public class StickToPlanet : MonoBehaviour {
         }
     }
 
-    void OnCollision(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
-        m_CollidedWithPlanet = true;
+        if (collision.gameObject.tag == "Planet")
+        {
+            //m_CollidedWithPlanet = true;
+        }
     }
 
     float GetGravityStrength(RaycastHit hit)

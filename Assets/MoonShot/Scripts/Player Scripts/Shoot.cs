@@ -16,6 +16,7 @@ public class Shoot : MonoBehaviour {
     
     //The accessers to our controller script
     Controls controls;
+    Shotgun m_Shotgun;
     Vector2 aimDir;
     public float m_bulletSpeed;
 
@@ -40,6 +41,7 @@ public class Shoot : MonoBehaviour {
     void Start () {
         controls = GetComponent<Controls>();
         m_playerStats = gameObject.GetComponent<PlayerStats>();
+        m_Shotgun = gameObject.GetComponent<Shotgun>();
         l_bullets = 0;
     }
 	
@@ -98,5 +100,10 @@ public class Shoot : MonoBehaviour {
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots
         }
+    }
+
+    public void ShootShotgun()
+    {
+        m_Shotgun.Shoot();
     }
 }

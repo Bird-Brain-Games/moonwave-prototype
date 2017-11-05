@@ -140,7 +140,7 @@ public class Controls : MonoBehaviour
         return 0.0f;
     }
     //returns a value between 0 and 1 for the right trigger
-    float GetRightTrigger()
+    public float GetRightTrigger()
     {
         return GetRightTrigger(playerNumber);
     }
@@ -162,7 +162,8 @@ public class Controls : MonoBehaviour
     //The controls for the player
     public Aim aimControls;
     public Move moveControls;
-    public Button shoot;
+    public Button shootLaser;
+    public Button shootShotgun;
     public Button jump;
     public Button boost;
 
@@ -185,10 +186,15 @@ public class Controls : MonoBehaviour
         result.y = getAnalogInput(moveControls.moveY);
         return result;
     }
-    //returns true or false using the shoot controls.
-    public bool GetShoot(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
+    //returns true or false using the shoot laser controls.
+    public bool GetShootLaser(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
     {
-        return GetButtonStruct(shoot, detect);
+        return GetButtonStruct(shootLaser, detect);
+    }
+    //returns true or false using the shoot shotgun controls.
+    public bool GetShootShotgun(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
+    {
+        return GetButtonStruct(shootShotgun, detect);
     }
     //returns true or false using the jump controls.
     public bool GetJump(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)

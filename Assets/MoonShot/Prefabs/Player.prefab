@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 114715620829579938}
   - component: {fileID: 114482691866668444}
   - component: {fileID: 114563655088194838}
+  - component: {fileID: 114890674134318816}
   - component: {fileID: 114836769225208922}
   - component: {fileID: 114097125839179680}
   m_Layer: 9
@@ -193,12 +194,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colourdull: {r: 0, g: 0, b: 0, a: 0}
   colour: {r: 0, g: 0, b: 0, a: 0}
+  m_PlayerID: 0
+  m_HitLastBy: {fileID: 0}
   m_Score: 0
+  l_killedBy: 
   m_shieldState: 0
   m_CriticalMultipier: 10
   driftMoveForce: 2
   walkMoveForce: 25
   jumpForce: 250
+  maxStunTime: 0
+  m_Shoot:
+    shotgunDuration: 1
+    shotgunCooldown: 1
+    shotgunForce: 10
   m_boost:
     BaseForce: 200
     AddedForcePerSecond: 50
@@ -207,12 +216,6 @@ MonoBehaviour:
     AddedDurationPerSecond: 0.25
     MaxDuration: 1.5
     Cooldown: 1
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c160fd87aa3344fadf825a9295b732, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxStunTimer: 1
 --- !u!114 &114097125839179680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,8 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c160fd87aa3344fadf825a9295b732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStunTimer: 1
-
 --- !u!114 &114097281429128976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,8 +260,11 @@ MonoBehaviour:
   moveControls:
     moveX: 2
     moveY: 3
-  shoot:
+  shootLaser:
     key: 512
+    altKey: 0
+  shootShotgun:
+    key: 0
     altKey: 0
   jump:
     key: 4096
@@ -340,6 +344,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_inertiaForce: 2
   l_boosts: 0
+--- !u!114 &114890674134318816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1650582250571524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1593a33e49316d40b3b71f085895c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotgunShot: {fileID: 114055539461388566, guid: efd73956d97acd6429fd0fc11f13963c,
+    type: 2}
 --- !u!136 &136973922298270704
 CapsuleCollider:
   m_ObjectHideFlags: 1

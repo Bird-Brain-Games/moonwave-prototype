@@ -37,7 +37,7 @@ public class PlayerOnPlanetState : State {
 			m_Move.MoveOnPlanet();
 		
 		// If the shoot button is pressed, FIRE THE LASER
-		if (m_Controls.GetShoot(BUTTON_DETECTION.GET_BUTTON))
+		if (m_Controls.GetShootLaser(BUTTON_DETECTION.GET_BUTTON))
 		{
 			m_Shoot.ShootLaser();
 		}

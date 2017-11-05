@@ -34,9 +34,15 @@ public class PlayerDriftState : State {
 			m_RigidBody.AddForce(m_PlayerStats.driftMoveForce * m_Direction, ForceMode.Impulse);
 		
 		// If the shoot button is pressed, FIRE THE LASER
-		if (m_Controls.GetShoot(BUTTON_DETECTION.GET_BUTTON))
+		if (m_Controls.GetShootLaser(BUTTON_DETECTION.GET_BUTTON))
 		{
 			m_Shoot.ShootLaser();
+		}
+
+		// If the "fire shotgun" button is pressed, shoot it. [Graham]
+		if (m_Controls.GetRightTrigger() > 0.5f)	// TO BE CHANGED
+		{
+			m_Shoot.ShootShotgun();
 		}
 
 		// Update the gravity [G, C]
