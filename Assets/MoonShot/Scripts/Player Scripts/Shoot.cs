@@ -81,6 +81,7 @@ public class Shoot : MonoBehaviour {
             m_randomX = m_randomX / 100;
 
             // Bullet Spread applied by adding the random values to the aim
+            if (aimDir.sqrMagnitude == 0f) aimDir = transform.up;	// If not aiming, fire straight up
             Vector3 forward = new Vector3(aimDir.x + m_randomX, aimDir.y + m_randomY);
             forward.Normalize();
 

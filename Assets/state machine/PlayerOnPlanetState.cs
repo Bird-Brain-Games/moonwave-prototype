@@ -42,6 +42,12 @@ public class PlayerOnPlanetState : State {
 			m_Shoot.ShootLaser();
 		}
 
+		// If the "fire shotgun" button is pressed, shoot it. [Graham]
+		if (m_Controls.GetShootShotgun())
+		{
+			m_Shoot.ShootShotgun();
+		}
+
 		// If the jump button is pressed, cause the player to jump
 		if (m_Controls.GetJump(BUTTON_DETECTION.GET_BUTTON_DOWN))
 		{

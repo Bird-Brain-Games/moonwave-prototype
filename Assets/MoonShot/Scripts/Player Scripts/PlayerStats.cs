@@ -27,11 +27,16 @@ public class PlayerStats : MonoBehaviour {
     public struct Shoot
     {
         // Shotgun based variables
-        [Tooltip("The length of time (s) that the shotgun blast hitbox is on screen")]
+        [Tooltip("The time (s) it takes to reach maximum size and disappear")]
         public float shotgunDuration;
         [Tooltip("The length of time (s) between shotgun shots")]
         public float shotgunCooldown;
+        [Tooltip("The force of the shotgun bullets on the player")]
         public float shotgunForce;
+        [Tooltip("How far the shotgun shot travels")]
+        public float shotgunDistance;
+        [Tooltip("The size of the cone of effect")]
+        public float shotgunRadius;
     }
 
 #region  StateStrings

@@ -9,48 +9,65 @@ public class Shotgun : MonoBehaviour {
 	PlayerStats m_PlayerStats;
 	int m_PlayerNum;
 	Vector3 aimDir;
-	float currentCooldown;	// Cooldown until you can fire the shotgun again [Graham]
-	float maxCooldown;
-	float duration;	// How long the shotgun shot will exist [Graham]
-	float force;
+	float m_ShotgunCurrentCooldown;	// Cooldown until you can fire the shotgun again [Graham]
+	float m_ShotgunMaxCooldown;
+
+	float m_ShotDistance;
+	float m_ShotDuration;
+	float m_ShotForce;
 	
 	// Use this for initialization
 	void Start () {
 		controls = GetComponent<Controls>();
 		m_PlayerStats = GetComponent<PlayerStats>();
 
-		maxCooldown = m_PlayerStats.m_Shoot.shotgunCooldown;
-		duration = m_PlayerStats.m_Shoot.shotgunDuration;
-		force = m_PlayerStats.m_Shoot.shotgunForce;
+		m_ShotgunMaxCooldown = m_PlayerStats.m_Shoot.shotgunCooldown;
+		m_ShotDistance = m_PlayerStats.m_Shoot.shotgunDistance;
+		m_ShotDuration = m_PlayerStats.m_Shoot.shotgunDuration;
+		m_ShotForce = m_PlayerStats.m_Shoot.shotgunForce;
 		m_PlayerNum = m_PlayerStats.m_PlayerID;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// Update the cooldown timer [Graham]
-		if (currentCooldown > 0f)
+		if (m_ShotgunCurrentCooldown > 0f)
 		{
-			currentCooldown -= Time.deltaTime;
-			if (currentCooldown < 0f)
-				currentCooldown = 0f;
+			m_ShotgunCurrentCooldown -= Time.deltaTime;
+			if (m_ShotgunCurrentCooldown < 0f)
+				m_ShotgunCurrentCooldown = 0f;
 		}
 	}
 
 	public void Shoot()
 	{
-		if (currentCooldown != 0f) return;	// Don't allow shoot if in cooldown [Graham]
+		if (m_ShotgunCurrentCooldown != 0f) return;	// Don't allow shoot if in cooldown [Graham]
 
+		// Get the rotation of the object [Graham]
 		aimDir = controls.GetAim();
+		if (aimDir.sqrMagnitude == 0f) aimDir = transform.up;	// If not aiming, fire straight up
 
-		ShotgunShot clone = Instantiate(shotgunShot, transform.position, Quaternion.Euler(aimDir));
-		clone.gameObject.transform.Rotate(new Vector3(0f, 90f, -180f));
-		clone.Init(transform.up, force, m_PlayerStats);
-		clone.duration = duration;
+		Quaternion rotation = Quaternion.LookRotation(transform.forward, aimDir);
+
+		// Instatntiate the shotgun wave [Graham]
+		ShotgunShot clone = Instantiate(shotgunShot, transform.position, rotation);
+		
+		// Figure out the velocity that the shotgun wave should travel at [Graham]
+		Vector3 currentVelocity = GetComponent<Rigidbody>().velocity;
+
+		// Figure out how fast the shot should be moving to reach the distance in the given time [Graham]
+		float unitsPerSec = m_PlayerStats.m_Shoot.shotgunDistance / m_PlayerStats.m_Shoot.shotgunDuration;
+		Debug.Log(unitsPerSec);
+
+		clone.GetComponent<Rigidbody>().AddForce(currentVelocity + aimDir * unitsPerSec, ForceMode.Impulse);
+
+		// Initialize the shotgun wave [Graham]
+		clone.Init(transform.up, m_ShotForce, m_PlayerStats);
 		Physics.IgnoreCollision(
                 clone.GetComponent<Collider>(), 
                 GetComponent<Collider>());
 
 		// Reset the cooldown
-		currentCooldown = maxCooldown;
+		m_ShotgunCurrentCooldown = m_ShotgunMaxCooldown;
 	}
 }

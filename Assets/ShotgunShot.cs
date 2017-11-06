@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class ShotgunShot : Projectile {
 
-	public float duration {get; set;}
-	float currentDuration {get; set;}
+	float m_Duration;
+	float m_CurrentDuration;
+	Vector3 m_StartScale;
+	Vector3 m_EndScale;
+	Vector3 m_ScaleVector;
 
 	// Use this for initialization
 	void Start()
 	{
-		currentDuration = duration;
+		m_Duration = m_PlayerStats.m_Shoot.shotgunDuration;
+		m_CurrentDuration = m_Duration;
+
+		m_StartScale = transform.localScale;
+		m_EndScale = transform.localScale;
+		m_EndScale.x *= m_PlayerStats.m_Shoot.shotgunRadius;
+
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		currentDuration -= Time.deltaTime;
-		if (currentDuration <= 0f)
+		m_ScaleVector = Vector3.Lerp(m_StartScale, m_EndScale, 1 - m_CurrentDuration / m_Duration);
+		transform.localScale = m_ScaleVector;
+
+		m_CurrentDuration -= Time.deltaTime;
+		if (m_CurrentDuration <= 0f)
 			Destroy(gameObject);
 	}
 

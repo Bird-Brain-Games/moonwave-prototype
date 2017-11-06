@@ -208,6 +208,8 @@ MonoBehaviour:
     shotgunDuration: 1
     shotgunCooldown: 1
     shotgunForce: 10
+    shotgunDistance: 0
+    shotgunRadius: 0
   m_boost:
     BaseForce: 200
     AddedForcePerSecond: 50
@@ -263,15 +265,15 @@ MonoBehaviour:
   shootLaser:
     key: 512
     altKey: 0
-  shootShotgun:
-    key: 0
-    altKey: 0
   jump:
     key: 4096
     altKey: 0
   boost:
     key: 8192
     altKey: 256
+  shootShotgun:
+    sensitivity: 0.2
+    trigger: 0
 --- !u!114 &114240935921160950
 MonoBehaviour:
   m_ObjectHideFlags: 1

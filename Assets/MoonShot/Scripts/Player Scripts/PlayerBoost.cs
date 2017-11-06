@@ -77,7 +77,7 @@ public class PlayerBoost : MonoBehaviour
 
     public void ChargeBoost()
     {
-        Debug.Log("Boost charging");
+        //Debug.Log("Boost charging");
 
         //This unreadable mess is what allows our boost to charge
 
