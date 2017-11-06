@@ -20,7 +20,9 @@ public class ShotgunShot : Projectile {
 		m_EndScale = transform.localScale;
 		m_EndScale.x *= m_PlayerStats.m_Shoot.shotgunRadius;
 
-		
+		Physics.IgnoreCollision(
+                GetComponent<Collider>(), 
+                m_PlayerStats.GetComponent<Collider>());
 	}
 	
 	// Update is called once per frame
@@ -51,8 +53,8 @@ public class ShotgunShot : Projectile {
 		// If the shield has health, change how much force 
 		if (m_shield.m_shieldHealth == 0)
 		{
-			addForce = m_Direction * m_Force * 
-				other.gameObject.GetComponent<PlayerStats>().m_CriticalMultipier;
+			addForce = m_Direction * m_Force * m_PlayerStats.m_Shoot.shotgunCriticalMultiplier;
+			Debug.Log(addForce);
 		}
 		else
 		{

@@ -45,8 +45,7 @@ public class Bullet : Projectile {
 		// If the shield has health, change how much force 
 		if (m_shield.m_shieldHealth == 0)
 		{
-			addForce = m_Direction * m_Force * 
-				other.gameObject.GetComponent<PlayerStats>().m_CriticalMultipier;
+			addForce = m_Direction * m_Force * m_PlayerStats.m_CriticalMultipier;
 		}
 		else
 		{

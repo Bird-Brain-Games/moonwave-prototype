@@ -57,15 +57,14 @@ public class Shotgun : MonoBehaviour {
 
 		// Figure out how fast the shot should be moving to reach the distance in the given time [Graham]
 		float unitsPerSec = m_PlayerStats.m_Shoot.shotgunDistance / m_PlayerStats.m_Shoot.shotgunDuration;
-		Debug.Log(unitsPerSec);
 
 		clone.GetComponent<Rigidbody>().AddForce(currentVelocity + aimDir * unitsPerSec, ForceMode.Impulse);
 
 		// Initialize the shotgun wave [Graham]
 		clone.Init(transform.up, m_ShotForce, m_PlayerStats);
-		Physics.IgnoreCollision(
-                clone.GetComponent<Collider>(), 
-                GetComponent<Collider>());
+		// Physics.IgnoreCollision(
+        //         clone.GetComponent<Collider>(), 
+        //         GetComponent<Collider>());
 
 		// Reset the cooldown
 		m_ShotgunCurrentCooldown = m_ShotgunMaxCooldown;

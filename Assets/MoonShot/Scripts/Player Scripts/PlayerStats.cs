@@ -37,6 +37,7 @@ public class PlayerStats : MonoBehaviour {
         public float shotgunDistance;
         [Tooltip("The size of the cone of effect")]
         public float shotgunRadius;
+        public float shotgunCriticalMultiplier;
     }
 
 #region  StateStrings
