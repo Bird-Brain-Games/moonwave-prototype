@@ -286,28 +286,28 @@ MonoBehaviour:
   l_killedBy: 
   m_shieldState: 0
   m_CriticalMultipier: 2
-  driftMoveForce: 2
-  walkMoveForce: 25
-  jumpForce: 250
+  driftMoveForce: 10
+  walkMoveForce: 50
+  jumpForce: 300
   maxJumpTime: 1.25
-  fallGravMultiplier: 1.5
+  fallGravMultiplier: 1
   maxStunTime: 1
   m_Shoot:
     shotgunDuration: 0.2
-    shotgunCooldown: 1
+    shotgunCooldown: 0.75
     shotgunForce: 50
     shotgunDistance: 20
     shotgunRadius: 15
     shotgunCriticalMultiplier: 20
   m_boost:
     BaseForce: 200
-    AddedForcePerSecond: 50
-    MaxForce: 500
+    AddedForcePerSecond: 500
+    MaxForce: 800
     BaseDuration: 0.25
     AddedDurationPerSecond: 0.25
     MaxDuration: 1.5
-    Cooldown: 1
-    timeToMaxCharge: 1.5
+    Cooldown: 0.2
+    timeToMaxCharge: 0.4
 --- !u!114 &114097125839179680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -418,8 +418,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
   m_bulletImpact: 10
-  m_bulletSpeed: 50
-  m_bulletDelay: 0.0625
+  m_bulletSpeed: 150
+  m_bulletDelay: 0.25
   m_stray: 0
   l_bullets: 0
 --- !u!114 &114715620829579938
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddc582bb9e2e8246821fd907dc5aa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inertiaForce: 2
+  m_inertiaForce: 50
   boostBigHitTesting: 0
   l_boosts: 0
 --- !u!114 &114890674134318816
