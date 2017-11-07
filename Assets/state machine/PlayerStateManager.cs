@@ -39,6 +39,9 @@ public class PlayerStateManager : MonoBehaviour {
         movementStates.AttachState(playerStats.PlayerOnPlanetStateString, onPlanetState);
         movementStates.AttachState(playerStats.PlayerBoostActiveString, boostActiveState);
         movementStates.AttachState(playerStats.PlayerBoostChargeString, boostChargeState);
+
+		stunTimer = 3f;
+		movementStates.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -70,10 +73,10 @@ public class PlayerStateManager : MonoBehaviour {
 
 	public void ResetPlayer()
 	{
+		stunTimer = 0f;
 		movementStates.enabled = true;
 		movementStates.ResetToDefaultState();
 		playerStats.stunTrigger = false;
-		stunTimer = 0f;
 		GetComponentInChildren<Shield>().ResetShield();		// TEMP [Graham]
 	}
 }

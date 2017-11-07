@@ -263,6 +263,11 @@ public class StickToPlanet : MonoBehaviour {
             RotateTowardsCurrentPlanet();
             
         }
+
+        else if (collision.gameObject.CompareTag("Hazard"))
+        {
+            GetComponent<KnockOut>().PlayerKnockedOut();
+        }
     }
 
     void OnCollisionStay(Collision collision)
