@@ -6,6 +6,7 @@ public class StateManager : MonoBehaviour
 {
 
     //Holds all of our items in it.
+    [SerializeField]
     State currentState;
     State defaultState;
     string defaultStateString;
@@ -21,11 +22,12 @@ public class StateManager : MonoBehaviour
     // So that all the updates can call first [G, C]
     public void ChangeState(string a_State)
     {
+        Debug.Log("Changing to " + a_State + " from " + currentState.m_Name);
+
         currentState.Exit();
         currentState = states[a_State];
         currentState.Enter();
 
-        Debug.Log("Changing to " + a_State);
     }
 
     public void AttachState(string key, State s)
@@ -33,6 +35,7 @@ public class StateManager : MonoBehaviour
         if (states.ContainsKey(key))    return; // If it's already in the list, don't add it [Graham]
 
         states.Add(key, s);
+        s.m_Name = key;
         if (currentState == null)
         {
             currentState = states[key];

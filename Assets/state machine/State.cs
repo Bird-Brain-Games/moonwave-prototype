@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State : MonoBehaviour
+public abstract class State : MonoBehaviour
 {
+    public virtual string m_Name {get; set;}
     // Keeping track of the next state to change to
     bool changingState;
     string nextState;

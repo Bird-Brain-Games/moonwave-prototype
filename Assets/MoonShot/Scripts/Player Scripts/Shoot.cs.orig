@@ -10,18 +10,14 @@ public class Shoot : MonoBehaviour {
 
     //The impact a bullet has on a player
     public float m_bulletImpact;
-   
-    //The vector we store our joystick axis's in
-    Vector2 m_aim;
-
-    //whether we are pressing the shoot button or not.
-    bool m_shoot;
 
     //Whether we can shoot on this frame, is affected by m_bulletDelay
-    bool m_shootStatus;
+    bool m_shootTimer;
     
     //The accessers to our controller script
     Controls controls;
+    Shotgun m_Shotgun;
+    Vector2 aimDir;
     public float m_bulletSpeed;
 
     //Variable used to control how fast bullets can be shot
@@ -45,18 +41,36 @@ public class Shoot : MonoBehaviour {
     void Start () {
         controls = GetComponent<Controls>();
         m_playerStats = gameObject.GetComponent<PlayerStats>();
+        m_Shotgun = gameObject.GetComponent<Shotgun>();
         l_bullets = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        m_shoot = controls.GetShoot(BUTTON_DETECTION.GET_BUTTON);
-        m_aim = controls.GetAim();
-
-        if (m_shoot && m_shootStatus)
+        if (m_bulletDelay > m_timer - m_startTime && !m_shootTimer)
         {
-            m_shootStatus = false;
+            m_timer = Time.time;
+            //Debug.Log("start Time: " + m_startTime);
+            //Debug.Log("Time: " + m_timer);
+        }
+        else if (m_bulletDelay < m_timer - m_startTime && !m_shootTimer)
+        {
+            //Debug.Log("shoot recharged");
+            m_shootTimer = true;
+            m_timer = 0;
+            m_startTime = 0;
+        }
+
+        aimDir = controls.GetAim();
+	}
+
+    public void ShootLaser()
+    {
+        // If the timer allows us to shoot again
+        if (m_shootTimer)
+        {
+            m_shootTimer = false;
             m_timer = Time.time;
             m_startTime = Time.time;
 
@@ -67,44 +81,42 @@ public class Shoot : MonoBehaviour {
             m_randomX = m_randomX / 100;
 
             // Bullet Spread applied by adding the random values to the aim
-            Vector3 forward = new Vector3(m_aim.x + m_randomX, m_aim.y + m_randomY);
+            if (aimDir.sqrMagnitude == 0f) aimDir = transform.up;	// If not aiming, fire straight up
+            Vector3 forward = new Vector3(aimDir.x + m_randomX, aimDir.y + m_randomY);
             forward.Normalize();
 
             //creating the bullet
-            Rigidbody clone;
-            clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
+            Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
 
-<<<<<<< working copy
-            forward *= m_bulletSpeed;
-            //Debug.Log(forward.ToString());
-
-=======
             //setting the bullets speed
-            forward *= 50.0f;
->>>>>>> merge rev
-            clone.velocity = forward;
+            //forward *= m_bulletSpeed;
+            clone.velocity = forward * m_bulletSpeed;
+<<<<<<< working copy
 
+            // Initialize the bullet
+            clone.GetComponent<Bullet>().Init(
+                forward, m_bulletImpact, m_playerStats);
+            Physics.IgnoreCollision(
+                clone.GetComponent<Collider>(), 
+                GetComponent<Collider>());
+=======
+            
             //probably should set these to be more effecient.
-            clone.GetComponent<Owner>().setOwner(gameObject);
-            clone.GetComponent<Owner>().SetPlayerStats(m_playerStats);
-            clone.GetComponent<Owner>().setVelocity(clone.velocity);
-            clone.GetComponent<Owner>().SetImpact(m_bulletImpact);
+            clone.GetComponent<Bullet>().playerNum = controls.playerNumber;
+            clone.GetComponent<Bullet>().force = m_bulletImpact;
+            clone.GetComponent<Bullet>().initialVelocity = clone.velocity;
+            clone.GetComponent<Bullet>().m_PlayerStats = m_playerStats;
+>>>>>>> merge rev
+
+            clone.GetComponent<MeshRenderer>().material.color = m_playerStats.ColourOfBullet;
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots
         }
-        else if (m_bulletDelay > m_timer - m_startTime && !m_shootStatus)
-        {
-            m_timer = Time.time;
-            //Debug.Log("start Time: " + m_startTime);
-            //Debug.Log("Time: " + m_timer);
-        }
-        else if (m_bulletDelay < m_timer - m_startTime && !m_shootStatus)
-        {
-            //Debug.Log("shoot recharged");
-            m_shootStatus = true;
-            m_timer = 0;
-            m_startTime = 0;
-        }
-	}
+    }
+
+    public void ShootShotgun()
+    {
+        m_Shotgun.Shoot();
+    }
 }

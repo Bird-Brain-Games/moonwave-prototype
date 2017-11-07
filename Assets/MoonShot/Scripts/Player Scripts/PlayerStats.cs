@@ -2,29 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct Boost
-{
-    //The default boost force
-    public float BaseForce;
-    //The force that is added for every second of charge
-    public float AddedForcePerSecond;
-    //The max force a boost can have
-    public float MaxForce;
-    //The default boost duration
-    public float BaseDuration;
-    //the added time a boost lasts for, for every second of charge
-    public float AddedDurationPerSecond;
-    //The max duration a boost can last for
-    public float MaxDuration;
-    //The time it takes for a boost to be ready agian.
-    public float Cooldown;
-}
 public class PlayerStats : MonoBehaviour {
+
+    [System.Serializable]
+    public struct Boost
+    {
+        //The default boost force
+        public float BaseForce;
+        //The force that is added for every second of charge
+        public float AddedForcePerSecond;
+        //The max force a boost can have
+        public float MaxForce;
+        //The default boost duration
+        public float BaseDuration;
+        //the added time a boost lasts for, for every second of charge
+        public float AddedDurationPerSecond;
+        //The max duration a boost can last for
+        public float MaxDuration;
+        //The time it takes for a boost to be ready agian.
+        public float Cooldown;
+    }
+
+    [System.Serializable]
+    public struct Shoot
+    {
+        // Shotgun based variables
+        [Tooltip("The time (s) it takes to reach maximum size and disappear")]
+        public float shotgunDuration;
+        [Tooltip("The length of time (s) between shotgun shots")]
+        public float shotgunCooldown;
+        [Tooltip("The force of the shotgun bullets on the player")]
+        public float shotgunForce;
+        [Tooltip("How far the shotgun shot travels")]
+        public float shotgunDistance;
+        [Tooltip("The size of the cone of effect")]
+        public float shotgunRadius;
+        public float shotgunCriticalMultiplier;
+    }
 
     #region  StateStrings
     public string PlayerOnPlanetStateString { get; set; }
     public string PlayerDriftStateString { get; set; }
+    public string PlayerJumpStateString {get; set;}
     public string PlayerBoostChargeString { get; set; }
     public string PlayerBoostActiveString { get; set; }
     public string PlayerBigHitState {get; set;}
@@ -51,10 +70,13 @@ public class PlayerStats : MonoBehaviour {
     public float driftMoveForce;
     public float walkMoveForce;
 
-    // Grounded based variables
+    // Jump based variables
     public float jumpForce;
+    public float maxJumpTime;
+    public float fallGravMultiplier;
 
-
+	public float maxStunTime;
+    public Shoot m_Shoot;
     public Boost m_boost;
 
     //Determines whether we can boost or not.
@@ -62,7 +84,6 @@ public class PlayerStats : MonoBehaviour {
 
     // Stunned variables [Graham]
     public bool stunTrigger {get; set;}
-	public float maxStunTime;
 
 
 
@@ -79,6 +100,7 @@ public class PlayerStats : MonoBehaviour {
         PlayerDriftStateString = "drift";
         PlayerBoostActiveString = "boostActive";
         PlayerBoostChargeString = "boostCharge";
+        PlayerJumpStateString = "jump";
         PlayerBigHitState = "bigHit";
 
         //Request a colour from our bullet colours [cam]

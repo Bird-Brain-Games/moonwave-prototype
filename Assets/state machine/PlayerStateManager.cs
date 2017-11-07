@@ -13,6 +13,7 @@ public class PlayerStateManager : MonoBehaviour {
 
 #region movementStates
     PlayerDriftState driftState;
+	PlayerJumpState jumpState;
     PlayerOnPlanetState onPlanetState;
     PlayerBoostChargeState boostChargeState;
     PlayerBoostActiveState boostActiveState;
@@ -23,6 +24,7 @@ public class PlayerStateManager : MonoBehaviour {
 	{
 		movementStates = gameObject.AddComponent<StateManager>();
 		driftState = gameObject.AddComponent<PlayerDriftState>();
+		jumpState = gameObject.AddComponent<PlayerJumpState>();
         onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
         boostChargeState = gameObject.AddComponent<PlayerBoostChargeState>();
         boostActiveState = gameObject.AddComponent<PlayerBoostActiveState>();
@@ -34,12 +36,16 @@ public class PlayerStateManager : MonoBehaviour {
 	void Start () {
         playerStats = GetComponent<PlayerStats>();
 		m_Gravity = GetComponent<StickToPlanet>();
+		
         movementStates.AttachDefaultState(playerStats.PlayerDriftStateString, driftState);
+		movementStates.AttachDefaultState(playerStats.PlayerJumpStateString, jumpState);
         movementStates.AttachState(playerStats.PlayerOnPlanetStateString, onPlanetState);
         movementStates.AttachState(playerStats.PlayerBoostActiveString, boostActiveState);
         movementStates.AttachState(playerStats.PlayerBoostChargeString, boostChargeState);
         movementStates.AttachState(playerStats.PlayerBigHitState, bigHitState);
-		
+
+		stunTimer = 3f;
+		movementStates.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -67,5 +73,14 @@ public class PlayerStateManager : MonoBehaviour {
 			// Cause the stunned player to be affected by gravity[Graham]
 			m_Gravity.DriftingUpdate();
 		}
+	}
+
+	public void ResetPlayer()
+	{
+		stunTimer = 0f;
+		movementStates.enabled = true;
+		movementStates.ResetToDefaultState();
+		playerStats.stunTrigger = false;
+		GetComponentInChildren<Shield>().ResetShield();		// TEMP [Graham]
 	}
 }

@@ -2,24 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : Projectile {
+	public Vector3 m_InitialVelocity;
 
-	Rigidbody m_Rigidbody;
-
-	// Layer masks for collision
-	int planetLayer;
-	int playerLayer;
-
-	public int playerNum {get; set;}
-	public float force {get; set;}
-	public Vector3 initialVelocity;
-	public PlayerStats m_PlayerStats {get; set;}
-
-	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		m_Rigidbody = GetComponent<Rigidbody>();
-		planetLayer = 8;//LayerMask.GetMask("Planet");
-		playerLayer = 9;//LayerMask.GetMask("Player");
 	}
 
 	public void BulletOutOfBounds()
@@ -34,53 +22,40 @@ public class Bullet : MonoBehaviour {
         int layer = collision.gameObject.layer;
 
         // If the bullet collides with a planet, destroy it [Robbie]
-        if (layer == planetLayer) // If the object is a planet
+        if (layer == m_PlanetLayer) // If the object is a planet
         {
             Destroy(gameObject, 0);  // Destroys bullets when they hit a planet
         }
 
         //if we have collided with a player.
-        else if (layer == playerLayer)
+        else if (layer == m_PlayerLayer)
         {
-			// If the player owns the bullet, don't collide
-			int otherPlayerNum = collision.gameObject.GetComponent<Controls>().playerNumber;
-			if (playerNum != otherPlayerNum)
-            	collideWithPlayer(collision);
+            collideWithPlayer(collision);
+			Destroy(gameObject, 0);
         }
-
     }
 
-	void collideWithPlayer(Collision collision)
+	void collideWithPlayer(Collision other)
 	{
-		Shield m_shield = collision.gameObject.GetComponentInChildren<Shield>();
-		Vector3 direction = initialVelocity.normalized;
-		//Debug.Log(m_Rigidbody.velocity);
+		Shield m_shield = other.gameObject.GetComponentInChildren<Shield>();
 		Vector3 addForce;
 
-
-		collision.rigidbody.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
+		other.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
 
 		// If the shield has health, change how much force 
 		if (m_shield.m_shieldHealth == 0)
 		{
-			addForce = direction * force * 
-				collision.gameObject.GetComponent<PlayerStats>().m_CriticalMultipier;
-			//Debug.Log("bullet criticaly hit player");
+			addForce = m_Direction * m_Force * m_PlayerStats.m_CriticalMultipier;
 		}
 		else
 		{
-			addForce = direction * force;
-			//Debug.Log("bullet hit player ");
-			
+			addForce = m_Direction * m_Force;
 		}
 
 		// Add the force [Graham]
-		collision.rigidbody.AddForce(addForce, ForceMode.Impulse);
-		//Debug.Log(addForce + " applied to player");
+		other.gameObject.GetComponent<Rigidbody>().AddForce(addForce, ForceMode.Impulse);
 
 		// Tell the shield to be hit
 		m_shield.ShieldHit(Shield.BULLET_TYPE.plasma);
-
-		Destroy(gameObject, 0);
 	}
 }

@@ -37,16 +37,29 @@ public class PlayerOnPlanetState : State {
 			m_Move.MoveOnPlanet();
 		
 		// If the shoot button is pressed, FIRE THE LASER
-		if (m_Controls.GetShoot(BUTTON_DETECTION.GET_BUTTON))
+		if (m_Controls.GetShootLaser(BUTTON_DETECTION.GET_BUTTON))
 		{
 			m_Shoot.ShootLaser();
+		}
+
+		// If the "fire shotgun" button is pressed, shoot it. [Graham]
+		if (m_Controls.GetShootShotgun())
+		{
+			m_Shoot.ShootShotgun();
 		}
 
 		// If the jump button is pressed, cause the player to jump
 		if (m_Controls.GetJump(BUTTON_DETECTION.GET_BUTTON_DOWN))
 		{
 			m_RigidBody.AddForce(m_PlayerStats.jumpForce * transform.up, ForceMode.Impulse);
+			ChangeState(m_PlayerStats.PlayerJumpStateString);
+		}
+
+		// If it can't find ground beneath it, change to drifting state
+		if (!m_Gravity.FindIfGrounded())
+		{
 			ChangeState(m_PlayerStats.PlayerDriftStateString);
+			Debug.Log("No ground found in On Planet State");
 		}
 	}
 }

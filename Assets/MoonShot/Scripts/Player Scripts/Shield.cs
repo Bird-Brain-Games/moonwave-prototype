@@ -116,5 +116,11 @@ public class Shield : MonoBehaviour
         }
     }
 
-
+    public void ResetShield()
+    {
+        // Needs more fleshing out, not enough knowledge on this script [Graham]
+        m_canRecharge = false;
+        m_shieldHealth = mm_axShieldHealth;
+        m_timeSinceLastHit = 0f;
+    }
 }
