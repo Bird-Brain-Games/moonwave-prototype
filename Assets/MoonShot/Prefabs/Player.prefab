@@ -412,10 +412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a845933893896447a41233b14220a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shieldHealth: 0
-  m_maxShieldHealth: 0
-  m_rechargeDelay: 10
-  m_rechargeRatePerSecond: 10
+  m_shieldHealth: 100
+  m_maxShieldHealth: 100
+  m_rechargeDelay: 3
+  m_rechargeRatePerSecond: 50
   m_timeSinceLastHit: 0
   m_hitUpdate: 0
   m_canRecharge: 0
