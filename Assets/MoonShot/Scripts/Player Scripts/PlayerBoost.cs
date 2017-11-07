@@ -16,8 +16,9 @@ public class PlayerBoost : MonoBehaviour
     float m_CooldownDuration;
     bool m_startCooldown;
 
+    //Need to move this to playerstats
     public float m_inertiaForce;
-
+    public bool boostBigHitTesting;
 
     //All of the componenets we need access to
     Rigidbody m_RigidBody;
@@ -25,8 +26,9 @@ public class PlayerBoost : MonoBehaviour
     PlayerStats m_PlayerStats;
     Renderer m_Rend;
     Controls m_controls;
-    GameObject m_bigHit;
-
+    BoostCollider m_BoostCollider;
+    BoxCollider m_BoxCollider;
+    MeshRenderer m_MeshRender;
     //the direction of analogue movement
     Vector2 m_move;
 
@@ -62,11 +64,14 @@ public class PlayerBoost : MonoBehaviour
         m_PlayerStats = GetComponent<PlayerStats>();
         m_Rend = GetComponent<Renderer>();
         m_controls = GetComponent<Controls>();
-
         l_boosts = 0;
         //Set player colour for boost reset.
         m_PlayerStats.colour = m_Rend.material.color;
         m_startCooldown = false;
+        //Get the boost big hit collider [cam]
+        m_BoostCollider = GetComponentInChildren<BoostCollider>();
+        m_BoxCollider = m_BoostCollider.GetComponent<BoxCollider>();
+        m_MeshRender = m_BoostCollider.GetComponent<MeshRenderer>();
 
     }
 
@@ -117,9 +122,26 @@ public class PlayerBoost : MonoBehaviour
         else
             m_Direction = new Vector3(m_move.x, m_move.y, 0.0f);
 
-        if (m_BoostForce == m_PlayerStats.m_boost.MaxForce)
+        //If the player boost knockback duration has ended.
+        float maxForce = 0;
+        if (boostBigHitTesting == false)
         {
-            Instantiate<>
+            maxForce = m_PlayerStats.m_boost.MaxForce;
+        }
+        if (m_BoostForce >= maxForce)
+        {
+            // set the position of the players boost collider;
+            Debug.Log("testing");
+            m_BoostCollider.transform.position = transform.position;
+            m_BoostCollider.transform.rotation = Quaternion.identity;
+            m_BoostCollider.transform.Translate(m_Direction * 7.0f);
+            Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f));
+            m_BoostCollider.transform.rotation = rotation;
+            m_BoostCollider.transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
+
+            m_BoxCollider.enabled = true;
+            m_MeshRender.enabled = true;
+            
         }
 
         //Adding boost velocity.
@@ -136,20 +158,32 @@ public class PlayerBoost : MonoBehaviour
         l_boosts++;
     }
 
+    public void ResetBoostCollider()
+    {
+        m_BoostCollider.transform.position = transform.position;
+        m_BoostCollider.transform.rotation = Quaternion.identity;
+    }
+
     public bool BoostDuration()
     {
 
-        //If the player boost knockback duration has ended.
         if (m_BoostDuration > 0) //&& m_PlayerStats.GetBoostState() == true)
         {
             m_BoostDuration -= Time.deltaTime;
             return false;
         }
         //If the boost has recharged.
+        BoostDurationEnd();
+        return true;
+    }
+
+    public void BoostDurationEnd()
+    {
         m_startCooldown = true;
         m_Rend.material.color = m_PlayerStats.colour;
         m_CooldownDuration = m_PlayerStats.m_boost.Cooldown;
-        return true;
+        m_BoxCollider.enabled = false;
+        m_MeshRender.enabled = false;
     }
 
     public void Update()

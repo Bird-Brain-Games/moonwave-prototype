@@ -16,6 +16,7 @@ public class PlayerStateManager : MonoBehaviour {
     PlayerOnPlanetState onPlanetState;
     PlayerBoostChargeState boostChargeState;
     PlayerBoostActiveState boostActiveState;
+    PLayerBigHitState bigHitState;
 #endregion
 
 	void Awake()
@@ -25,7 +26,9 @@ public class PlayerStateManager : MonoBehaviour {
         onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
         boostChargeState = gameObject.AddComponent<PlayerBoostChargeState>();
         boostActiveState = gameObject.AddComponent<PlayerBoostActiveState>();
-	}
+        bigHitState = gameObject.AddComponent<PLayerBigHitState>();
+
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +38,7 @@ public class PlayerStateManager : MonoBehaviour {
         movementStates.AttachState(playerStats.PlayerOnPlanetStateString, onPlanetState);
         movementStates.AttachState(playerStats.PlayerBoostActiveString, boostActiveState);
         movementStates.AttachState(playerStats.PlayerBoostChargeString, boostChargeState);
+        movementStates.AttachState(playerStats.PlayerBigHitState, bigHitState);
 		
 	}
 	

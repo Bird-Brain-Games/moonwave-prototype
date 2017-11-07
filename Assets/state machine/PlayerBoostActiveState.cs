@@ -25,6 +25,10 @@ public class PlayerBoostActiveState : State
         m_Boost.EntryBoost();
     }
 
+    public override void Exit()
+    {
+        m_Boost.ResetBoostCollider();
+    }
     override public void StateUpdate()
     {
         

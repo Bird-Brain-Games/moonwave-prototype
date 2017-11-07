@@ -22,15 +22,18 @@ public struct Boost
 }
 public class PlayerStats : MonoBehaviour {
 
-#region  StateStrings
-    public string PlayerOnPlanetStateString {get; set;}   
-    public string PlayerDriftStateString {get; set;}
-    public string PlayerBoostChargeString {get; set;}
-    public string PlayerBoostActiveString {get; set;}
+    #region  StateStrings
+    public string PlayerOnPlanetStateString { get; set; }
+    public string PlayerDriftStateString { get; set; }
+    public string PlayerBoostChargeString { get; set; }
+    public string PlayerBoostActiveString { get; set; }
+    public string PlayerBigHitState {get; set;}
 #endregion
 
     public Color colourdull;
     public Color colour;
+    //A colour for our bullets [cam]
+    public Color ColourOfBullet { get; set; }
 
     // Score Calculations
     public int m_PlayerID;
@@ -76,8 +79,22 @@ public class PlayerStats : MonoBehaviour {
         PlayerDriftStateString = "drift";
         PlayerBoostActiveString = "boostActive";
         PlayerBoostChargeString = "boostCharge";
-    }
+        PlayerBigHitState = "bigHit";
 
+        //Request a colour from our bullet colours [cam]
+        
+    }
+    private void Start()
+    {
+        ColourData temp = GetComponentInParent<bulletColour>().GetNextAvailableColour();
+        if (temp.isFree == true)
+        {
+            ColourOfBullet = temp.colour;
+            colour = temp.colour;
+            GetComponent<MeshRenderer>().material.color = colour;
+        }
+        
+    }
     //Getters and Setters
 
     public int getScore()
