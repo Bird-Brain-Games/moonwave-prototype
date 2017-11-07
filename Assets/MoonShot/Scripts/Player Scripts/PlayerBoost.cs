@@ -31,6 +31,7 @@ public class PlayerBoost : MonoBehaviour
     MeshRenderer m_MeshRender;
     //the direction of analogue movement
     Vector2 m_move;
+    float m_TimeCharging;
 
     //advancded direction variable
     Vector3 m_Direction;
@@ -80,19 +81,27 @@ public class PlayerBoost : MonoBehaviour
     {
         m_BoostForce = m_PlayerStats.m_boost.BaseForce;
         m_BoostDuration = m_PlayerStats.m_boost.BaseDuration;
+        m_TimeCharging = 0f;
     }
 
     public void ChargeBoost()
     {
-        //Debug.Log("Boost charging");
-
         //This unreadable mess is what allows our boost to charge
 
+        m_TimeCharging += Time.deltaTime;
+
         //This increases the force of the boost
-        if (m_BoostForce <= m_PlayerStats.m_boost.MaxForce)
+        //if (m_BoostForce < m_PlayerStats.m_boost.MaxForce)
+        if (m_TimeCharging < m_PlayerStats.m_boost.timeToMaxCharge)
+        {
             m_BoostForce += m_PlayerStats.m_boost.AddedForcePerSecond * Time.deltaTime;
+            Debug.Log("Boost charging");
+        }
         else
+        {
             m_BoostForce = m_PlayerStats.m_boost.MaxForce;
+            Debug.Log("Boost fully charged");
+        }
 
         //This increases the duration of the boost
         if (m_BoostDuration <= m_PlayerStats.m_boost.MaxDuration)
@@ -128,7 +137,7 @@ public class PlayerBoost : MonoBehaviour
         {
             maxForce = m_PlayerStats.m_boost.MaxForce;
         }
-        if (m_BoostForce >= maxForce)
+        if (m_TimeCharging >= m_PlayerStats.m_boost.timeToMaxCharge)
         {
             // set the position of the players boost collider;
             Debug.Log("testing");
