@@ -116,6 +116,7 @@ public class PlayerStats : MonoBehaviour {
             ColourOfBullet = temp.colour;
             colour = temp.colour;
             GetComponent<MeshRenderer>().material.color = colour;
+            m_PlayerID = temp.playerID;
         }
         
     }

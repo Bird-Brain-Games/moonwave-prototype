@@ -18,6 +18,7 @@ public struct ColourData
 {
     public Color colour;
     public bool isFree;
+    public int playerID;
 }
 public class bulletColour : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class bulletColour : MonoBehaviour
 
     void AddColours()
     {
-        colours.Add(COLOURS.red, new Color(190.0f/255.0f, 68 / 255.0f, 35 / 255.0f));
+        colours.Add(COLOURS.red, new Color(190.0f/255.0f, 98 / 255.0f, 85 / 255.0f));
 
         counter++;
         colours.Add(COLOURS.blue, new Color(79 / 255.0f, 187 / 255.0f, 255 / 255.0f));
@@ -75,10 +76,12 @@ public class bulletColour : MonoBehaviour
         {
             r_colours.colour = colours[a_colours];
             array[(int)a_colours] = true;
+            r_colours.playerID = (int)a_colours;
         }
         else
         {
             r_colours.colour = white;
+            r_colours.playerID = 10;
         }
 
         return r_colours;
@@ -102,11 +105,13 @@ public class bulletColour : MonoBehaviour
                 r_colours.isFree = true;
                 array[i] = true;
                 r_colours.colour = colours[(COLOURS)i];
+                r_colours.playerID = i;
                 return r_colours;
             }
         }
         r_colours.isFree = false;
         r_colours.colour = white;
+        r_colours.playerID = 10;
         return r_colours;
     }
 }

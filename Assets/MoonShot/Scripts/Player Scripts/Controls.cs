@@ -280,9 +280,16 @@ public class Controls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        playerNumber = GetComponent<PlayerStats>().m_PlayerID;
+        Debug.Log("Player number: " + playerNumber);
         if (!CreateController(playerNumber))
+        {
             Debug.Log("error this controller already exists");
+        }
+        if (ControllerUpdate(playerNumber) == false)
+        {
+            gameObject.active = false;
+        }
     }
 
     // Update is called once per frame
