@@ -199,17 +199,20 @@ MonoBehaviour:
   m_Score: 0
   l_killedBy: 
   m_shieldState: 0
-  m_CriticalMultipier: 10
+  m_CriticalMultipier: 2
   driftMoveForce: 2
   walkMoveForce: 25
   jumpForce: 250
+  maxJumpTime: 1.25
+  fallGravMultiplier: 1.5
   maxStunTime: 0
   m_Shoot:
-    shotgunDuration: 1
+    shotgunDuration: 0.2
     shotgunCooldown: 1
-    shotgunForce: 10
-    shotgunDistance: 0
-    shotgunRadius: 0
+    shotgunForce: 50
+    shotgunDistance: 20
+    shotgunRadius: 15
+    shotgunCriticalMultiplier: 20
   m_boost:
     BaseForce: 200
     AddedForcePerSecond: 50

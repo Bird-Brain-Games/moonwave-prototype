@@ -43,6 +43,7 @@ public class PlayerStats : MonoBehaviour {
 #region  StateStrings
     public string PlayerOnPlanetStateString {get; set;}   
     public string PlayerDriftStateString {get; set;}
+    public string PlayerJumpStateString {get; set;}
     public string PlayerBoostChargeString {get; set;}
     public string PlayerBoostActiveString {get; set;}
 #endregion
@@ -66,10 +67,12 @@ public class PlayerStats : MonoBehaviour {
     public float driftMoveForce;
     public float walkMoveForce;
 
-    // Grounded based variables
+    // Jump based variables
     public float jumpForce;
-	public float maxStunTime;
+    public float maxJumpTime;
+    public float fallGravMultiplier;
 
+	public float maxStunTime;
     public Shoot m_Shoot;
     public Boost m_boost;
 
@@ -94,6 +97,7 @@ public class PlayerStats : MonoBehaviour {
         PlayerDriftStateString = "drift";
         PlayerBoostActiveString = "boostActive";
         PlayerBoostChargeString = "boostCharge";
+        PlayerJumpStateString = "jump";
     }
 
     //Getters and Setters

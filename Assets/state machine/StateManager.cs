@@ -6,6 +6,7 @@ public class StateManager : MonoBehaviour
 {
 
     //Holds all of our items in it.
+    [SerializeField]
     State currentState;
     State defaultState;
     string defaultStateString;

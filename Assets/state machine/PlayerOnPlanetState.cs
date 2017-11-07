@@ -52,7 +52,14 @@ public class PlayerOnPlanetState : State {
 		if (m_Controls.GetJump(BUTTON_DETECTION.GET_BUTTON_DOWN))
 		{
 			m_RigidBody.AddForce(m_PlayerStats.jumpForce * transform.up, ForceMode.Impulse);
+			ChangeState(m_PlayerStats.PlayerJumpStateString);
+		}
+
+		// If it can't find ground beneath it, change to drifting state
+		if (!m_Gravity.FindIfGrounded())
+		{
 			ChangeState(m_PlayerStats.PlayerDriftStateString);
+			Debug.Log("No ground found in On Planet State");
 		}
 	}
 }

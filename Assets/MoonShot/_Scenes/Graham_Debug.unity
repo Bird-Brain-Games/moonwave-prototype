@@ -702,50 +702,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114890674134318816, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114563655088194838, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1650582250571524, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_Shoot.shotgunDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_Shoot.shotgunDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_Shoot.shotgunRadius
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_CriticalMultipier
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_Shoot.shotgunCriticalMultiplier
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001979804940358, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
-        type: 2}
-      propertyPath: m_Shoot.shotgunForce
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
   m_IsPrefabParent: 0
