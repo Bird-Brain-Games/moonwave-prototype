@@ -17,8 +17,8 @@ public class Shield : MonoBehaviour
     PlayerStats m_playerStats;
 
     //self explanitory
-    public int m_shieldHealth;
-    public int m_maxShieldHealth;
+    public float m_shieldHealth;
+    public float m_maxShieldHealth;
 
     public float m_rechargeDelay;
     public int m_rechargeRatePerSecond;
@@ -51,10 +51,10 @@ public class Shield : MonoBehaviour
             switch (bullet)
             {
                 case BULLET_TYPE.plasma:
-                    m_shieldHealth -= 10;
+                    m_shieldHealth -= GetComponentInParent<Shoot>().m_bulletImpact;
                     break;
                 case BULLET_TYPE.shotgun:
-                    m_shieldHealth -= 5;
+                    m_shieldHealth -= m_playerStats.m_Shoot.shotgunDamage;
                     break;
             }
 

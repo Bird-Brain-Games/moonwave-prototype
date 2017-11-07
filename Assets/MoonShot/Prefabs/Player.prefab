@@ -320,9 +320,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
-  m_bulletImpact: 10
-  m_bulletSpeed: 50
-  m_bulletDelay: 0.0625
+  m_bulletImpact: 20
+  m_bulletSpeed: 150
+  m_bulletDelay: 0.25
   m_stray: 0
   l_bullets: 0
 --- !u!114 &114282463284189154

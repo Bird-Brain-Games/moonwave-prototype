@@ -7,6 +7,7 @@ public class PlayerStateManager : MonoBehaviour {
 	StateManager movementStates;
 	PlayerStats playerStats;
 	StickToPlanet m_Gravity;
+    Rigidbody m_RigidBody;
 
 	float stunTimer;
 	bool isCountingDown;
@@ -36,6 +37,7 @@ public class PlayerStateManager : MonoBehaviour {
 	void Start () {
         playerStats = GetComponent<PlayerStats>();
 		m_Gravity = GetComponent<StickToPlanet>();
+        m_RigidBody = GetComponent<Rigidbody>();
 		
         movementStates.AttachDefaultState(playerStats.PlayerDriftStateString, driftState);
 		movementStates.AttachDefaultState(playerStats.PlayerJumpStateString, jumpState);
@@ -71,7 +73,7 @@ public class PlayerStateManager : MonoBehaviour {
 			}
 
 			// Cause the stunned player to be affected by gravity[Graham]
-			m_Gravity.DriftingUpdate();
+			m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
 		}
 	}
 

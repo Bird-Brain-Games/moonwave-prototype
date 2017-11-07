@@ -487,11 +487,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4989117057895944, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -68.6
+      value: -64.9
       objectReference: {fileID: 0}
     - target: {fileID: 4989117057895944, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 15.7
+      value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 4989117057895944, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -689,7 +689,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4989117057895944, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 44.5
+      value: 40.5
       objectReference: {fileID: 0}
     - target: {fileID: 4989117057895944, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -724,6 +724,11 @@ Prefab:
         type: 2}
       propertyPath: m_rechargeDelay
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114094715940810600, guid: eed1197363f0b7e4ca24ba3bf66fbcbc,
+        type: 2}
+      propertyPath: m_Shoot.shotgunDamage
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eed1197363f0b7e4ca24ba3bf66fbcbc, type: 2}

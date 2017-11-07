@@ -84,6 +84,7 @@ public class Shoot : MonoBehaviour {
             if (aimDir.sqrMagnitude == 0f) aimDir = transform.up;	// If not aiming, fire straight up
             Vector3 forward = new Vector3(aimDir.x + m_randomX, aimDir.y + m_randomY);
             forward.Normalize();
+            //Quaternion rotation = Quaternion.LookRotation(transform.f, aimDir);
 
             //creating the bullet
             Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
