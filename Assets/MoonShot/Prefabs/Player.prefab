@@ -205,7 +205,7 @@ MonoBehaviour:
   jumpForce: 250
   maxJumpTime: 1.25
   fallGravMultiplier: 1.5
-  maxStunTime: 0
+  maxStunTime: 1
   m_Shoot:
     shotgunDuration: 0.2
     shotgunCooldown: 1
