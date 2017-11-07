@@ -120,6 +120,11 @@ public class PlayerStats : MonoBehaviour {
     }
     //Getters and Setters
 
+    public void ResetPlayer()
+    {
+
+    }
+
     public int getScore()
     {
         return m_Score;

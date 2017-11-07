@@ -22,7 +22,7 @@ public class StateManager : MonoBehaviour
     // So that all the updates can call first [G, C]
     public void ChangeState(string a_State)
     {
-        Debug.Log("Changing to " + a_State + " from " + currentState.m_Name);
+        //Debug.Log("Changing to " + a_State + " from " + currentState.m_Name);
 
         currentState.Exit();
         currentState = states[a_State];

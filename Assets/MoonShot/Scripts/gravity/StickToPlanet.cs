@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StickToPlanet : MonoBehaviour {
+public class StickToPlanet : MonoBehaviour
+{
     /// <summary>
     /// Adapted from
     /// https://github.com/nlra/Galaxy/blob/master/Assets/Game/Scripts/StickToPlanet.cs
@@ -19,14 +20,14 @@ public class StickToPlanet : MonoBehaviour {
     PlanetGravityField m_CurrentPlanet;
     List<Collider> m_PlanetsAffecting;
     Quaternion m_PreviousRotation;
-    
+
     float m_PreviousGravityFieldStrength;
 
     float linkDistance = 100.0f;
     bool m_CollidedWithPlanet;
     float m_DistanceToGround;
 
-    [Tooltip("How large the turning angle of the player can be")]  
+    [Tooltip("How large the turning angle of the player can be")]
     public float m_TurningSpeed = 5.0f;
 
     [Tooltip("If the equation used for resolving gravity between\n multiple planets is constant or Newtonian")]
@@ -37,7 +38,8 @@ public class StickToPlanet : MonoBehaviour {
     public float l_hangTime;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<Collider>();
         m_PlayerStats = GetComponent<PlayerStats>();
@@ -77,11 +79,12 @@ public class StickToPlanet : MonoBehaviour {
 
         if (PlanetInRange() && OnlyOnePlanetInRange())     // Only one planet
         {
+            Debug.Log("One planet");
             // Try to hit directly below the player
             RaycastHit hit1;
-            bool hitPlanet = Physics.Raycast(m_RigidBody.position, -transform.up, 
+            bool hitPlanet = Physics.Raycast(m_RigidBody.position, -transform.up,
                 out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore);
-            
+
             // Apply gravity if it finds a planet directly below the player
             if (hitPlanet)
             {
@@ -90,7 +93,7 @@ public class StickToPlanet : MonoBehaviour {
             }
 
             // Shoot ray directed towards the center of the planet
-            else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized, 
+            else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized,
                 out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
             {
                 result = GetGravity(hit1, m_CurrentPlanet.m_GravityStrength);
@@ -103,6 +106,8 @@ public class StickToPlanet : MonoBehaviour {
         else if (PlanetInRange())   // Multiple planets
         {
             //RaycastHit hit;
+
+            Debug.Log("Multple Planets in range");
             Vector3 gravityForce = Vector3.zero;
 
             foreach (Collider planet in m_PlanetsAffecting)
@@ -166,7 +171,7 @@ public class StickToPlanet : MonoBehaviour {
                 m_RigidBody.AddForce(m_CurrentPlanet.m_GravityStrength * -transform.up);
             }
             // Shoot ray directed towards the center of the planet
-            else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized, 
+            else if (Physics.Raycast(m_RigidBody.position, (m_CurrentPlanet.transform.position - m_RigidBody.position).normalized,
                 out hit1, linkDistance, LayerMask.GetMask("Planet"), QueryTriggerInteraction.Ignore))
             {
                 if (hit1.distance > m_DistanceToGround)
@@ -188,23 +193,27 @@ public class StickToPlanet : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Planet")
+        Debug.Log(tag.ToString());
+        if (tag == "Player")
         {
-            if (!m_PlanetsAffecting.Contains(other))
+            if (other.tag == "Planet")
             {
-                m_PlanetsAffecting.Add(other);
-                Debug.Log("Entering " + other.name);
+                if (!m_PlanetsAffecting.Contains(other))
+                {
+                    m_PlanetsAffecting.Add(other);
+                    Debug.Log("Entering " + other.name);
 
-                if (OnlyOnePlanetInRange())
-                    m_CurrentPlanet = other.gameObject.GetComponent<PlanetGravityField>();
+                    if (OnlyOnePlanetInRange())
+                        m_CurrentPlanet = other.gameObject.GetComponent<PlanetGravityField>();
 
-                RotateTowardsCurrentPlanet();
+                    RotateTowardsCurrentPlanet();
+                }
             }
         }
     }
 
     void OnTriggerExit(Collider other)
-    {      
+    {
         if (other.tag == "Planet")
         {
             if (m_PlanetsAffecting.Contains(other))
@@ -247,7 +256,7 @@ public class StickToPlanet : MonoBehaviour {
             return false;
 
         return (hit.transform.tag == "Planet");
-        
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -261,7 +270,7 @@ public class StickToPlanet : MonoBehaviour {
 
             // Rotate player towards planet
             RotateTowardsCurrentPlanet();
-            
+
         }
 
         else if (collision.gameObject.CompareTag("Hazard"))

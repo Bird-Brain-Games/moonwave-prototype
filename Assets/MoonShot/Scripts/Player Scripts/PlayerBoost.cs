@@ -95,12 +95,10 @@ public class PlayerBoost : MonoBehaviour
         if (m_TimeCharging < m_PlayerStats.m_boost.timeToMaxCharge)
         {
             m_BoostForce += m_PlayerStats.m_boost.AddedForcePerSecond * Time.deltaTime;
-            Debug.Log("Boost charging");
         }
         else
         {
             m_BoostForce = m_PlayerStats.m_boost.MaxForce;
-            Debug.Log("Boost fully charged");
         }
 
         //This increases the duration of the boost
@@ -159,7 +157,7 @@ public class PlayerBoost : MonoBehaviour
         //reset and modify variables
         m_PlayerStats.CanBoost = false;
 
-        Debug.Log("Boost fired!");
+        //Debug.Log("Boost fired!");
 
         m_Rend.material.color = m_PlayerStats.colourdull;
 

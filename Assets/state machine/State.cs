@@ -54,7 +54,6 @@ public abstract class State : MonoBehaviour
     {
         if (changingState)
         {
-            Debug.Log("Changing state: " + nextState);
             stateManager.ChangeState(nextState);
             changingState = false;
         }

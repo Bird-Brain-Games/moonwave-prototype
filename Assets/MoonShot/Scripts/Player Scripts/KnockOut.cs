@@ -8,6 +8,7 @@ public class KnockOut : MonoBehaviour {
     Rigidbody m_rigidBody;
     PlayerStats m_PlayerStats;
     PlayerStateManager m_StateManager;
+    Shield m_shield;
 
     // Logging    l_ is used to indicate a variable is a logging variable
     public int l_deaths;
@@ -55,5 +56,6 @@ public class KnockOut : MonoBehaviour {
         transform.position = new Vector3(12, 11, 0);
         m_rigidBody.velocity = new Vector3(0f, 0f, 0f);
         m_StateManager.ResetPlayer();
+        m_shield.ResetShield();
     }
 }

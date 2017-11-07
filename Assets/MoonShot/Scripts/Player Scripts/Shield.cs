@@ -18,7 +18,7 @@ public class Shield : MonoBehaviour
 
     //self explanitory
     public int m_shieldHealth;
-    public int mm_axShieldHealth;
+    public int m_maxShieldHealth;
 
     public float m_rechargeDelay;
     public int m_rechargeRatePerSecond;
@@ -38,7 +38,7 @@ public class Shield : MonoBehaviour
     void Start()
     {
         m_canRecharge = false;
-        m_shieldHealth = mm_axShieldHealth;
+        m_shieldHealth = m_maxShieldHealth;
         m_playerStats = GetComponentInParent<PlayerStats>();
     }
 
@@ -78,7 +78,7 @@ public class Shield : MonoBehaviour
     {
 
         //a blanket if statement to reduce the times that this code will run. aka only if they are injured.
-        if (mm_axShieldHealth > m_shieldHealth)
+        if (m_maxShieldHealth > m_shieldHealth)
         {
             //Debug.Log("shield updating");
             //controls whether enough time has passed for the shield to start recharging
@@ -120,7 +120,9 @@ public class Shield : MonoBehaviour
     {
         // Needs more fleshing out, not enough knowledge on this script [Graham]
         m_canRecharge = false;
-        m_shieldHealth = mm_axShieldHealth;
+        m_shieldHealth = m_maxShieldHealth;
         m_timeSinceLastHit = 0f;
+        GetComponent<MeshRenderer>().enabled = true;
+        m_playerStats.SetShieldState(false);
     }
 }
