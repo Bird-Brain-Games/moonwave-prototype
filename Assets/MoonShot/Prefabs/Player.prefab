@@ -84,7 +84,7 @@ Transform:
   m_GameObject: {fileID: 1844278217068080}
   m_LocalRotation: {x: -0, y: -0, z: 0.70881844, w: 0.705391}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4205999, y: 2.69231, z: 0.25}
+  m_LocalScale: {x: 3.906671, y: 10.106713, z: 1}
   m_Children: []
   m_Father: {fileID: 4989117057895944}
   m_RootOrder: 1
@@ -96,8 +96,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707648662927964}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
-  m_LocalScale: {x: 2.5, y: 1, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 5.7}
+  m_LocalScale: {x: 10, y: 3, z: 15.499997}
   m_Children: []
   m_Father: {fileID: 4989117057895944}
   m_RootOrder: 0
@@ -108,9 +108,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1650582250571524}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 17.499998, z: 0}
-  m_LocalScale: {x: 4, y: 3, z: 4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.9, y: 17.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4757026845812456}
   - {fileID: 4485919500634806}
@@ -225,7 +225,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1650582250571524}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 28619d2a2ddb0ad4b812eb7a4b674964, type: 3}
 --- !u!33 &33631765791872656
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3254170856fc6fa4dbf7c3e33ea4dc82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 1
+  playerNumber: 0
   aimControls:
     aimX: 0
     aimY: 1
@@ -470,7 +470,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 8fb20f7b93fbe2046a68b2119e9a3461, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 2.8836555
+  m_Height: 8.649155
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.43909454, z: 0}
