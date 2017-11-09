@@ -188,10 +188,10 @@ public class Controls : MonoBehaviour
     //The controls for the player
     public Aim aimControls;
     public Move moveControls;
-    public Button shootLaser;
+    public Trigger shootLaser;
     public Button jump;
-    public Button boost;
-    public Trigger shootShotgun;
+    public Trigger boost;
+    public Button shootShotgun;
 
     //This region uses the above variables to fetch the controller state
     #region controls
@@ -213,23 +213,23 @@ public class Controls : MonoBehaviour
         return result;
     }
     //returns true or false using the shoot laser controls.
-    public bool GetShootLaser(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
+    public bool GetShootLaser()
     {
-        return GetButtonStruct(shootLaser, detect);
-    }
-    //returns true or false using the shotgun controls
-    public bool GetShootShotgun()
-    {
-        if (shootShotgun.sensitivity < GetTrigger(shootShotgun.trigger))
+        if (shootLaser.sensitivity < GetTrigger(shootLaser.trigger))
         {
             return true;
         }
         return false;
     }
+    //returns true or false using the shotgun controls
+    public bool GetShootShotgun(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
+    {
+        return GetButtonStruct(shootShotgun, detect);
+    }
     //Return the pressure of trigger
     public float GetShootShotgunFloat()
     {
-        return GetTrigger(shootShotgun.trigger);
+        return 0.0f;
     }
     //returns true or false using the jump controls.
     public bool GetJump(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
@@ -239,7 +239,11 @@ public class Controls : MonoBehaviour
     //returns true or false using the boost controls.
     public bool GetBoost(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
     {
-        return GetButtonStruct(boost, detect);
+        if (boost.sensitivity < GetTrigger(boost.trigger))
+        {
+            return true;
+        }
+        return false;
     }
 
 

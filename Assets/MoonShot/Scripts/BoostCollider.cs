@@ -29,9 +29,14 @@ public class BoostCollider : MonoBehaviour {
             Debug.Log("boost collider with player");
             //basically switch to the playerBigHitState;
 
+            //Set hitlastby
+            collider.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_stats;
+
             if (collider.transform.GetComponent<PlayerStats>().GetShieldState() == false)
             {
                 Debug.Log("boost collider without shield");
+
+                
 
                 //get the colliders BigHitState
                 m_tempState = collider.transform.GetComponentInParent<PLayerBigHitState>();
