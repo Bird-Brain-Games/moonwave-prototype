@@ -55,9 +55,7 @@ public class PlayerStateManager : MonoBehaviour {
 		// If the trigger is sent to stun the player
 		if (playerStats.stunTrigger)
 		{
-			playerStats.stunTrigger = false;
-			stunTimer = playerStats.maxStunTime;
-			movementStates.enabled = false;
+			StunPlayer();
 		}
 
 		// If the player is stunned
@@ -67,9 +65,7 @@ public class PlayerStateManager : MonoBehaviour {
 			stunTimer -= Time.deltaTime;
 			if (stunTimer <= 0f)
 			{
-				stunTimer = 0f;
-				movementStates.enabled = true;
-				movementStates.ResetToDefaultState();
+				UnStunPlayer();
 			}
 
 			// Cause the stunned player to be affected by gravity[Graham]
@@ -79,10 +75,21 @@ public class PlayerStateManager : MonoBehaviour {
 
 	public void ResetPlayer()
 	{
-		stunTimer = 0f;
+		UnStunPlayer();
+		GetComponentInChildren<Shield>().ResetShield();		// TEMP [Graham]
+	}
+
+	void StunPlayer()
+	{
+		playerStats.stunTrigger = false;
+		stunTimer = playerStats.maxStunTime;
+		movementStates.enabled = false;
+	}
+
+	void UnStunPlayer()
+	{
 		movementStates.enabled = true;
 		movementStates.ResetToDefaultState();
-		playerStats.stunTrigger = false;
-		GetComponentInChildren<Shield>().ResetShield();		// TEMP [Graham]
+		stunTimer = 0f;
 	}
 }

@@ -23,7 +23,7 @@ public class PlayerJumpState : State {
 		m_Gravity = GetComponent<StickToPlanet>();
 	}
 
-	override public void Enter()
+	override public void StateEnter()
 	{
 		jumpTimer = 0f;
 		m_CollidedWithPlanet = false;
@@ -73,7 +73,7 @@ public class PlayerJumpState : State {
 		}
 	}
 
-	// void OnCollisionEnter(Collision collision)
+	// override public void StateOnCollisionEnter(Collision collision)
     // {
     //     if (collision.gameObject.tag == "Planet")
     //     {

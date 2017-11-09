@@ -19,6 +19,10 @@ public class PlayerBoostChargeState : State
         m_Boost = GetComponent<PlayerBoost>();
     }
 
+    public override void StateEnter()
+    {
+        m_Boost.EntryBoost();
+    }
 
     override public void StateUpdate()
     {
@@ -34,14 +38,5 @@ public class PlayerBoostChargeState : State
             m_Boost.FireBoost();
             ChangeState(m_PlayerStats.PlayerBoostActiveString);
         }
-    }
-
-    public override void Enter()
-    {
-        m_Boost.EntryBoost();
-    }
-    public override void Exit()
-    {
-        
     }
 }

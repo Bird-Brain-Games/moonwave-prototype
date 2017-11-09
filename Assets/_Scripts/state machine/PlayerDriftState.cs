@@ -22,7 +22,7 @@ public class PlayerDriftState : State {
 		m_Gravity = GetComponent<StickToPlanet>();
 	}
 
-	override public void Enter()
+	override public void StateEnter()
 	{
 		m_CollidedWithPlanet = false;
 	}
@@ -69,7 +69,7 @@ public class PlayerDriftState : State {
 		}
 	}
 
-	void OnCollisionEnter(Collision collision)
+	override public void StateOnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Planet")
         {
@@ -77,7 +77,7 @@ public class PlayerDriftState : State {
         }
     }
 
-	void OnCollisionStay(Collision collision)
+	override public void StateOnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Planet")
         {

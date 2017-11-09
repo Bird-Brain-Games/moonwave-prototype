@@ -19,13 +19,13 @@ public class PlayerBoostActiveState : State
         m_Boost = GetComponent<PlayerBoost>();
     }
 
-    override public void Enter()
+    override public void StateEnter()
     {
         //setup variables.
         m_Boost.EntryBoost();
     }
 
-    public override void Exit()
+    public override void StateExit()
     {
         m_Boost.ResetBoostCollider();
     }
@@ -37,7 +37,7 @@ public class PlayerBoostActiveState : State
 
     }
 
-    void OnCollisionEnter(Collision collision)
+    override public void StateOnCollisionEnter(Collision collision)
     {
         // Collide with a player
         if (collision.gameObject.CompareTag("Player"))

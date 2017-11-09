@@ -24,9 +24,9 @@ public class StateManager : MonoBehaviour
     {
         //Debug.Log("Changing to " + a_State + " from " + currentState.m_Name);
 
-        currentState.Exit();
+        currentState.StateExit();
         currentState = states[a_State];
-        currentState.Enter();
+        currentState.StateEnter();
 
     }
 
@@ -72,4 +72,11 @@ public class StateManager : MonoBehaviour
         currentState.StateLateUpdate();
         currentState.ChangeStateUpdate();
     }
+
+    void OnCollisionEnter(Collision collision) {currentState.StateOnCollisionEnter(collision);}
+    void OnCollisionStay(Collision collision) {currentState.StateOnCollisionStay(collision);}
+    void OnCollisionExit(Collision collision) {currentState.StateOnCollisionExit(collision);}
+    void OnTriggerEnter(Collider other) {currentState.StateOnTriggerEnter(other);}
+    void OnTriggerStay(Collider other) {currentState.StateOnTriggerStay(other);}
+    void OnTriggerExit(Collider other) {currentState.StateOnTriggerExit(other);}
 }
