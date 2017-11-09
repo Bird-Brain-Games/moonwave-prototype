@@ -108,8 +108,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1650582250571524}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.9, y: 17.3, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 27.6, y: 28.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4757026845812456}
@@ -299,13 +299,13 @@ MonoBehaviour:
     shotgunDistance: 20
     shotgunRadius: 15
     shotgunCriticalMultiplier: 20
-    shotgunDamage: 5
+    shotgunDamage: 10
   m_boost:
-    BaseForce: 200
-    AddedForcePerSecond: 500
+    BaseForce: 400
+    AddedForcePerSecond: 200
     MaxForce: 800
     BaseDuration: 0.25
-    AddedDurationPerSecond: 0.25
+    AddedDurationPerSecond: 0.3
     MaxDuration: 1.5
     Cooldown: 0.2
     timeToMaxCharge: 0.4
@@ -323,7 +323,7 @@ MonoBehaviour:
   bullet: {fileID: 54031750831577956, guid: f9bdeecb836dd6a4192ca89a79dcfbfd, type: 2}
   m_bulletImpact: 20
   m_bulletSpeed: 150
-  m_bulletDelay: 0.25
+  m_bulletDelay: 0.2
   m_stray: 0
   l_bullets: 0
 --- !u!114 &114282463284189154
@@ -413,9 +413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a845933893896447a41233b14220a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shieldHealth: 100
-  m_maxShieldHealth: 100
-  m_rechargeDelay: 3
+  m_shieldHealth: 50
+  m_maxShieldHealth: 50
+  m_rechargeDelay: 6
   m_rechargeRatePerSecond: 50
   m_timeSinceLastHit: 0
   m_hitUpdate: 0
