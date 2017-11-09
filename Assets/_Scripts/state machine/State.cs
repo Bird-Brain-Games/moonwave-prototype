@@ -19,30 +19,20 @@ public abstract class State : MonoBehaviour
 
 #region Virtual States
     
-    public virtual void StateUpdate()
-    {
+    public virtual void StateUpdate() {}
+    public virtual void StateFixedUpdate() {}
+    public virtual void StateLateUpdate() {}
 
-    }
+    public virtual void StateOnCollisionEnter(Collision collision) {}
+    public virtual void StateOnCollisionStay(Collision collision) {}
+    public virtual void StateOnCollisionExit(Collision collision) {}
 
-    public virtual void StateFixedUpdate()
-    {
+    public virtual void StateOnTriggerEnter(Collider other) {}
+    public virtual void StateOnTriggerStay(Collider other) {}
+    public virtual void StateOnTriggerExit(Collider other) {}
 
-    }
-
-    public virtual void StateLateUpdate()
-    {
-
-    }
-
-    public virtual void Enter()
-    {
-
-    }
-
-    public virtual void Exit()
-    {
-
-    }
+    public virtual void StateEnter() {}
+    public virtual void StateExit() {}
 
     public virtual StateManager GetManager()
     {

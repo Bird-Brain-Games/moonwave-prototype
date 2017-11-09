@@ -17,6 +17,7 @@ public class KnockOut : MonoBehaviour {
         m_rigidBody = GetComponent<Rigidbody>();
         m_PlayerStats = GetComponent<PlayerStats>();
         m_StateManager = GetComponent<PlayerStateManager>();
+        m_shield = GetComponentInChildren<Shield>();
         l_deaths = 0;
     }
 	
@@ -56,6 +57,6 @@ public class KnockOut : MonoBehaviour {
         transform.position = new Vector3(12, 11, 0);
         m_rigidBody.velocity = new Vector3(0f, 0f, 0f);
         m_StateManager.ResetPlayer();
-        //m_shield.ResetShield();
+        m_shield.ResetShield();//
     }
 }

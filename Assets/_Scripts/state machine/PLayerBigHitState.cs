@@ -24,14 +24,15 @@ public class PLayerBigHitState : State
         m_rigidBody = GetComponent<Rigidbody>();
         isTarget = true;
     }
-    public void SetDuration(float a_dur) { duration = a_dur; }
-    public override void Enter()
+
+    public override void StateEnter()
     {
         timer = duration;
         Debug.Log("enter playerbig hit");
         m_rigidBody.velocity *= 0.1f;
         m_rigidBody.AddForce(Direction / (1.0f / (25 * duration)));
     }
+    
     // Update is called once per frame
     public override void StateUpdate()
     {
@@ -49,7 +50,7 @@ public class PLayerBigHitState : State
         }
     }
 
-    public override void Exit()
+    public override void StateExit()
     {
         if (isTarget == true)
         {
