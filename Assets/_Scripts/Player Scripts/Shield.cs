@@ -61,6 +61,7 @@ public class Shield : MonoBehaviour
         }
         if (m_shieldHealth <= 0)
         {
+            m_shieldHealth = 0;
             GetComponent<MeshRenderer>().enabled = false;
             m_playerStats.SetShieldState(false);
 

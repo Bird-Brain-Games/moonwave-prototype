@@ -84,6 +84,8 @@ public class PlayerStateManager : MonoBehaviour {
 		playerStats.stunTrigger = false;
 		stunTimer = playerStats.maxStunTime;
 		movementStates.enabled = false;
+		GetComponent<Collider>().material.bounciness = 1.0f;
+		GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Maximum;
 	}
 
 	void UnStunPlayer()
@@ -91,5 +93,7 @@ public class PlayerStateManager : MonoBehaviour {
 		movementStates.enabled = true;
 		movementStates.ResetToDefaultState();
 		stunTimer = 0f;
+		GetComponent<Collider>().material.bounciness = 0.0f;
+		GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Average;
 	}
 }

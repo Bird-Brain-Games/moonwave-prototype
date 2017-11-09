@@ -51,7 +51,7 @@ public class ShotgunShot : Projectile {
 		other.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
 
 		// If the shield has health, change how much force 
-		if (m_shield.m_shieldHealth == 0)
+		if (m_shield.m_shieldHealth <= 0)
 		{
 			addForce = m_Direction * m_Force * m_PlayerStats.m_Shoot.shotgunCriticalMultiplier;
 			Debug.Log(addForce);

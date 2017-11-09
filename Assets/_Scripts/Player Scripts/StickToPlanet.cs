@@ -79,7 +79,7 @@ public class StickToPlanet : MonoBehaviour
 
         if (PlanetInRange() && OnlyOnePlanetInRange())     // Only one planet
         {
-            Debug.Log("One planet");
+            //Debug.Log("One planet");
             // Try to hit directly below the player
             RaycastHit hit1;
             bool hitPlanet = Physics.Raycast(m_RigidBody.position, -transform.up,

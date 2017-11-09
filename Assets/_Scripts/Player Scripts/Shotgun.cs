@@ -61,7 +61,7 @@ public class Shotgun : MonoBehaviour {
 		clone.GetComponent<Rigidbody>().AddForce(currentVelocity + aimDir * unitsPerSec, ForceMode.Impulse);
 
 		// Initialize the shotgun wave [Graham]
-		clone.Init(transform.up, m_ShotForce, m_PlayerStats);
+		clone.Init(aimDir, m_PlayerStats.m_Shoot.shotgunForce, m_PlayerStats);
 		// Physics.IgnoreCollision(
         //         clone.GetComponent<Collider>(), 
         //         GetComponent<Collider>());
