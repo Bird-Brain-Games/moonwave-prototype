@@ -46,7 +46,7 @@ public class PlayerJumpState : State {
 		}
 		
 		// If the shoot button is pressed, FIRE THE LASER
-		if (m_Controls.GetShootLaser(BUTTON_DETECTION.GET_BUTTON))
+		if (m_Controls.GetShootLaser())
 		{
 			m_Shoot.ShootLaser();
 		}

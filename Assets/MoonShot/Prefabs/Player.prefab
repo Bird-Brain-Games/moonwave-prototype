@@ -451,17 +451,17 @@ MonoBehaviour:
     moveX: 2
     moveY: 3
   shootLaser:
-    key: 512
-    altKey: 0
+    sensitivity: 0
+    trigger: 0
   jump:
     key: 4096
     altKey: 0
   boost:
-    key: 8192
-    altKey: 256
+    sensitivity: 0
+    trigger: 1
   shootShotgun:
-    sensitivity: 0.2
-    trigger: 0
+    key: 512
+    altKey: 0
 --- !u!136 &136340227647414152
 CapsuleCollider:
   m_ObjectHideFlags: 1
