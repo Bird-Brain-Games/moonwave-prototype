@@ -190,7 +190,7 @@ public class Controls : MonoBehaviour
     public Move moveControls;
     public Trigger shootLaser;
     public Button jump;
-    public Trigger boost;
+    public Button boost;
     public Button shootShotgun;
 
     //This region uses the above variables to fetch the controller state
@@ -239,11 +239,7 @@ public class Controls : MonoBehaviour
     //returns true or false using the boost controls.
     public bool GetBoost(BUTTON_DETECTION detect = BUTTON_DETECTION.GET_BUTTON)
     {
-        if (boost.sensitivity < GetTrigger(boost.trigger))
-        {
-            return true;
-        }
-        return false;
+        return GetButtonStruct(boost, detect);
     }
 
 

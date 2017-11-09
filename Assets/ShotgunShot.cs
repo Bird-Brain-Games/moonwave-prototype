@@ -45,9 +45,6 @@ public class ShotgunShot : Projectile {
 
 	void collideWithPlayer(Collider other)
 	{
-        //Set HitLastBy [Jack]
-        other.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
-
 		Shield m_shield = other.gameObject.GetComponentInChildren<Shield>();
 		Vector3 addForce;
 
