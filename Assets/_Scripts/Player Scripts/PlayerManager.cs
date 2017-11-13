@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
-    PlayerStats[] players;
+    public PlayerStats[] players;
     public int[] playerScores;
-    Color[] playerColours;
+    public Color[] playerColours;
     int numPlayers;
     
 	// Use this for initialization
@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour {
         // Get the player colours [Graham]
         for (int i = 0; i < numPlayers; i++)
         {
+            //Debug.Log("Initializing colours");
             playerColours[i] = players[i].colour;
         }
 

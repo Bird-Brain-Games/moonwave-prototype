@@ -106,13 +106,14 @@ public class PlayerStats : MonoBehaviour {
         PlayerBigHitState = "bigHit";
 
         //Request a colour from our bullet colours [cam]
-        
+        Debug.Log("Player Made");
     }
     private void Start()
     {
         ColourData temp = GetComponentInParent<bulletColour>().GetNextAvailableColour();
         if (temp.isFree == true)
         {
+            Debug.Log("Setting Colour");
             ColourOfBullet = temp.colour;
             colour = temp.colour;
             GetComponent<MeshRenderer>().material.color = colour;
