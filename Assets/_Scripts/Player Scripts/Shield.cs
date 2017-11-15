@@ -107,7 +107,7 @@ public class Shield : MonoBehaviour
             //If the recharge delay has passed then the shield will start recharging.
             else
             {
-                if (1.0 > m_rechargeUpdate - m_timeSinceLastRecharge)
+                if (0.5 > m_rechargeUpdate - m_timeSinceLastRecharge)
                 {
                     m_rechargeUpdate = Time.time;
                 }
@@ -126,13 +126,12 @@ public class Shield : MonoBehaviour
         m_percentSheild = m_shieldHealth / m_maxShieldHealth;
 
         // Adjust the sheild color based on % damnge taken! [Jack]
-        if (m_percentSheild != 1)
-        {
-            m_currentColor.b = Mathf.Lerp(m_endColor.b, m_maxColor.b, m_percentSheild);
-            m_currentColor.r = Mathf.Lerp(m_endColor.r, m_maxColor.r, m_percentSheild);
-            m_currentColor.g = Mathf.Lerp(m_endColor.g, m_maxColor.g, m_percentSheild);
-            m_currentColor.a = Mathf.Lerp(m_endColor.a, m_maxColor.a, m_percentSheild);
-        }
+
+        m_currentColor.b = Mathf.Lerp(m_endColor.b, m_maxColor.b, m_percentSheild);
+        m_currentColor.r = Mathf.Lerp(m_endColor.r, m_maxColor.r, m_percentSheild);
+        m_currentColor.g = Mathf.Lerp(m_endColor.g, m_maxColor.g, m_percentSheild);
+        m_currentColor.a = Mathf.Lerp(m_endColor.a, m_maxColor.a, m_percentSheild);
+
         gameObject.GetComponent<Renderer>().material.color = m_currentColor;
     }
 
