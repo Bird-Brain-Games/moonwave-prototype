@@ -26,8 +26,12 @@ public class ScoreDisplay : MonoBehaviour {
         for (int i = 0; i < numPlayers; i++)
         {
             playerScoreText[i] = Instantiate(playerScorePrefab, transform);
-            //playerScoreText[i].color = playerColours[i];  // Broken for some reason [Graham]
+            //if (i == 0)
+                playerScoreText[i].color = manager.players[i].colour;  // Broken for some reason [Graham]
+            //if (i == 1)
+                //playerScoreText[i].color = manager.players[1].colour;
             playerScoreText[i].text = playerScores[i].ToString();
+            Debug.Log("Initializing colours");
         }
         
 	}
@@ -39,6 +43,7 @@ public class ScoreDisplay : MonoBehaviour {
         // Update the player texts
         for (int i = 0; i < numPlayers; i++)
         {
+            playerScoreText[i].color = manager.players[i].colour;
             playerScoreText[i].text = playerScores[i].ToString();
         }
     }
