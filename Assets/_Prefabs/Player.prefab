@@ -415,8 +415,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_shieldHealth: 50
   m_maxShieldHealth: 50
+  m_percentSheild: 0
   m_rechargeDelay: 6
   m_rechargeRatePerSecond: 50
+  m_maxColor: {r: 1, g: 1, b: 1, a: 0}
+  m_currentColor: {r: 0, g: 0, b: 0, a: 0}
+  m_endColor: {r: 1, g: 0, b: 0, a: 0}
   m_timeSinceLastHit: 0
   m_hitUpdate: 0
   m_canRecharge: 0
