@@ -321,12 +321,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0158572e9a9c84895ada7960e91bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Attraction: -2
+  m_Attraction: -0.5
   m_SpawnDistance: 3
   m_DistanceVariance: 6
   m_AngleVariance: 0.3
   m_numParticles: 50
   m_lockZ: 1
+  m_initialized: 0
+  m_birth: 0
+  m_age: 0
+  m_lifespan: 0.4
+  m_death: 0
   m_SpawnableObject: {fileID: 1573369822639624, guid: 1dba30e3c26a3aa4fb6be28a7875a6c2,
     type: 2}
 --- !u!114 &114172909073379266

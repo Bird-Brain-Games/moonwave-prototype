@@ -12,7 +12,15 @@ public class shieldParticles : MonoBehaviour
     public int m_numParticles;
     public bool m_lockZ;
 
+    public bool m_initialized;
 
+    // The life of a particle... In variables [Jack]
+    public float m_birth;
+    public float m_age;
+    public float m_lifespan;
+    public float m_death;
+
+    // The object that will be our particle
     public GameObject m_SpawnableObject;
 
 
@@ -50,27 +58,70 @@ public class shieldParticles : MonoBehaviour
     {
         for (int i = 0; i < m_numParticles; i++)
         {
-            particleArr[i].transform.position = new Vector3(particleArray[i].Pos.x, particleArray[i].Pos.y, particleArray[i].Pos.z);
+            if (particleArr[i] != null)
+                particleArr[i].transform.position = new Vector3(particleArray[i].Pos.x, particleArray[i].Pos.y, particleArray[i].Pos.z);
         }
     }
     void Start()
     {
-
-        for (int i = 0; i < m_numParticles; i++)
-        {
-            particleArr[i] = Instantiate<GameObject>(m_SpawnableObject);
-        }
-
-        initSystem();
-        updateAttraction(m_Attraction);
-        updateTargetPos(transform.position.x, transform.position.y, transform.position.z);
-        initialize(particleArray, m_numParticles, m_SpawnDistance, m_lockZ, m_DistanceVariance, m_AngleVariance);
-        setPosition();
+        m_initialized = false;
+        //for (int i = 0; i < m_numParticles; i++)
+        //{
+        //    particleArr[i] = Instantiate<GameObject>(m_SpawnableObject);
+        //}
+        //
+        //initSystem();
+        //updateAttraction(m_Attraction);
+        //updateTargetPos(transform.position.x, transform.position.y, transform.position.z);
+        //initialize(particleArray, m_numParticles, m_SpawnDistance, m_lockZ, m_DistanceVariance, m_AngleVariance);
+        //setPosition();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<Shield>().m_percentSheild <= 0 && !m_initialized && Time.time > 3)
+        {
+            for (int i = 0; i < m_numParticles; i++)
+            {
+                particleArr[i] = Instantiate<GameObject>(m_SpawnableObject);
+            }
+
+            initSystem();
+            updateAttraction(m_Attraction);
+            updateTargetPos(transform.position.x, transform.position.y, transform.position.z);
+            initialize(particleArray, m_numParticles, m_SpawnDistance, m_lockZ, m_DistanceVariance, m_AngleVariance);
+            setPosition();
+            m_initialized = true;
+
+            // Set the particles' Life story [Jack]
+            m_birth = Time.time;
+            m_age = m_birth;
+            m_death = m_birth + m_lifespan;
+        }
+
+        if (m_age >= m_death)
+        {
+            for (int i = 0; i < m_numParticles; i++)
+            {
+                if (particleArr[i] != null)
+                {
+                    Object.Destroy(particleArr[i]);
+                }
+            }
+        }
+
+        if (GetComponent<Shield>().m_percentSheild > 0)
+        {
+            if (m_initialized)
+            {
+                m_initialized = false;
+            }
+        }
+
+        // Let the particle age per frame [Jack]
+        m_age += Time.deltaTime;
+
         Vector3 pos = transform.position;
         updateTargetPos(pos.x, pos.y, pos.z);
         updateParticlePos(particleArray, Time.deltaTime);
