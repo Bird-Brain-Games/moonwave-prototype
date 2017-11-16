@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 33674887257884066}
   - component: {fileID: 23957896530123446}
   - component: {fileID: 114845022035045384}
+  - component: {fileID: 114165022105156572}
   m_Layer: 0
   m_Name: shield
   m_TagString: Untagged
@@ -109,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1650582250571524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 73.3, y: -9.2, z: 0}
+  m_LocalPosition: {x: 27.6, y: 28.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4757026845812456}
@@ -309,6 +310,25 @@ MonoBehaviour:
     MaxDuration: 1.5
     Cooldown: 0.2
     timeToMaxCharge: 0.4
+--- !u!114 &114165022105156572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1707648662927964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0158572e9a9c84895ada7960e91bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Attraction: -2
+  m_SpawnDistance: 3
+  m_DistanceVariance: 6
+  m_AngleVariance: 0.3
+  m_numParticles: 50
+  m_lockZ: 1
+  m_SpawnableObject: {fileID: 1573369822639624, guid: 1dba30e3c26a3aa4fb6be28a7875a6c2,
+    type: 2}
 --- !u!114 &114172909073379266
 MonoBehaviour:
   m_ObjectHideFlags: 1
