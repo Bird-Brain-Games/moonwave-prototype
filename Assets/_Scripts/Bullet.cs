@@ -8,7 +8,8 @@ public class Bullet : Projectile {
 	void Start()
 	{
 		m_Rigidbody = GetComponent<Rigidbody>();
-	}
+        
+    }
 
 	public void BulletOutOfBounds()
     {

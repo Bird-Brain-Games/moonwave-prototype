@@ -50,7 +50,6 @@ GameObject:
   - component: {fileID: 33674887257884066}
   - component: {fileID: 23957896530123446}
   - component: {fileID: 114845022035045384}
-  - component: {fileID: 114165022105156572}
   m_Layer: 0
   m_Name: shield
   m_TagString: Untagged
@@ -310,28 +309,6 @@ MonoBehaviour:
     MaxDuration: 1.5
     Cooldown: 0.2
     timeToMaxCharge: 0.4
---- !u!114 &114165022105156572
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1707648662927964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba0158572e9a9c84895ada7960e91bd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Attraction: -5
-  m_SpawnDistance: 0.5
-  m_DistanceVariance: 3
-  m_AngleVariance: 0.1
-  m_numParticles: 50
-  m_lockZ: 1
-  m_initialized: 0
-  m_lifeSpanMax: 0.15
-  m_lifeSpanMin: 0.05
-  m_SpawnableObject: {fileID: 1568879064608902, guid: a62735bc891ecd34cb4bdfbff79b8058,
-    type: 2}
 --- !u!114 &114172909073379266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,6 +421,8 @@ MonoBehaviour:
   m_maxColor: {r: 1, g: 1, b: 1, a: 0}
   m_currentColor: {r: 0, g: 0, b: 0, a: 0}
   m_endColor: {r: 1, g: 0, b: 0, a: 0}
+  m_Explosion: {fileID: 1419220156410330, guid: 3e941e330f613f74c8356a0b2ff85aa7,
+    type: 2}
   m_timeSinceLastHit: 0
   m_hitUpdate: 0
   m_canRecharge: 0

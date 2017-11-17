@@ -28,6 +28,8 @@ public class Shield : MonoBehaviour
     public Color m_currentColor;
     public Color m_endColor;
 
+    public GameObject m_Explosion;
+
     //[HideInInspector]
     public float m_timeSinceLastHit;
     //[HideInInspector]
@@ -67,6 +69,12 @@ public class Shield : MonoBehaviour
         }
         if (m_shieldHealth <= 0)
         {
+            // Make an explosion go boom //////////////////////////////////////////////////////////////////////////////////////////
+            if (GetComponent<MeshRenderer>().enabled)
+            {
+                Instantiate(m_Explosion, transform);
+            }
+           
             m_shieldHealth = 0;
             GetComponent<MeshRenderer>().enabled = false;
             m_playerStats.SetShieldState(false);
