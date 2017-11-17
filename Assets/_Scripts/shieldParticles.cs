@@ -15,10 +15,9 @@ public class shieldParticles : MonoBehaviour
     public bool m_initialized;
 
     // The life of a particle... In variables [Jack]
-    public float m_birth;
-    public float m_age;
-    public float m_lifespan;
-    public float m_death;
+    public float m_lifeSpanMax;
+    public float m_lifeSPanMin;
+
 
     // The object that will be our particle
     public GameObject m_SpawnableObject;
@@ -40,13 +39,13 @@ public class shieldParticles : MonoBehaviour
     [DllImport("shieldParticles")]
     public static extern void initSystem();
     [DllImport("shieldParticles")]
-    public static extern void initialize(Particle[] p, int size, float spawnDistance, bool lockZ, float distanceRan, float angleRan);
+    public static extern void initialize(Particle[] p, int size, float spawnDistance, bool lockZ, float distanceRan, float angleRan, float lifeSpanMax, float lifeSpanMin);
     [DllImport("shieldParticles")]
     public static extern void updateTargetPos(float x, float y, float z);
     [DllImport("shieldParticles")]
     public static extern void updateAttraction(float a);
     [DllImport("shieldParticles")]
-    public static extern void updateParticlePos(Particle[] p, float dt);
+    public static extern void updateParticle(Particle[] p, float dt);
 
     #endregion
 
@@ -68,9 +67,22 @@ public class shieldParticles : MonoBehaviour
             initParticles();
         }
 
-        particleAging();
+        void particleDeath()
+        {
+            for (int i = 0; i < m_numParticles; i++)
+            {
+                if (particleArr[i] != null)
+                {
+                    if (particleArr[i].lifeSpan == 0)
+                    {
+                        Object.Destroy(particleArr[i]);
+                    }
 
-       
+                }
+            }
+        }
+
+
         if (m_initialized) {
             Vector3 pos = transform.position;
             updateTargetPos(pos.x, pos.y, pos.z);
@@ -110,49 +122,19 @@ public class shieldParticles : MonoBehaviour
         m_initialized = true;
     }
 
-    void particleAging()
+    void particleDeath()
     {
-        if (m_age >= m_death)
+        for (int i = 0; i < m_numParticles; i++)
         {
-            for (int i = 0; i < m_numParticles; i = i + 3)
+            if (particleArr[i] != null)
             {
-                if (particleArr[i] != null)
+                if (particleArr[i].lifeSpan == 0)
                 {
                     Object.Destroy(particleArr[i]);
                 }
+                
             }
         }
-        if (m_age >= m_death + 0.03)
-        {
-            for (int i = 0; i < m_numParticles; i = i + 2)
-            {
-                if (particleArr[i] != null)
-                {
-                    Object.Destroy(particleArr[i]);
-                }
-            }
-        }
-        if (m_age >= m_death + 0.06)
-        {
-            for (int i = 0; i < m_numParticles; i++)
-            {
-                if (particleArr[i] != null)
-                {
-                    Object.Destroy(particleArr[i]);
-                }
-            }
-        }
-        if (GetComponent<Shield>().m_percentSheild > 0)
-        {
-            if (m_initialized)
-            {
-                m_initialized = false;
-            }
-        }
-
-    
-        // Let the particle age per frame [Jack]
-        m_age += Time.deltaTime;
     }
 
 }
