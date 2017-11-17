@@ -114,6 +114,26 @@ public class shieldParticles : MonoBehaviour
     {
         if (m_age >= m_death)
         {
+            for (int i = 0; i < m_numParticles; i = i + 3)
+            {
+                if (particleArr[i] != null)
+                {
+                    Object.Destroy(particleArr[i]);
+                }
+            }
+        }
+        if (m_age >= m_death + 0.03)
+        {
+            for (int i = 0; i < m_numParticles; i = i + 2)
+            {
+                if (particleArr[i] != null)
+                {
+                    Object.Destroy(particleArr[i]);
+                }
+            }
+        }
+        if (m_age >= m_death + 0.06)
+        {
             for (int i = 0; i < m_numParticles; i++)
             {
                 if (particleArr[i] != null)

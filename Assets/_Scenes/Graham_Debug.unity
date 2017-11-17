@@ -732,6 +732,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1573369822639624, guid: 1dba30e3c26a3aa4fb6be28a7875a6c2, type: 2}
+      propertyPath: m_Name
+      value: Shield Particle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dba30e3c26a3aa4fb6be28a7875a6c2, type: 2}
   m_IsPrefabParent: 0

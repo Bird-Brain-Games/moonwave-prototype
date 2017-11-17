@@ -323,14 +323,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Attraction: -5
   m_SpawnDistance: 1
-  m_DistanceVariance: 6
+  m_DistanceVariance: 10
   m_AngleVariance: 0.3
   m_numParticles: 50
   m_lockZ: 1
   m_initialized: 0
   m_birth: 0
   m_age: 0
-  m_lifespan: 0.2
+  m_lifespan: 0.09
   m_death: 0
   m_SpawnableObject: {fileID: 1573369822639624, guid: 1dba30e3c26a3aa4fb6be28a7875a6c2,
     type: 2}
