@@ -16,7 +16,7 @@ public class shieldParticles : MonoBehaviour
 
     // The life of a particle... In variables [Jack]
     public float m_lifeSpanMax;
-    public float m_lifeSPanMin;
+    public float m_lifeSpanMin;
 
 
     // The object that will be our particle
@@ -35,6 +35,7 @@ public class shieldParticles : MonoBehaviour
     {
         public Vec Pos;
         public Vec Vel;
+        public float lifeSpan;
     }
     [DllImport("shieldParticles")]
     public static extern void initSystem();
@@ -67,26 +68,12 @@ public class shieldParticles : MonoBehaviour
             initParticles();
         }
 
-        void particleDeath()
-        {
-            for (int i = 0; i < m_numParticles; i++)
-            {
-                if (particleArr[i] != null)
-                {
-                    if (particleArr[i].lifeSpan == 0)
-                    {
-                        Object.Destroy(particleArr[i]);
-                    }
-
-                }
-            }
-        }
-
+        particleDeath();
 
         if (m_initialized) {
             Vector3 pos = transform.position;
             updateTargetPos(pos.x, pos.y, pos.z);
-            updateParticlePos(particleArray, Time.deltaTime);
+            updateParticle(particleArray, Time.deltaTime);
             setPosition();
         }
     }
@@ -110,14 +97,9 @@ public class shieldParticles : MonoBehaviour
         initSystem();
         updateAttraction(m_Attraction);
         updateTargetPos(transform.position.x, transform.position.y, transform.position.z);
-        initialize(particleArray, m_numParticles, m_SpawnDistance, m_lockZ, m_DistanceVariance, m_AngleVariance);
+        initialize(particleArray, m_numParticles, m_SpawnDistance, m_lockZ, m_DistanceVariance, m_AngleVariance, m_lifeSpanMax, m_lifeSpanMin);
         setPosition();
 
-
-        // Set the particles' Life story [Jack]
-        m_birth = Time.time;
-        m_age = m_birth;
-        m_death = m_birth + m_lifespan;
 
         m_initialized = true;
     }
@@ -128,12 +110,16 @@ public class shieldParticles : MonoBehaviour
         {
             if (particleArr[i] != null)
             {
-                if (particleArr[i].lifeSpan == 0)
+                if (particleArray[i].lifeSpan <= 0)
                 {
                     Object.Destroy(particleArr[i]);
                 }
                 
             }
+        }
+        if (particleArr.Length == 0)
+        {
+            m_initialized = false;
         }
     }
 
