@@ -288,7 +288,7 @@ public class Controls : MonoBehaviour
         }
         if (ControllerUpdate(playerNumber) == false)
         {
-            gameObject.active = false;
+            //gameObject.active = false;
         }
     }
 

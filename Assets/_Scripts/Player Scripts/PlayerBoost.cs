@@ -27,8 +27,6 @@ public class PlayerBoost : MonoBehaviour
     Renderer m_Rend;
     Controls m_controls;
     BoostCollider m_BoostCollider;
-    BoxCollider m_BoxCollider;
-    MeshRenderer m_MeshRender;
     //the direction of analogue movement
     Vector2 m_move;
     float m_TimeCharging;
@@ -72,8 +70,6 @@ public class PlayerBoost : MonoBehaviour
         //Get the boost big hit collider [cam]
         m_BoostCollider = GetComponentInParent<Unique>().GetComponentInChildren<BoostCollider>();
         m_BoostCollider.PlayerLink(m_PlayerStats);
-        m_BoxCollider = m_BoostCollider.GetComponent<BoxCollider>();
-        m_MeshRender = m_BoostCollider.GetComponent<MeshRenderer>();
 
     }
 
@@ -139,15 +135,8 @@ public class PlayerBoost : MonoBehaviour
         if (m_TimeCharging >= m_PlayerStats.m_boost.timeToMaxCharge)
         {
             // set the position of the players boost collider;
-            Debug.Log("testing");
-            //should switch this over to a function call instead of using a public getter/setter [cam]
-            m_BoostCollider.Offset = (m_Direction);
-            m_BoostCollider.Rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f));
-            m_BoostCollider.fixedUpdate = true;
+            m_BoostCollider.setCollider(m_Direction, Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f)));
 
-            m_BoxCollider.enabled = true;
-            m_MeshRender.enabled = true;
-            
         }
 
         //Adding boost velocity.
@@ -183,8 +172,6 @@ public class PlayerBoost : MonoBehaviour
         m_startCooldown = true;
         m_Rend.material.color = m_PlayerStats.colour;
         m_CooldownDuration = m_PlayerStats.m_boost.Cooldown;
-        m_BoxCollider.enabled = false;
-        m_MeshRender.enabled = false;
         m_BoostCollider.BoostEnded();
     }
 

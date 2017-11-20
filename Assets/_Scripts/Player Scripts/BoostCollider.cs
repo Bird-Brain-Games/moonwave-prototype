@@ -13,18 +13,17 @@ public class BoostCollider : MonoBehaviour
     BoxCollider m_BoxCollider;
     MeshRenderer m_MeshRender;
 
-    public bool fixedUpdate { get; set; }
-
-    public Vector3 Offset { get; set; }
+    private bool fixedUpdate;
+    private Vector3 m_offset;
+    private Quaternion m_rotation;
     public float setOffset;
-    public Quaternion Rotation { get; set; }
+
     void Start()
     {
 
         m_BoxCollider = GetComponent<BoxCollider>();
         m_MeshRender = GetComponent<MeshRenderer>();
         fixedUpdate = false;
-
     }
     public void PlayerLink(PlayerStats p_player)
     {
@@ -39,33 +38,46 @@ public class BoostCollider : MonoBehaviour
 
     }
 
+    public void setCollider(Vector3 transform, Quaternion rotation)
+    {
+        m_rotation = rotation;
+        m_offset = transform;
+        fixedUpdate = true;
+        //hacky way to update the position and then make it visisble.
+        FixedUpdate();
+        m_BoxCollider.enabled = true;
+        m_MeshRender.enabled = true;
+    }
+
     private void FixedUpdate()
     {
         if (fixedUpdate)
         {
-            Debug.Log("booost collider fixed update");
             transform.position = m_parentTransform.position;
             transform.rotation = Quaternion.identity;
-            transform.Translate(Offset * setOffset);
-            transform.rotation = Rotation;
+            transform.Translate(m_offset * setOffset);
+            transform.rotation = m_rotation;
             transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
         }
     }
 
     public void BoostEnded()
     {
-        Rotation = Quaternion.identity;
-        Offset = new Vector3();
+        m_rotation = Quaternion.identity;
+        m_offset = new Vector3();
         fixedUpdate = false;
+        m_BoxCollider.enabled = false;
+        m_MeshRender.enabled = false;
     }
 
     private void OnTriggerEnter(Collider collider)
     {
         Debug.Log("boost collider");
+        Debug.Log(collider.gameObject.tag);
         if (collider.gameObject.tag == "Player")
         {
             Debug.Log("boost collider with player");
-
+            Debug.Log(collider.GetInstanceID());
             if (collider.transform != m_parentTransform)
             {
                 //basically switch to the playerBigHitState;
@@ -102,8 +114,8 @@ public class BoostCollider : MonoBehaviour
                     m_state.GetComponent<StateManager>().ChangeState(m_stats.PlayerBigHitState);
                     m_state.isTarget = false;
 
-                    m_BoxCollider.enabled = true;
-                    m_MeshRender.enabled = true;
+                    m_BoxCollider.enabled = false;
+                    m_MeshRender.enabled =false;
                 }
             }
         }
