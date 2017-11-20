@@ -12,7 +12,7 @@ public class killBox : MonoBehaviour
         l_deaths = 0;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         // When player leaves kill box, call player's knockout funciton
         if (other.gameObject.CompareTag("Player"))

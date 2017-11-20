@@ -193,7 +193,7 @@ public class StickToPlanet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(tag.ToString());
+        //Debug.Log(tag.ToString());
         if (tag == "Player")
         {
             if (other.tag == "Planet")

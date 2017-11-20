@@ -17,7 +17,7 @@ public class Shoot : MonoBehaviour {
     //The accessers to our controller script
     Controls controls;
     Shotgun m_Shotgun;
-    Vector2 aimDir;
+    Vector2 aimDir, moveDir;
     public float m_bulletSpeed;
 
     //Variable used to control how fast bullets can be shot
@@ -30,6 +30,7 @@ public class Shoot : MonoBehaviour {
     public int m_stray;  // Control the variable for the spread, a higher number is greater variance
     float m_randomX;
     float m_randomY;
+    public BoxCollider m_BoostCollider;
 
     // Logging [Jack]
     public int l_bullets; // using l_ to indicate this data is for logging
@@ -63,6 +64,7 @@ public class Shoot : MonoBehaviour {
         }
 
         aimDir = controls.GetAim();
+        moveDir = controls.GetMove();
 	}
 
     public void ShootLaser()
@@ -81,13 +83,23 @@ public class Shoot : MonoBehaviour {
             m_randomX = m_randomX / 100;
 
             // Bullet Spread applied by adding the random values to the aim
-            if (aimDir.sqrMagnitude == 0f) aimDir = transform.up;	// If not aiming, fire straight up
+
+            if (aimDir.sqrMagnitude == 0f) 
+            {
+                if (moveDir.sqrMagnitude == 0f)
+                    aimDir = transform.up;	// If not aiming or moving, fire straight up
+                else
+                    aimDir = moveDir;
+            }
+            
             Vector3 forward = new Vector3(aimDir.x + m_randomX, aimDir.y + m_randomY);
             forward.Normalize();
             //Quaternion rotation = Quaternion.LookRotation(transform.f, aimDir);
 
             //creating the bullet
             Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
+            Physics.IgnoreCollision(
+                clone.GetComponent<Collider>(), GetComponent<Collider>());
 
             //setting the bullets speed
             //forward *= m_bulletSpeed;
@@ -96,9 +108,7 @@ public class Shoot : MonoBehaviour {
             // Initialize the bullet
             clone.GetComponent<Bullet>().Init(
                 forward, m_bulletImpact, m_playerStats);
-            Physics.IgnoreCollision(
-                clone.GetComponent<Collider>(), 
-                GetComponent<Collider>());
+            
 
             clone.GetComponent<MeshRenderer>().material.color = m_playerStats.ColourOfBullet;
 

@@ -45,7 +45,13 @@ public class Shotgun : MonoBehaviour {
 
 		// Get the rotation of the object [Graham]
 		aimDir = controls.GetAim();
-		if (aimDir.sqrMagnitude == 0f) aimDir = transform.up;	// If not aiming, fire straight up
+		if (aimDir.sqrMagnitude == 0f) 
+            {
+                if (controls.GetMove().sqrMagnitude == 0f)
+                    aimDir = transform.up;	// If not aiming or moving, fire straight up
+                else
+                    aimDir = controls.GetMove();
+            }
 
 		Quaternion rotation = Quaternion.LookRotation(transform.forward, aimDir);
 

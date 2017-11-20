@@ -38,7 +38,7 @@ public class BoostCollider : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("Boost fixed update");
+        //Debug.Log("Boost fixed update");
         transform.position = m_parentTransform.position;
         transform.rotation = Quaternion.identity;
         transform.Translate(Offset * setOffset);
