@@ -12,8 +12,6 @@ public class explosionParticles : MonoBehaviour
     public int m_numParticles;
     public bool m_lockZ;
 
-    public bool m_initialized;
-
     // The life of a particle... In variables [Jack]
     public float m_lifeSpanMax;
     public float m_lifeSpanMin;
@@ -57,7 +55,7 @@ public class explosionParticles : MonoBehaviour
 
     void Start()
     {
-        m_initialized = true;
+        
         initParticles();
     }
 
@@ -65,11 +63,9 @@ public class explosionParticles : MonoBehaviour
     void Update()
     {
         particleDeath();
-
-        if (m_initialized) {
-            updateParticle(particleArray, Time.deltaTime);
-            setPosition();
-        }
+        updateParticle(particleArray, Time.deltaTime);
+        setPosition();
+   
     }
 
     void setPosition()
@@ -93,9 +89,6 @@ public class explosionParticles : MonoBehaviour
         updateTargetPos(transform.position.x, transform.position.y, transform.position.z);
         initialize(particleArray, m_numParticles, m_SpawnDistance, m_lockZ, m_DistanceVariance, m_AngleVariance, m_lifeSpanMax, m_lifeSpanMin);
         setPosition();
-
-
-        m_initialized = true;
     }
 
     void particleDeath()
@@ -114,7 +107,6 @@ public class explosionParticles : MonoBehaviour
         if (particleArr.Length == 0)
         {
             Destroy(gameObject, 0);
-            m_initialized = false;
         }
     }
 
