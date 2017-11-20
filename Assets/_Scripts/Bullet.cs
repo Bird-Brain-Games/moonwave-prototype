@@ -3,11 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : Projectile {
-	public Vector3 m_InitialVelocity;
+	public float m_SeekForce;
+	Vector3 m_InitialDir;
+	Vector3 m_seekForceVec;
 
 	void Start()
 	{
 		m_Rigidbody = GetComponent<Rigidbody>();
+	}
+
+	// Update is called once per frame
+	void FixedUpdate () {
+		m_Rigidbody.AddForce(m_seekForceVec.normalized * m_SeekForce);
+		m_seekForceVec = Vector3.zero;
+	}
+
+	void OnTriggerStay(Collider other)
+	{
+		if (other.gameObject.layer == m_PlayerLayer)
+		{
+			if (other.GetComponent<PlayerStats>().m_PlayerID != m_PlayerStats.m_PlayerID)
+			{
+				Vector3 dir = (other.transform.position - transform.position).normalized;
+				m_seekForceVec += dir;
+			}
+		}
 	}
 
 	public void BulletOutOfBounds()

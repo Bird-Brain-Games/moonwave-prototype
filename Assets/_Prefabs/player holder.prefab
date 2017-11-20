@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1010784538799810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.6, y: 28.5, z: 0}
+  m_LocalPosition: {x: 78.1, y: -9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4757026845812456}
@@ -138,7 +138,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1650582250571524}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -429,6 +429,7 @@ MonoBehaviour:
   m_bulletSpeed: 150
   m_bulletDelay: 0.2
   m_stray: 0
+  m_BoostCollider: {fileID: 65848603536495190}
   l_bullets: 0
 --- !u!114 &114707259383679956
 MonoBehaviour:
@@ -458,7 +459,7 @@ MonoBehaviour:
     key: 256
     altKey: 0
   shootShotgun:
-    key: 0
+    key: 512
     altKey: 0
 --- !u!114 &114716325399607942
 MonoBehaviour:
