@@ -13,6 +13,8 @@ public class BoostCollider : MonoBehaviour
     BoxCollider m_BoxCollider;
     MeshRenderer m_MeshRender;
 
+    public bool fixedUpdate { get; set; }
+
     public Vector3 Offset { get; set; }
     public float setOffset;
     public Quaternion Rotation { get; set; }
@@ -21,6 +23,7 @@ public class BoostCollider : MonoBehaviour
 
         m_BoxCollider = GetComponent<BoxCollider>();
         m_MeshRender = GetComponent<MeshRenderer>();
+        fixedUpdate = false;
 
     }
     public void PlayerLink(PlayerStats p_player)
@@ -38,12 +41,22 @@ public class BoostCollider : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("Boost fixed update");
-        transform.position = m_parentTransform.position;
-        transform.rotation = Quaternion.identity;
-        transform.Translate(Offset * setOffset);
-        transform.rotation = Rotation;
-        transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
+        if (fixedUpdate)
+        {
+            Debug.Log("booost collider fixed update");
+            transform.position = m_parentTransform.position;
+            transform.rotation = Quaternion.identity;
+            transform.Translate(Offset * setOffset);
+            transform.rotation = Rotation;
+            transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
+        }
+    }
+
+    public void BoostEnded()
+    {
+        Rotation = Quaternion.identity;
+        Offset = new Vector3();
+        fixedUpdate = false;
     }
 
     private void OnTriggerEnter(Collider collider)

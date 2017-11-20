@@ -140,9 +140,10 @@ public class PlayerBoost : MonoBehaviour
         {
             // set the position of the players boost collider;
             Debug.Log("testing");
+            //should switch this over to a function call instead of using a public getter/setter [cam]
             m_BoostCollider.Offset = (m_Direction);
             m_BoostCollider.Rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f));
-
+            m_BoostCollider.fixedUpdate = true;
 
             m_BoxCollider.enabled = true;
             m_MeshRender.enabled = true;
@@ -163,11 +164,6 @@ public class PlayerBoost : MonoBehaviour
         l_boosts++;
     }
 
-    public void ResetBoostCollider()
-    {
-        m_BoostCollider.transform.position = transform.position;
-        m_BoostCollider.transform.rotation = Quaternion.identity;
-    }
 
     public bool BoostDuration()
     {
@@ -189,6 +185,7 @@ public class PlayerBoost : MonoBehaviour
         m_CooldownDuration = m_PlayerStats.m_boost.Cooldown;
         m_BoxCollider.enabled = false;
         m_MeshRender.enabled = false;
+        m_BoostCollider.BoostEnded();
     }
 
     public void Update()
