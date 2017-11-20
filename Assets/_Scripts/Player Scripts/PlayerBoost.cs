@@ -70,7 +70,8 @@ public class PlayerBoost : MonoBehaviour
         m_PlayerStats.colour = m_Rend.material.color;
         m_startCooldown = false;
         //Get the boost big hit collider [cam]
-        m_BoostCollider = GetComponentInChildren<BoostCollider>();
+        m_BoostCollider = GetComponentInParent<Unique>().GetComponentInChildren<BoostCollider>();
+        m_BoostCollider.PlayerLink(m_PlayerStats);
         m_BoxCollider = m_BoostCollider.GetComponent<BoxCollider>();
         m_MeshRender = m_BoostCollider.GetComponent<MeshRenderer>();
 
@@ -139,12 +140,10 @@ public class PlayerBoost : MonoBehaviour
         {
             // set the position of the players boost collider;
             Debug.Log("testing");
-            m_BoostCollider.transform.position = transform.position;
-            m_BoostCollider.transform.rotation = Quaternion.identity;
-            m_BoostCollider.transform.Translate(m_Direction * 7.0f);
-            Quaternion rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f));
-            m_BoostCollider.transform.rotation = rotation;
-            m_BoostCollider.transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
+            //should switch this over to a function call instead of using a public getter/setter [cam]
+            m_BoostCollider.Offset = (m_Direction);
+            m_BoostCollider.Rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f));
+            m_BoostCollider.fixedUpdate = true;
 
             m_BoxCollider.enabled = true;
             m_MeshRender.enabled = true;
@@ -165,11 +164,6 @@ public class PlayerBoost : MonoBehaviour
         l_boosts++;
     }
 
-    public void ResetBoostCollider()
-    {
-        m_BoostCollider.transform.position = transform.position;
-        m_BoostCollider.transform.rotation = Quaternion.identity;
-    }
 
     public bool BoostDuration()
     {
@@ -191,6 +185,7 @@ public class PlayerBoost : MonoBehaviour
         m_CooldownDuration = m_PlayerStats.m_boost.Cooldown;
         m_BoxCollider.enabled = false;
         m_MeshRender.enabled = false;
+        m_BoostCollider.BoostEnded();
     }
 
     public void Update()
