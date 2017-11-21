@@ -151,7 +151,7 @@ public class Shield : MonoBehaviour
         m_shieldHealth = m_maxShieldHealth;
         m_timeSinceLastHit = 0f;
         GetComponent<MeshRenderer>().enabled = true;
-        m_playerStats.SetShieldState(false);
+        m_playerStats.SetShieldState(true);
         m_currentColor = m_maxColor;
     }
 }

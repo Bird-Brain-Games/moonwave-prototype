@@ -73,11 +73,9 @@ public class BoostCollider : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         Debug.Log("boost collider");
-        Debug.Log(collider.gameObject.tag);
         if (collider.gameObject.tag == "Player")
         {
             Debug.Log("boost collider with player");
-            Debug.Log(collider.GetInstanceID());
             if (collider.transform != m_parentTransform)
             {
                 //basically switch to the playerBigHitState;
@@ -96,7 +94,7 @@ public class BoostCollider : MonoBehaviour
 
                     //calculate the force acting on the hit player
                     var Force = collider.transform.position - m_stats.transform.position;
-                    m_state.Direction = Force;
+                    m_state.Direction = Force;  
                     m_tempState.Direction = -Force;
                     Force.Normalize();
 
@@ -117,6 +115,12 @@ public class BoostCollider : MonoBehaviour
                     m_BoxCollider.enabled = false;
                     m_MeshRender.enabled =false;
                 }
+            }
+            else
+            {
+                Debug.Log("Collision with ourselves");
+                Debug.Log(collider.transform.GetInstanceID());
+                Debug.Log(m_parentTransform.GetInstanceID());
             }
         }
     }

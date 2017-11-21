@@ -193,7 +193,7 @@ public class StickToPlanet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(tag.ToString());
+
         if (tag == "Player")
         {
             if (other.tag == "Planet")
@@ -226,7 +226,6 @@ public class StickToPlanet : MonoBehaviour
         //Debug.Log(m_PlanetsAffecting.Count);
         if (!PlanetInRange())
         {
-            Debug.Log("Drifting");
             m_CurrentPlanet = null;
         }
         else if (OnlyOnePlanetInRange())

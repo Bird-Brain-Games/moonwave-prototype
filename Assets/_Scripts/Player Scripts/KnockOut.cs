@@ -47,7 +47,6 @@ public class KnockOut : MonoBehaviour {
         // Reset m_HitLastBy for respawning [Jack]
         m_PlayerStats.m_HitLastBy = null;
 
-        Debug.Log("KNOCKOUT!!!!1!!!!!");
         ResetPlayer();
 
         // Logging

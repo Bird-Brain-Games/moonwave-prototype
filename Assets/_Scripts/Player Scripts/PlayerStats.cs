@@ -155,7 +155,6 @@ public class PlayerStats : MonoBehaviour {
         //if shield is deactivated return critical multiplier.
         else
         {
-            Debug.Log("Critical hit");
             return m_CriticalMultipier;
         }
     }
