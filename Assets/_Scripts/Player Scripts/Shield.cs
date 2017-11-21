@@ -69,9 +69,10 @@ public class Shield : MonoBehaviour
         }
         if (m_shieldHealth <= 0)
         {
-            // Make an explosion go boom //////////////////////////////////////////////////////////////////////////////////////////
             if (GetComponent<MeshRenderer>().enabled)
             {
+                // SFX
+                FindObjectOfType<AudioManager>().Play("Shield Shatter");
                 Instantiate(m_Explosion, transform);
             }
            

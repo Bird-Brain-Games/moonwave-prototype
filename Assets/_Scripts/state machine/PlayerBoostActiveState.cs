@@ -22,7 +22,7 @@ public class PlayerBoostActiveState : State
     override public void StateEnter()
     {
         //setup variables.
-        m_Boost.EntryBoost();
+        //m_Boost.EntryBoost();
     }
 
     public override void StateExit()

@@ -76,6 +76,7 @@ public class PlayerBoost : MonoBehaviour
     //This is called when we enter the charge boost state.
     public void EntryBoost()
     {
+        FindObjectOfType<AudioManager>().Play("Charge");
         m_BoostForce = m_PlayerStats.m_boost.BaseForce;
         m_BoostDuration = m_PlayerStats.m_boost.BaseDuration;
         m_TimeCharging = 0f;
@@ -83,8 +84,8 @@ public class PlayerBoost : MonoBehaviour
 
     public void ChargeBoost()
     {
+        
         //This unreadable mess is what allows our boost to charge
-
         m_TimeCharging += Time.deltaTime;
 
         //This increases the force of the boost
@@ -109,12 +110,14 @@ public class PlayerBoost : MonoBehaviour
         l_Inertia.Normalize();
         l_Inertia = l_Inertia *= m_inertiaForce;
         m_RigidBody.AddForce(l_Inertia, ForceMode.Impulse);
-
-
     }
 
     public void FireBoost()
     {
+        // SFX
+        FindObjectOfType<AudioManager>().Stop("Charge");
+        FindObjectOfType<AudioManager>().Play("Boost");
+
         //set boost direction
         m_move = m_controls.GetMove();
         if (m_move.x == 0 && m_move.y == 0)

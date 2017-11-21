@@ -7,6 +7,9 @@ public class Bullet : Projectile {
 
 	void Start()
 	{
+		// SFX
+		FindObjectOfType<AudioManager>().Play("Pew");
+		
 		m_Rigidbody = GetComponent<Rigidbody>();
         
     }

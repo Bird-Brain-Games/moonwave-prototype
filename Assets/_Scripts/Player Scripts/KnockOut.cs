@@ -21,9 +21,12 @@ public class KnockOut : MonoBehaviour {
         l_deaths = 0;
     }
 	
-	// Update is called once per frame
+
 	public void PlayerKnockedOut ()
     {
+        // SFX
+        FindObjectOfType<AudioManager>().Play("Death");
+        
         // The player who hit them out gets 2 points [Jack]
         if (m_PlayerStats.m_HitLastBy != null)
         {

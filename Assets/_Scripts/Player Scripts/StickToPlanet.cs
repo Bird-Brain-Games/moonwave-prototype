@@ -275,6 +275,9 @@ public class StickToPlanet : MonoBehaviour
 
         else if (collision.gameObject.CompareTag("Hazard"))
         {
+            // SFX
+            FindObjectOfType<AudioManager>().Play("Lava Death");
+            
             GetComponent<KnockOut>().PlayerKnockedOut();
         }
     }
