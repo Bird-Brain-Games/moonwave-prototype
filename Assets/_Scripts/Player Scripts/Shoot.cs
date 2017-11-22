@@ -87,7 +87,9 @@ public class Shoot : MonoBehaviour {
             //Quaternion rotation = Quaternion.LookRotation(transform.f, aimDir);
 
             //creating the bullet
-            Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
+            Quaternion rotation = Quaternion.LookRotation(transform.forward, forward);
+            Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), rotation);
+            clone.transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
 
             //setting the bullets speed
             //forward *= m_bulletSpeed;
