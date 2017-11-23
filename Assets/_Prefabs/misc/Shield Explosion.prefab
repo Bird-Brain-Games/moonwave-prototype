@@ -57,7 +57,6 @@ MonoBehaviour:
   m_AngleVariance: 0.1
   m_numParticles: 50
   m_lockZ: 1
-  m_initialized: 0
   m_lifeSpanMax: 0.2
   m_lifeSpanMin: 0.1
   m_SpawnableObject: {fileID: 1446921683111280, guid: 0b34b1cce2304e1458e40ce7f3ed46c3,
