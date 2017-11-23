@@ -22,6 +22,7 @@ public class PlayerStats : MonoBehaviour {
         //The time it takes for a boost to be ready agian.
         public float Cooldown;
         public float timeToMaxCharge;
+        public float boostCriticalHit;
     }
 
     [System.Serializable]

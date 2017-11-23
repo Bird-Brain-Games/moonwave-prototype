@@ -69,7 +69,7 @@ public class PlayerStateManager : MonoBehaviour {
 			}
 
 			// Cause the stunned player to be affected by gravity[Graham]
-			m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
+			//m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
 		}
 	}
 

@@ -56,7 +56,8 @@ public class PLayerBigHitState : State
         {
             //apply big knockback
             Debug.Log("Hit target");
-            m_rigidBody.AddForce(Force);
+            m_rigidBody.AddForce(Force, ForceMode.Impulse);
+            m_playerStats.stunTrigger = true;
         }
         isTarget = true;
         //GetComponent<PlayerBoost>().ResetBoostCollider();

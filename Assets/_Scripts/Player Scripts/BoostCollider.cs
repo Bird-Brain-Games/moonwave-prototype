@@ -101,8 +101,7 @@ public class BoostCollider : MonoBehaviour
                     //Adds the force to the player we collided with
                     Force = (Force
                         * m_stats.m_boost.MaxForce
-                        * m_stats.GetCriticalMultiplier()
-                        * 50);
+                        * m_stats.m_boost.boostCriticalHit);
 
                     collider.GetComponent<StateManager>().ChangeState(m_stats.PlayerBigHitState);
 

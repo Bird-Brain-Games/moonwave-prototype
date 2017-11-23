@@ -491,7 +491,7 @@ MonoBehaviour:
     shotgunForce: 50
     shotgunDistance: 20
     shotgunRadius: 15
-    shotgunCriticalMultiplier: 20
+    shotgunCriticalMultiplier: 12.5
     shotgunDamage: 5
   m_boost:
     BaseForce: 400
@@ -502,6 +502,7 @@ MonoBehaviour:
     MaxDuration: 1.5
     Cooldown: 0.2
     timeToMaxCharge: 0.4
+    boostCriticalHit: 2
 --- !u!114 &114797571519523060
 MonoBehaviour:
   m_ObjectHideFlags: 1
