@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Shotgun
-    clip: {fileID: 8300000, guid: 306c480fbeca4be409b6d9b25a94a59b, type: 3}
+    clip: {fileID: 8300000, guid: e2d4b0e31eceb4b40ab2e2b14b19cc04, type: 3}
     volume: 0.622
     pitch: 1
     loop: 0
@@ -65,43 +65,79 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: Boost
-    clip: {fileID: 8300000, guid: 4edab736dc492044d9af3bf936a90ed7, type: 3}
+    clip: {fileID: 8300000, guid: 7d0d5bf4544377a459fc983f5c65de62, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
-    clip: {fileID: 8300000, guid: 870ef983468d6d24694dd9197e626477, type: 3}
+    clip: {fileID: 8300000, guid: cbcdd7960d5433a4fb84801c36315147, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Pew
-    clip: {fileID: 8300000, guid: 44bd679eeac61e341bda7fff96974c61, type: 3}
+    clip: {fileID: 8300000, guid: 0e7cfee6d34cea14aaa5446bc0a4dc8f, type: 3}
     volume: 0.662
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Death
-    clip: {fileID: 8300000, guid: 870ef983468d6d24694dd9197e626477, type: 3}
+  - name: Death2
+    clip: {fileID: 8300000, guid: 3e85b0188e4f269409450217c853822e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Shield Shatter
-    clip: {fileID: 8300000, guid: 5dd5e8bc7d0099f4eada332691669420, type: 3}
+    clip: {fileID: 8300000, guid: cd829aa517978e94e91c80ef3c55feb2, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Lava Death
-    clip: {fileID: 8300000, guid: 5dd5e8bc7d0099f4eada332691669420, type: 3}
+    clip: {fileID: 8300000, guid: 02d76f0918619c54ea2c27432344f6ad, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Charge
     clip: {fileID: 8300000, guid: c4525ec3596b7b043a111abf73820c00, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Pew2
+    clip: {fileID: 8300000, guid: ed3562cee5961894aa86b18e05747322, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Pew3
+    clip: {fileID: 8300000, guid: 0e7cfee6d34cea14aaa5446bc0a4dc8f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Pew4
+    clip: {fileID: 8300000, guid: 4c2a906e7c1b1dd41a324ab927f81ea3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Death3
+    clip: {fileID: 8300000, guid: cbcdd7960d5433a4fb84801c36315147, type: 3}
+    volume: 0.469
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Death4
+    clip: {fileID: 8300000, guid: 3e85b0188e4f269409450217c853822e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Crit
+    clip: {fileID: 8300000, guid: 6a2229d0223c1eb4ba1e581c65dd7d30, type: 3}
     volume: 1
     pitch: 1
     loop: 0

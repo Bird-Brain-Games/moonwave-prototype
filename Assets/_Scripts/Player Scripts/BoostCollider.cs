@@ -88,6 +88,8 @@ public class BoostCollider : MonoBehaviour
                     Debug.Log("boost collider without shield");
 
 
+                    // SFX
+                    FindObjectOfType<AudioManager>().Play("Crit");
 
                     //get the colliders BigHitState
                     m_tempState = collider.transform.GetComponentInParent<PLayerBigHitState>();

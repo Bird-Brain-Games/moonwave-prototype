@@ -36,8 +36,8 @@ public class Shoot : MonoBehaviour {
 
     PlayerStats m_playerStats;
 
-#endregion
-
+    #endregion
+    
     void Start () {
         controls = GetComponent<Controls>();
         m_playerStats = gameObject.GetComponent<PlayerStats>();
@@ -70,6 +70,13 @@ public class Shoot : MonoBehaviour {
         // If the timer allows us to shoot again
         if (m_shootTimer)
         {
+
+            // SFX
+            if (m_playerStats.m_PlayerID == 1) { FindObjectOfType<AudioManager>().Play("Pew"); }
+            else if (m_playerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Pew2"); }
+            else if (m_playerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Pew3"); }
+            else { FindObjectOfType<AudioManager>().Play("Pew4"); }
+
             m_shootTimer = false;
             m_timer = Time.time;
             m_startTime = Time.time;
@@ -112,5 +119,7 @@ public class Shoot : MonoBehaviour {
     public void ShootShotgun()
     {
         m_Shotgun.Shoot();
+        // SFX
+        FindObjectOfType<AudioManager>().Play("Shotgun");
     }
 }

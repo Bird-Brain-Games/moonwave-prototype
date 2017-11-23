@@ -24,9 +24,13 @@ public class KnockOut : MonoBehaviour {
 
 	public void PlayerKnockedOut ()
     {
+
         // SFX
-        FindObjectOfType<AudioManager>().Play("Death");
-        
+        if (m_PlayerStats.m_PlayerID == 1) { FindObjectOfType<AudioManager>().Play("Death"); }
+        else if (m_PlayerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Death2"); }
+        else if (m_PlayerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Death3"); }
+        else { FindObjectOfType<AudioManager>().Play("Death4"); }
+
         // The player who hit them out gets 2 points [Jack]
         if (m_PlayerStats.m_HitLastBy != null)
         {

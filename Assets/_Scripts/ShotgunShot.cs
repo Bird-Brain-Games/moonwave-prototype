@@ -13,8 +13,7 @@ public class ShotgunShot : Projectile {
 	// Use this for initialization
 	void Start()
 	{
-		// SFX
-		FindObjectOfType<AudioManager>().Play("Shotgun");
+
 		
 		m_Duration = m_PlayerStats.m_Shoot.shotgunDuration;
 		m_CurrentDuration = m_Duration;
