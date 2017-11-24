@@ -159,7 +159,11 @@ public class PlayerBoost : MonoBehaviour
 
     public bool BoostDuration()
     {
-
+        if (m_controls.GetBoost(BUTTON_DETECTION.GET_BUTTON_DOWN))
+        {
+            m_RigidBody.velocity = Vector3.zero;
+            return false;
+        }
         if (m_BoostDuration > 0) //&& m_PlayerStats.GetBoostState() == true)
         {
             m_BoostDuration -= Time.deltaTime;

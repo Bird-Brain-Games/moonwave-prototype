@@ -500,7 +500,7 @@ MonoBehaviour:
     BaseDuration: 0.25
     AddedDurationPerSecond: 0.3
     MaxDuration: 1.5
-    Cooldown: 0.2
+    Cooldown: 0
     timeToMaxCharge: 0.4
     boostCriticalHit: 2
 --- !u!114 &114797571519523060
