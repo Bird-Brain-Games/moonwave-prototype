@@ -9,6 +9,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
     Vector2 m_move;
     public int m_MovementType = 1;
     float dotProduct;
+    public float friction;
 
     Vector3 m_JoyStick;
     Vector3 m_PlanetToPlayer;
@@ -59,17 +60,22 @@ public class PlayerMoveOnPlanet : MonoBehaviour
 
                     //Debug.Log("Move counter clockwise");
                     m_RigidBody.velocity = transform.right * m_PlayerStats.walkMoveForce * 1.0f;
+                    if (transform.localScale.x == 1f)
+                        transform.localScale = new Vector3(-1f, 1f, 1f);
                 }
                 else
                 {
                     //Debug.Log("Move clockwise");
                     m_RigidBody.velocity = transform.right * m_PlayerStats.walkMoveForce * -1.0f;
+                    if (transform.localScale.x == -1f)
+                        transform.localScale = new Vector3(1f, 1f, 1f);
                 }
             }
             else
             {
-                m_RigidBody.velocity += -m_RigidBody.velocity * 0.2f;
-                if (m_RigidBody.velocity.magnitude < 0.1f)
+                // Apply friction
+                m_RigidBody.velocity += -m_RigidBody.velocity * friction;
+                if (m_RigidBody.velocity.magnitude < 50f)
                 {
                     m_RigidBody.velocity.Set(0, 0, 0);
                 }
@@ -79,7 +85,7 @@ public class PlayerMoveOnPlanet : MonoBehaviour
         //IF the player isnt moving apply friction
         else if (m_move.x == 0.0f && m_RigidBody.velocity != Vector3.zero)
         {
-            m_RigidBody.velocity += -m_RigidBody.velocity * 0.2f;
+            m_RigidBody.velocity += -m_RigidBody.velocity * friction;
             if (m_RigidBody.velocity.magnitude < 0.1f)
             {
                 m_RigidBody.velocity.Set(0, 0, 0);

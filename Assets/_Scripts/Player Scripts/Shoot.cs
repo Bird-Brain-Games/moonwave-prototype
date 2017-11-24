@@ -20,7 +20,7 @@ public class Shoot : MonoBehaviour {
     //The accessers to our controller script
     Controls controls;
     Shotgun m_Shotgun;
-    Vector2 aimDir;
+    Vector2 aimDir, moveDir;
     public float m_bulletSpeed;
 
     //Variable used to control how fast bullets can be shot
@@ -67,6 +67,7 @@ public class Shoot : MonoBehaviour {
         }
 
         aimDir = controls.GetAim();
+        moveDir = controls.GetMove();
 	}
 
     public void ShootLaser()
@@ -92,7 +93,13 @@ public class Shoot : MonoBehaviour {
             m_randomX = m_randomX / 100;
 
             // Bullet Spread applied by adding the random values to the aim
-            if (aimDir.sqrMagnitude == 0f) aimDir = transform.up;	// If not aiming, fire straight up
+            if (aimDir.sqrMagnitude == 0f) 
+            {
+                if (moveDir.sqrMagnitude == 0f)
+                    aimDir = transform.up;	// If not aiming or moving, fire straight up
+                else
+                    aimDir = moveDir;
+            }
             Vector3 forward = new Vector3(aimDir.x + m_randomX, aimDir.y + m_randomY);
             forward.Normalize();
             //Quaternion rotation = Quaternion.LookRotation(transform.f, aimDir);

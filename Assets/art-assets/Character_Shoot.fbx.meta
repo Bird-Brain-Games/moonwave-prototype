@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 21c8342d4356294458792408dfd9e21b
-timeCreated: 1511473647
+guid: 91cf64718d3ff2c418a716e1a34eb25f
+timeCreated: 1511559206
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -74,10 +74,6 @@ ModelImporter:
     7400000: Character|CharacterAction Shoot
     7400002: Character|GunAction Shoot
     7400004: Gun|GunAction Shoot
-    7400006: Gun|GunAction
-    7400008: Character|GunAction (1)
-    7400010: Gun|GunAction
-    7400012: Gun|GunAction (1)
     9500000: //RootNode
     13700000: Alien
     13700002: Gun.001
@@ -86,12 +82,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Default
-    second: {fileID: 2100000, guid: cffb83ce9b6dccc46a5a74533d8de3ba, type: 2}
+    second: {fileID: 2100000, guid: 07508dd3d53dec9438a0f0ec342be4b5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: None
-    second: {fileID: 2100000, guid: 0462156643aa16444b71d7960662a165, type: 2}
+    second: {fileID: 2100000, guid: c2c1507d1e166da45a8da23e4b734b62, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -119,8 +115,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Gun|GunAction Shoot
-      takeName: Gun|GunAction
+      name: Character|CharacterAction Shoot
+      takeName: Character|CharacterAction
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0
@@ -129,8 +125,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -175,8 +171,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Character|CharacterAction Shoot
-      takeName: Character|CharacterAction
+      name: Gun|GunAction Shoot
+      takeName: Gun|GunAction
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0
@@ -241,7 +237,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: Bone
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
