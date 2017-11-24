@@ -130,6 +130,7 @@ public class PlayerStats : MonoBehaviour {
             colour = temp.colour;
             GetComponent<MeshRenderer>().material.color = colour;
             m_PlayerID = temp.playerID;
+            GetComponentInParent<Unique>().GetComponentInChildren<BoostCollider>().setColour(colour);
         }
         
     }

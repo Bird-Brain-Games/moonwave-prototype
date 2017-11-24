@@ -12,17 +12,19 @@ public class BoostCollider : MonoBehaviour
     Transform m_parentTransform;
     BoxCollider m_BoxCollider;
     MeshRenderer m_MeshRender;
+    Renderer m_Rend;
 
     private bool fixedUpdate;
     private Vector3 m_offset;
     private Quaternion m_rotation;
     public float setOffset;
 
-    void Start()
+    void Awake()
     {
 
         m_BoxCollider = GetComponent<BoxCollider>();
         m_MeshRender = GetComponent<MeshRenderer>();
+        m_Rend = GetComponent<Renderer>();
         fixedUpdate = false;
     }
     public void PlayerLink(PlayerStats p_player)
@@ -30,8 +32,13 @@ public class BoostCollider : MonoBehaviour
         m_stats = p_player;
         m_state = p_player.GetComponent<PLayerBigHitState>();
         m_parentTransform = p_player.GetComponent<Transform>();
+
     }
 
+    public void setColour(Color colour)
+    {
+        m_Rend.material.color = colour;
+    }
     // Update is called once per frame
     void Update()
     {
