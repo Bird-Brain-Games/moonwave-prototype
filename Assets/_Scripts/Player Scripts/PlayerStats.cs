@@ -128,7 +128,7 @@ public class PlayerStats : MonoBehaviour {
             Debug.Log("Setting Colour");
             ColourOfBullet = temp.colour;
             colour = temp.colour;
-            GetComponent<MeshRenderer>().material.color = colour;
+            GetComponentInChildren<SkinnedMeshRenderer>().material.color = colour;
             m_PlayerID = temp.playerID;
             GetComponentInParent<Unique>().GetComponentInChildren<BoostCollider>().setColour(colour);
         }

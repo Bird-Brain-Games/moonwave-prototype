@@ -6,6 +6,7 @@ public class PlayerOnPlanetState : State {
 
 	Vector3 m_Direction;
 
+	Animator m_Animator;
 	Rigidbody m_RigidBody;
 	PlayerStats m_PlayerStats;
 	Controls m_Controls;
@@ -21,6 +22,12 @@ public class PlayerOnPlanetState : State {
 		m_Shoot = GetComponent<Shoot>();
 		m_Gravity = GetComponent<StickToPlanet>();
 		m_Move = GetComponent<PlayerMoveOnPlanet>();
+		m_Animator = GetComponentInChildren<Animator>();
+	}
+
+	override public void StateEnter()
+	{
+		m_Animator.SetBool("OnPlanet", true);
 	}
 
 	override public void StateUpdate()
@@ -61,5 +68,20 @@ public class PlayerOnPlanetState : State {
 			ChangeState(m_PlayerStats.PlayerDriftStateString);
 			Debug.Log("No ground found in On Planet State");
 		}
+
+		// Check if boosting
+		if (m_Controls.GetBoost(BUTTON_DETECTION.GET_BUTTON) && m_PlayerStats.CanBoost == true)
+		{
+			// Change the state to the "Boost Charge" state
+			ChangeState(m_PlayerStats.PlayerBoostChargeString);
+		}
+
+		m_Animator.SetFloat("WalkSpeed", m_Direction.sqrMagnitude > 0.0f ? 2 : 0);		// TEMP, to be changed
+	}
+
+	override public void StateExit()
+	{
+		m_Animator.SetBool("OnPlanet", false);
+		m_Animator.SetFloat("WalkSpeed", 0f);
 	}
 }
