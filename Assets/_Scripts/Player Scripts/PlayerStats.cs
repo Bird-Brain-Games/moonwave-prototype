@@ -22,6 +22,7 @@ public class PlayerStats : MonoBehaviour {
         //The time it takes for a boost to be ready agian.
         public float Cooldown;
         public float timeToMaxCharge;
+        public float boostCriticalHit;
     }
 
     [System.Serializable]
@@ -49,12 +50,15 @@ public class PlayerStats : MonoBehaviour {
     public string PlayerBoostChargeString { get; set; }
     public string PlayerBoostActiveString { get; set; }
     public string PlayerBigHitState {get; set;}
-#endregion
+    public string PlayerRespawnState { get; set; }
+    #endregion
 
+    public float m_respawnTime;
     public Color colourdull;
     public Color colour;
     //A colour for our bullets [cam]
     public Color ColourOfBullet { get; set; }
+    public bool Invincible { get; set; }
 
     // Score Calculations
     public int m_PlayerID;
@@ -70,6 +74,7 @@ public class PlayerStats : MonoBehaviour {
 
     // Drift based variables
     public float driftMoveForce;
+    public float maxDriftMoveForce;
     public float walkMoveForce;
 
     // Jump based variables
@@ -77,7 +82,13 @@ public class PlayerStats : MonoBehaviour {
     public float maxJumpTime;
     public float fallGravMultiplier;
 
-	public float maxStunTime;
+    //these are used to set stunTimer;
+	public float maxShotgunStunTime;
+    public float maxBoostStunTime;
+
+    //This is what is fetched by stun timer.
+    public float StunTimer { get; set; }
+
     public Shoot m_Shoot;
     public Boost m_boost;
 
@@ -96,7 +107,7 @@ public class PlayerStats : MonoBehaviour {
         CanBoost = true;
         l_killedBy = new int[4];
         stunTrigger = false;
-
+        Invincible = false;
         // Making them small strings, easier to compare (probably change to ints) [Graham]
         PlayerOnPlanetStateString = "onPlanet";
         PlayerDriftStateString = "drift";
@@ -104,6 +115,7 @@ public class PlayerStats : MonoBehaviour {
         PlayerBoostChargeString = "boostCharge";
         PlayerJumpStateString = "jump";
         PlayerBigHitState = "bigHit";
+        PlayerRespawnState = "respawnState";
 
         //Request a colour from our bullet colours [cam]
         Debug.Log("Player Made");
@@ -118,6 +130,7 @@ public class PlayerStats : MonoBehaviour {
             colour = temp.colour;
             GetComponent<MeshRenderer>().material.color = colour;
             m_PlayerID = temp.playerID;
+            GetComponentInParent<Unique>().GetComponentInChildren<BoostCollider>().setColour(colour);
         }
         
     }

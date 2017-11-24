@@ -13,8 +13,7 @@ public class ShotgunShot : Projectile {
 	// Use this for initialization
 	void Start()
 	{
-		// SFX
-		FindObjectOfType<AudioManager>().Play("Shotgun");
+
 		
 		m_Duration = m_PlayerStats.m_Shoot.shotgunDuration;
 		m_CurrentDuration = m_Duration;
@@ -42,7 +41,10 @@ public class ShotgunShot : Projectile {
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
-            collideWithPlayer(other);
+            if (other.transform.GetComponent<PlayerStats>().Invincible == false)
+            {
+                collideWithPlayer(other);
+            }
 		}
 	}
 

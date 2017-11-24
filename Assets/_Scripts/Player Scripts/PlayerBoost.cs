@@ -5,9 +5,12 @@ using UnityEngine;
 //Primary coder campbell.
 public class PlayerBoost : MonoBehaviour
 {
-   
+
 
     #region Variables
+
+    //How much velocity we retain upon canceling boost.
+    public float m_cancelRetention;
 
     //The amount of force a players action causes
 
@@ -33,7 +36,7 @@ public class PlayerBoost : MonoBehaviour
 
     //advancded direction variable
     Vector3 m_Direction;
-
+    Vector3 m_DirectionSelected;
 
 
     // Logging  l_ is used to indicate a variable is for logging
@@ -85,7 +88,7 @@ public class PlayerBoost : MonoBehaviour
     public void ChargeBoost()
     {
         
-        //This unreadable mess is what allows our boost to charge
+        //charge time update update [cam]
         m_TimeCharging += Time.deltaTime;
 
         //This increases the force of the boost
@@ -99,11 +102,36 @@ public class PlayerBoost : MonoBehaviour
             m_BoostForce = m_PlayerStats.m_boost.MaxForce;
         }
 
+
+
         //This increases the duration of the boost
         if (m_BoostDuration <= m_PlayerStats.m_boost.MaxDuration)
             m_BoostDuration += m_PlayerStats.m_boost.AddedDurationPerSecond * Time.deltaTime;
         else
             m_BoostDuration = m_PlayerStats.m_boost.MaxDuration;
+
+
+        m_move = m_controls.GetMove();
+        if (m_move.x == 0 && m_move.y == 0)
+        {
+            Debug.Log(m_DirectionSelected);
+            m_Direction = m_DirectionSelected;
+        }
+        else
+        {
+            m_Direction = new Vector3(m_move.x, m_move.y, 0.0f);
+            m_Direction.Normalize();
+            m_DirectionSelected = m_Direction;
+        }
+
+        transform.rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_Direction.x, m_Direction.y, 0.0f));
+        //transform.Rotate(new Vector3(0, 0, 270));
+
+        if (m_TimeCharging >= m_PlayerStats.m_boost.timeToMaxCharge)
+        {
+            // set the position of the players boost collider;
+            m_BoostCollider.setCollider(m_Direction, Quaternion.LookRotation(transform.forward, new Vector3(m_Direction.x, m_Direction.y, 0.0f)), false);
+        }
 
         //Setup Inertia canceling.
         Vector3 l_Inertia = (-1 * m_RigidBody.velocity);
@@ -150,7 +178,6 @@ public class PlayerBoost : MonoBehaviour
 
         //Debug.Log("Boost fired!");
 
-        m_Rend.material.color = m_PlayerStats.colourdull;
 
         //Log Boosts
         l_boosts++;
@@ -159,7 +186,12 @@ public class PlayerBoost : MonoBehaviour
 
     public bool BoostDuration()
     {
-
+        if (m_controls.GetBoost(BUTTON_DETECTION.GET_BUTTON_DOWN))
+        {
+            m_RigidBody.velocity = m_RigidBody.velocity.normalized * 15;
+            m_BoostCollider.BoostEnded();
+            return false;
+        }
         if (m_BoostDuration > 0) //&& m_PlayerStats.GetBoostState() == true)
         {
             m_BoostDuration -= Time.deltaTime;
@@ -173,7 +205,6 @@ public class PlayerBoost : MonoBehaviour
     public void BoostDurationEnd()
     {
         m_startCooldown = true;
-        m_Rend.material.color = m_PlayerStats.colour;
         m_CooldownDuration = m_PlayerStats.m_boost.Cooldown;
         m_BoostCollider.BoostEnded();
     }

@@ -2,98 +2,108 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateManager : MonoBehaviour {
+public class PlayerStateManager : MonoBehaviour
+{
 
-	StateManager movementStates;
-	PlayerStats playerStats;
-	StickToPlanet m_Gravity;
+    StateManager movementStates;
+    PlayerStats playerStats;
+    StickToPlanet m_Gravity;
     Rigidbody m_RigidBody;
 
-	float stunTimer;
-	bool isCountingDown;
+    float stunTimer;
+    bool isCountingDown;
 
-#region movementStates
+    #region movementStates
     PlayerDriftState driftState;
-	PlayerJumpState jumpState;
+    PlayerJumpState jumpState;
     PlayerOnPlanetState onPlanetState;
     PlayerBoostChargeState boostChargeState;
     PlayerBoostActiveState boostActiveState;
     PLayerBigHitState bigHitState;
-#endregion
+    RespawnState respawnState;
+    #endregion
 
-	void Awake()
-	{
-		movementStates = gameObject.AddComponent<StateManager>();
-		driftState = gameObject.AddComponent<PlayerDriftState>();
-		jumpState = gameObject.AddComponent<PlayerJumpState>();
+    void Awake()
+    {
+        movementStates = gameObject.AddComponent<StateManager>();
+        driftState = gameObject.AddComponent<PlayerDriftState>();
+        jumpState = gameObject.AddComponent<PlayerJumpState>();
         onPlanetState = gameObject.AddComponent<PlayerOnPlanetState>();
         boostChargeState = gameObject.AddComponent<PlayerBoostChargeState>();
         boostActiveState = gameObject.AddComponent<PlayerBoostActiveState>();
         bigHitState = gameObject.AddComponent<PLayerBigHitState>();
-
+        respawnState = gameObject.AddComponent<RespawnState>();
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         playerStats = GetComponent<PlayerStats>();
-		m_Gravity = GetComponent<StickToPlanet>();
+        m_Gravity = GetComponent<StickToPlanet>();
         m_RigidBody = GetComponent<Rigidbody>();
-		
+
         movementStates.AttachDefaultState(playerStats.PlayerDriftStateString, driftState);
-		movementStates.AttachDefaultState(playerStats.PlayerJumpStateString, jumpState);
+        movementStates.AttachDefaultState(playerStats.PlayerJumpStateString, jumpState);
         movementStates.AttachState(playerStats.PlayerOnPlanetStateString, onPlanetState);
         movementStates.AttachState(playerStats.PlayerBoostActiveString, boostActiveState);
         movementStates.AttachState(playerStats.PlayerBoostChargeString, boostChargeState);
         movementStates.AttachState(playerStats.PlayerBigHitState, bigHitState);
+        movementStates.AttachState(playerStats.PlayerRespawnState, respawnState);
 
-		stunTimer = 3f;
-		movementStates.enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		// If the trigger is sent to stun the player
-		if (playerStats.stunTrigger)
-		{
-			StunPlayer();
-		}
+        stunTimer = 3f;
+        movementStates.enabled = false;
+    }
 
-		// If the player is stunned
-		if (stunTimer > 0f)
-		{
-			// Update the stun timer [Graham]
-			stunTimer -= Time.deltaTime;
-			if (stunTimer <= 0f)
-			{
-				UnStunPlayer();
-			}
+    // Update is called once per frame
+    void Update()
+    {
+        // If the trigger is sent to stun the player
+        if (playerStats.stunTrigger)
+        {
+            StunPlayer();
+        }
 
-			// Cause the stunned player to be affected by gravity[Graham]
-			m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
-		}
-	}
+        // If the player is stunned
+        if (stunTimer > 0f)
+        {
+            // Update the stun timer [Graham]
+            stunTimer -= Time.deltaTime;
+            if (stunTimer <= 0f)
+            {
+                UnStunPlayer();
+            }
 
-	public void ResetPlayer()
-	{
-		UnStunPlayer();
-		GetComponentInChildren<Shield>().ResetShield();		// TEMP [Graham]
-	}
+            // Cause the stunned player to be affected by gravity[Graham]
+            //m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
+        }
+    }
 
-	void StunPlayer()
-	{
-		playerStats.stunTrigger = false;
-		stunTimer = playerStats.maxStunTime;
-		movementStates.enabled = false;
-		GetComponent<Collider>().material.bounciness = 1.0f;
-		GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Maximum;
-	}
+    public void ResetPlayer()
+    {
+        UnStunPlayer();
+        movementStates.ChangeState(playerStats.PlayerRespawnState);
+    }
 
-	void UnStunPlayer()
-	{
-		movementStates.enabled = true;
-		movementStates.ResetToDefaultState();
-		stunTimer = 0f;
-		GetComponent<Collider>().material.bounciness = 0.0f;
-		GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Average;
-	}
+    void StunPlayer()
+    {
+        playerStats.stunTrigger = false;
+        stunTimer = playerStats.StunTimer;
+        movementStates.enabled = false;
+        GetComponent<Collider>().material.bounciness = 1.0f;
+        GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Maximum;
+    }
+
+    void UnStunPlayer()
+    {
+        movementStates.enabled = true;
+        movementStates.ResetToDefaultState();
+        stunTimer = 0f;
+        GetComponent<Collider>().material.bounciness = 0.0f;
+        GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Average;
+    }
+
+    public void ChangeState(string a_State)
+    {
+        movementStates.ChangeState(a_State);
+    }
 }

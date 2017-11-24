@@ -9,9 +9,9 @@ public enum COLOURS
     red,
     blue,
     green,
-    dark_purple,
     purple,
-    gray
+    gray,
+    dark_purple
 }
 
 public struct ColourData
@@ -46,7 +46,7 @@ public class bulletColour : MonoBehaviour
 
     void AddColours()
     {
-        colours.Add(COLOURS.red, new Color(190.0f/255.0f, 98 / 255.0f, 85 / 255.0f));
+        colours.Add(COLOURS.red, new Color(250.0f / 255.0f, 79 / 255.0f, 32 / 255.0f));
 
         counter++;
         colours.Add(COLOURS.blue, new Color(79 / 255.0f, 187 / 255.0f, 255 / 255.0f));
@@ -54,8 +54,6 @@ public class bulletColour : MonoBehaviour
         counter++;
         colours.Add(COLOURS.green, new Color(26 / 255.0f, 156 / 255.0f, 41 / 255.0f));
 
-        counter++;
-        colours.Add(COLOURS.dark_purple, new Color(25 / 255.0f, 8 / 255.0f, 108 / 255.0f));
 
         counter++;
         colours.Add(COLOURS.purple, new Color(165 / 255.0f, 36 / 255.0f, 197 / 255.0f));
@@ -63,6 +61,8 @@ public class bulletColour : MonoBehaviour
         counter++;
         colours.Add(COLOURS.gray, new Color(115 / 255.0f, 117 / 255.0f, 128 / 255.0f));
 
+        counter++;
+        colours.Add(COLOURS.dark_purple, new Color(25 / 255.0f, 8 / 255.0f, 108 / 255.0f));
     }
 
     //Returns the colour data and whether it is free or not.

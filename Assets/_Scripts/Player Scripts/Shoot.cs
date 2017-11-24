@@ -36,8 +36,8 @@ public class Shoot : MonoBehaviour {
 
     PlayerStats m_playerStats;
 
-#endregion
-
+    #endregion
+    
     void Start () {
         controls = GetComponent<Controls>();
         m_playerStats = gameObject.GetComponent<PlayerStats>();
@@ -70,6 +70,13 @@ public class Shoot : MonoBehaviour {
         // If the timer allows us to shoot again
         if (m_shootTimer)
         {
+
+            // SFX
+            if (m_playerStats.m_PlayerID == 1) { FindObjectOfType<AudioManager>().Play("Pew"); }
+            else if (m_playerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Pew2"); }
+            else if (m_playerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Pew3"); }
+            else { FindObjectOfType<AudioManager>().Play("Pew4"); }
+
             m_shootTimer = false;
             m_timer = Time.time;
             m_startTime = Time.time;
@@ -87,7 +94,9 @@ public class Shoot : MonoBehaviour {
             //Quaternion rotation = Quaternion.LookRotation(transform.f, aimDir);
 
             //creating the bullet
-            Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), Quaternion.identity);
+            Quaternion rotation = Quaternion.LookRotation(transform.forward, forward);
+            Rigidbody clone = Instantiate(bullet, transform.position + (forward*2.5f), rotation);
+            clone.transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f));
 
             //setting the bullets speed
             //forward *= m_bulletSpeed;
@@ -110,5 +119,7 @@ public class Shoot : MonoBehaviour {
     public void ShootShotgun()
     {
         m_Shotgun.Shoot();
+        // SFX
+        FindObjectOfType<AudioManager>().Play("Shotgun");
     }
 }

@@ -31,6 +31,7 @@ public class PLayerBigHitState : State
         Debug.Log("enter playerbig hit");
         m_rigidBody.velocity *= 0.1f;
         m_rigidBody.AddForce(Direction / (1.0f / (25 * duration)));
+        m_playerStats.Invincible = true;
     }
     
     // Update is called once per frame
@@ -56,12 +57,15 @@ public class PLayerBigHitState : State
         {
             //apply big knockback
             Debug.Log("Hit target");
-            m_rigidBody.AddForce(Force);
+            m_rigidBody.AddForce(Force, ForceMode.Impulse);
+            m_playerStats.stunTrigger = true;
+            m_playerStats.StunTimer = m_playerStats.maxBoostStunTime;
         }
         isTarget = true;
         //GetComponent<PlayerBoost>().ResetBoostCollider();
         GetComponent<PlayerBoost>().BoostDurationEnd();
         //Apply the collision information.
+        m_playerStats.Invincible = false;
     }
 
 }

@@ -82,7 +82,10 @@ public class Shield : MonoBehaviour
 
             // Stun the player if they are hit when shield down
             if (bullet == BULLET_TYPE.shotgun)
+            {
                 m_playerStats.stunTrigger = true;
+                m_playerStats.StunTimer = m_playerStats.maxShotgunStunTime;
+            }
         }
         m_timeSinceLastHit = Time.time;
         m_hitUpdate = Time.time;

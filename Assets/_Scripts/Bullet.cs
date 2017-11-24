@@ -7,8 +7,7 @@ public class Bullet : Projectile {
 
 	void Start()
 	{
-		// SFX
-		FindObjectOfType<AudioManager>().Play("Pew");
+
 		
 		m_Rigidbody = GetComponent<Rigidbody>();
         
@@ -41,25 +40,28 @@ public class Bullet : Projectile {
 
 	void collideWithPlayer(Collision other)
 	{
-		Shield m_shield = other.gameObject.GetComponentInChildren<Shield>();
-		Vector3 addForce;
+        if (other.transform.GetComponent<PlayerStats>().Invincible == false)
+        {
+            Shield m_shield = other.gameObject.GetComponentInChildren<Shield>();
+            Vector3 addForce;
 
-		other.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_PlayerStats;
 
-		// If the shield has health, change how much force 
-		if (m_shield.m_shieldHealth == 0)
-		{
-			addForce = m_Direction * m_Force * m_PlayerStats.m_CriticalMultipier;
-		}
-		else
-		{
-			addForce = m_Direction * m_Force;
-		}
 
-		// Add the force [Graham]
-		other.gameObject.GetComponent<Rigidbody>().AddForce(addForce, ForceMode.Impulse);
+            // If the shield has health, change how much force 
+            if (m_shield.m_shieldHealth == 0)
+            {
+                addForce = m_Direction * m_Force * m_PlayerStats.m_CriticalMultipier;
+            }
+            else
+            {
+                addForce = m_Direction * m_Force;
+            }
 
-		// Tell the shield to be hit
-		m_shield.ShieldHit(Shield.BULLET_TYPE.plasma);
+            // Add the force [Graham]
+            other.gameObject.GetComponent<Rigidbody>().AddForce(addForce, ForceMode.Impulse);
+
+            // Tell the shield to be hit
+            m_shield.ShieldHit(Shield.BULLET_TYPE.plasma);
+        }
 	}
 }

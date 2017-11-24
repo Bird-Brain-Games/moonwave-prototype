@@ -24,9 +24,13 @@ public class KnockOut : MonoBehaviour {
 
 	public void PlayerKnockedOut ()
     {
+
         // SFX
-        FindObjectOfType<AudioManager>().Play("Death");
-        
+        if (m_PlayerStats.m_PlayerID == 1) { FindObjectOfType<AudioManager>().Play("Death"); }
+        else if (m_PlayerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Death2"); }
+        else if (m_PlayerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Death3"); }
+        else { FindObjectOfType<AudioManager>().Play("Death4"); }
+
         // The player who hit them out gets 2 points [Jack]
         if (m_PlayerStats.m_HitLastBy != null)
         {
@@ -47,7 +51,9 @@ public class KnockOut : MonoBehaviour {
         // Reset m_HitLastBy for respawning [Jack]
         m_PlayerStats.m_HitLastBy = null;
 
+        
         ResetPlayer();
+        
 
         // Logging
         l_deaths++;
@@ -56,9 +62,9 @@ public class KnockOut : MonoBehaviour {
     void ResetPlayer()
     {
         m_rigidBody.ResetInertiaTensor();
-        transform.position = new Vector3(12, 11, 0);
-        m_rigidBody.velocity = new Vector3(0f, 0f, 0f);
+        m_rigidBody.velocity = Vector3.zero;
+        m_rigidBody.position = new Vector3(200, 200, 200);
+        m_shield.ResetShield();
         m_StateManager.ResetPlayer();
-        m_shield.ResetShield();//
     }
 }

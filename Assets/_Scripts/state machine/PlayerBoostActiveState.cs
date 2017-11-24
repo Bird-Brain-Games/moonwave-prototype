@@ -43,17 +43,21 @@ public class PlayerBoostActiveState : State
         // Collide with a player
         if (collision.gameObject.CompareTag("Player"))
         {
-            //sets the direction of the force
-            var direction = collision.transform.position - transform.position;
-            direction.Normalize();
+            if (collision.transform.GetComponent<PlayerStats>().Invincible == false)
+            {
 
-            //Adds the force to the player we collided with
-            collision.rigidbody.AddForce(direction
-                * m_Boost.GetBoostForce()
-                * m_PlayerStats.GetCriticalMultiplier());
+                //sets the direction of the force
+                var direction = collision.transform.position - transform.position;
+                direction.Normalize();
 
-            //adds inverse force to us to signifiy knockback.
-            //m_rigidbody.AddForce(-force * boostImpact);
+                //Adds the force to the player we collided with
+                collision.rigidbody.AddForce(direction
+                    * m_Boost.GetBoostForce()
+                    * m_PlayerStats.GetCriticalMultiplier());
+
+                //adds inverse force to us to signifiy knockback.
+                //m_rigidbody.AddForce(-force * boostImpact);
+            }
         }
     }
 }
