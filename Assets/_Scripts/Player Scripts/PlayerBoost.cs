@@ -5,9 +5,12 @@ using UnityEngine;
 //Primary coder campbell.
 public class PlayerBoost : MonoBehaviour
 {
-   
+
 
     #region Variables
+
+    //How much velocity we retain upon canceling boost.
+    public float m_cancelRetention;
 
     //The amount of force a players action causes
 
@@ -161,7 +164,8 @@ public class PlayerBoost : MonoBehaviour
     {
         if (m_controls.GetBoost(BUTTON_DETECTION.GET_BUTTON_DOWN))
         {
-            m_RigidBody.velocity = Vector3.zero;
+            m_RigidBody.velocity = m_RigidBody.velocity.normalized * 15;
+            m_BoostCollider.BoostEnded();
             return false;
         }
         if (m_BoostDuration > 0) //&& m_PlayerStats.GetBoostState() == true)
