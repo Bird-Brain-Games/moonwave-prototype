@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1821875975101796}
+  m_RootGameObject: {fileID: 1158627420668800}
   m_IsPrefabParent: 1
---- !u!1 &1821875975101796
+--- !u!1 &1158627420668800
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4043602507318528}
-  - component: {fileID: 114981942207497626}
+  - component: {fileID: 4353315790608980}
+  - component: {fileID: 114499118704605298}
   m_Layer: 0
-  m_Name: Audio Manager
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4043602507318528
+--- !u!4 &4353315790608980
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1821875975101796}
+  m_GameObject: {fileID: 1158627420668800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,12 +40,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114981942207497626
+--- !u!114 &114499118704605298
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1821875975101796}
+  m_GameObject: {fileID: 1158627420668800}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd7de66c9e10e9648a3bc14d76082bff, type: 3}
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Shotgun
-    clip: {fileID: 8300000, guid: 306c480fbeca4be409b6d9b25a94a59b, type: 3}
+    clip: {fileID: 8300000, guid: e2d4b0e31eceb4b40ab2e2b14b19cc04, type: 3}
     volume: 0.622
     pitch: 1
     loop: 0
@@ -65,37 +65,37 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: Boost
-    clip: {fileID: 8300000, guid: 4edab736dc492044d9af3bf936a90ed7, type: 3}
+    clip: {fileID: 8300000, guid: cd829aa517978e94e91c80ef3c55feb2, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
-    clip: {fileID: 8300000, guid: 870ef983468d6d24694dd9197e626477, type: 3}
+    clip: {fileID: 8300000, guid: cbcdd7960d5433a4fb84801c36315147, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Pew
-    clip: {fileID: 8300000, guid: 44bd679eeac61e341bda7fff96974c61, type: 3}
+    clip: {fileID: 8300000, guid: 0e7cfee6d34cea14aaa5446bc0a4dc8f, type: 3}
     volume: 0.662
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Death
-    clip: {fileID: 8300000, guid: 870ef983468d6d24694dd9197e626477, type: 3}
+  - name: Crit
+    clip: {fileID: 8300000, guid: 6a2229d0223c1eb4ba1e581c65dd7d30, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Shield Shatter
-    clip: {fileID: 8300000, guid: 5dd5e8bc7d0099f4eada332691669420, type: 3}
+    clip: {fileID: 8300000, guid: e70293d4d1b482a478ee840704d0af95, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Lava Death
-    clip: {fileID: 8300000, guid: 5dd5e8bc7d0099f4eada332691669420, type: 3}
+    clip: {fileID: 8300000, guid: 02d76f0918619c54ea2c27432344f6ad, type: 3}
     volume: 1
     pitch: 1
     loop: 0

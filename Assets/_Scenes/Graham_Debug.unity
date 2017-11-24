@@ -301,40 +301,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+    - target: {fileID: 4353315790608980, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: d2b7068bc296ae34bb511278a801b9b1, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 5478e54147cf5f947a8b7057e4f21508, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &264300286
 GameObject:
@@ -807,104 +807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca90f5daf1eb374a82d692eb3553a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1081566931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1789010173923100, guid: d2b7068bc296ae34bb511278a801b9b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 234237323}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1081566933}
-  - component: {fileID: 1081566932}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1081566932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114875739062825526, guid: d2b7068bc296ae34bb511278a801b9b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 234237323}
-  m_GameObject: {fileID: 1081566931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd7de66c9e10e9648a3bc14d76082bff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: Shotgun
-    clip: {fileID: 8300000, guid: 306c480fbeca4be409b6d9b25a94a59b, type: 3}
-    volume: 0.622
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Battle Theme
-    clip: {fileID: 8300000, guid: e9eb369e1fb54714db389a142c30e7f6, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: Boost
-    clip: {fileID: 8300000, guid: 4edab736dc492044d9af3bf936a90ed7, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Death
-    clip: {fileID: 8300000, guid: 870ef983468d6d24694dd9197e626477, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Pew
-    clip: {fileID: 8300000, guid: 44bd679eeac61e341bda7fff96974c61, type: 3}
-    volume: 0.662
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Death
-    clip: {fileID: 8300000, guid: 870ef983468d6d24694dd9197e626477, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Shield Shatter
-    clip: {fileID: 8300000, guid: 5dd5e8bc7d0099f4eada332691669420, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Lava Death
-    clip: {fileID: 8300000, guid: 5dd5e8bc7d0099f4eada332691669420, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Charge
-    clip: {fileID: 8300000, guid: c4525ec3596b7b043a111abf73820c00, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
---- !u!4 &1081566933
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4453699259076894, guid: d2b7068bc296ae34bb511278a801b9b1,
-    type: 2}
-  m_PrefabInternal: {fileID: 234237323}
-  m_GameObject: {fileID: 1081566931}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1121579565
 Prefab:
   m_ObjectHideFlags: 0
@@ -1031,12 +933,12 @@ Prefab:
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 500.5
+      value: 658.5
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 281.5
+      value: 316.5
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
