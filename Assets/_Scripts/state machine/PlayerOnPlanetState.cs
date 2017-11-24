@@ -69,11 +69,19 @@ public class PlayerOnPlanetState : State {
 			Debug.Log("No ground found in On Planet State");
 		}
 
+		// Check if boosting
+		if (m_Controls.GetBoost(BUTTON_DETECTION.GET_BUTTON) && m_PlayerStats.CanBoost == true)
+		{
+			// Change the state to the "Boost Charge" state
+			ChangeState(m_PlayerStats.PlayerBoostChargeString);
+		}
+
 		m_Animator.SetFloat("WalkSpeed", m_Direction.sqrMagnitude > 0.0f ? 2 : 0);		// TEMP, to be changed
 	}
 
 	override public void StateExit()
 	{
 		m_Animator.SetBool("OnPlanet", false);
+		m_Animator.SetFloat("WalkSpeed", 0f);
 	}
 }

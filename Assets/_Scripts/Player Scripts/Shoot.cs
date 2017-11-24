@@ -116,7 +116,7 @@ public class Shoot : MonoBehaviour {
             clone.GetComponent<MeshRenderer>().material.color = m_playerStats.ColourOfBullet;
 
             // Tell the animator to fire the bullet
-            m_Animator.SetTrigger("Shoot");
+            m_Animator.SetTrigger("Shoot Laser");
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots
@@ -126,6 +126,10 @@ public class Shoot : MonoBehaviour {
     public void ShootShotgun()
     {
         m_Shotgun.Shoot();
+
+        // Tell the animator to fire the bullet
+        m_Animator.SetTrigger("Shoot Laser");
+
         // SFX
         FindObjectOfType<AudioManager>().Play("Shotgun");
     }

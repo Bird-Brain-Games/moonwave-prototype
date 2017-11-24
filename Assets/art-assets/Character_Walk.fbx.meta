@@ -82,12 +82,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Default
-    second: {fileID: 2100000, guid: cffb83ce9b6dccc46a5a74533d8de3ba, type: 2}
+    second: {fileID: 2100000, guid: 07508dd3d53dec9438a0f0ec342be4b5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: None
-    second: {fileID: 2100000, guid: 0462156643aa16444b71d7960662a165, type: 2}
+    second: {fileID: 2100000, guid: c2c1507d1e166da45a8da23e4b734b62, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -121,7 +121,7 @@ ModelImporter:
       lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: 40
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
