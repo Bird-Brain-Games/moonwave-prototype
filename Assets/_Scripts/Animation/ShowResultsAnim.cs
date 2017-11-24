@@ -11,7 +11,7 @@ public class ShowResultsAnim : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Text resultText = animator.GetComponent<Text>();
-		PlayerManager players = GameObject.Find("Players").GetComponent<PlayerManager>();
+        PlayerManager players = GameObject.FindObjectOfType<PlayerManager>();
 
 		// Enable the "back to menu" button
 		//UnityEngine.UI.Button backToMenu = Instantiate(backToMenuPrefab, resultText.transform);

@@ -496,7 +496,7 @@ MonoBehaviour:
     shotgunDistance: 20
     shotgunRadius: 15
     shotgunCriticalMultiplier: 12.5
-    shotgunDamage: 5
+    shotgunDamage: 15
   m_boost:
     BaseForce: 400
     AddedForcePerSecond: 200
