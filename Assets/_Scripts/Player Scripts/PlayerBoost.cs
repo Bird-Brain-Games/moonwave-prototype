@@ -36,7 +36,7 @@ public class PlayerBoost : MonoBehaviour
 
     //advancded direction variable
     Vector3 m_Direction;
-
+    Vector3 m_DirectionSelected;
 
 
     // Logging  l_ is used to indicate a variable is for logging
@@ -114,16 +114,24 @@ public class PlayerBoost : MonoBehaviour
         m_move = m_controls.GetMove();
         if (m_move.x == 0 && m_move.y == 0)
         {
-            Debug.Log("movement direction");
-            m_Direction = new Vector3(m_RigidBody.velocity.x, m_RigidBody.velocity.y, 0.0f);
-            m_Direction.Normalize();
+            Debug.Log(m_DirectionSelected);
+            m_Direction = m_DirectionSelected;
         }
         else
+        {
             m_Direction = new Vector3(m_move.x, m_move.y, 0.0f);
+            m_Direction.Normalize();
+            m_DirectionSelected = m_Direction;
+        }
 
-
-        transform.rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f));
+        transform.rotation = Quaternion.LookRotation(transform.forward, new Vector3(m_Direction.x, m_Direction.y, 0.0f));
         //transform.Rotate(new Vector3(0, 0, 270));
+
+        if (m_TimeCharging >= m_PlayerStats.m_boost.timeToMaxCharge)
+        {
+            // set the position of the players boost collider;
+            m_BoostCollider.setCollider(m_Direction, Quaternion.LookRotation(transform.forward, new Vector3(m_Direction.x, m_Direction.y, 0.0f)), false);
+        }
 
         //Setup Inertia canceling.
         Vector3 l_Inertia = (-1 * m_RigidBody.velocity);

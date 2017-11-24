@@ -45,14 +45,14 @@ public class BoostCollider : MonoBehaviour
 
     }
 
-    public void setCollider(Vector3 transform, Quaternion rotation)
+    public void setCollider(Vector3 transform, Quaternion rotation, bool collision = true)
     {
         m_rotation = rotation;
         m_offset = transform;
         fixedUpdate = true;
         //hacky way to update the position and then make it visisble.
         FixedUpdate();
-        m_BoxCollider.enabled = true;
+        m_BoxCollider.enabled = collision;
         m_MeshRender.enabled = true;
     }
 
