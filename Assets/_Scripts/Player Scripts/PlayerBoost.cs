@@ -21,6 +21,7 @@ public class PlayerBoost : MonoBehaviour
 
     //Need to move this to playerstats
     public float m_inertiaForce;
+    public float m_zeroVelocity;
     public bool boostBigHitTesting;
 
     //All of the componenets we need access to
@@ -137,7 +138,14 @@ public class PlayerBoost : MonoBehaviour
         Vector3 l_Inertia = (-1 * m_RigidBody.velocity);
         l_Inertia.Normalize();
         l_Inertia = l_Inertia *= m_inertiaForce;
-        m_RigidBody.AddForce(l_Inertia, ForceMode.Impulse);
+        if (m_RigidBody.velocity.magnitude > m_zeroVelocity)
+        {
+            m_RigidBody.AddForce(l_Inertia, ForceMode.Impulse);
+        }
+        else
+        {
+            m_RigidBody.velocity = Vector3.zero;
+        }
     }
 
     public void FireBoost()
@@ -150,12 +158,15 @@ public class PlayerBoost : MonoBehaviour
         m_move = m_controls.GetMove();
         if (m_move.x == 0 && m_move.y == 0)
         {
-            Debug.Log("movement direction");
-            m_Direction = new Vector3(m_RigidBody.velocity.x, m_RigidBody.velocity.y, 0.0f);
-            m_Direction.Normalize();
+            Debug.Log(m_DirectionSelected);
+            m_Direction = m_DirectionSelected;
         }
         else
+        {
             m_Direction = new Vector3(m_move.x, m_move.y, 0.0f);
+            m_Direction.Normalize();
+            m_DirectionSelected = m_Direction;
+        }
 
         //If the player boost knockback duration has ended.
         float maxForce = 0;
@@ -166,7 +177,7 @@ public class PlayerBoost : MonoBehaviour
         if (m_TimeCharging >= m_PlayerStats.m_boost.timeToMaxCharge)
         {
             // set the position of the players boost collider;
-            m_BoostCollider.setCollider(m_Direction, Quaternion.LookRotation(transform.forward, new Vector3(m_move.x, m_move.y, 0.0f)));
+            m_BoostCollider.setCollider(m_Direction, Quaternion.LookRotation(transform.forward, new Vector3(m_Direction.x, m_Direction.y, 0.0f)));
 
         }
 

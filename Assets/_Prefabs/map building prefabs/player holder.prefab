@@ -338,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_cancelRetention: 15
   m_inertiaForce: 50
+  m_zeroVelocity: 50
   boostBigHitTesting: 0
   l_boosts: 0
 --- !u!114 &114169682380691696

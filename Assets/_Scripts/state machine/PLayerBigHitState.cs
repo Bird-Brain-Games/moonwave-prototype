@@ -18,7 +18,7 @@ public class PLayerBigHitState : State
     public Vector3 Direction { get; set; }
     void Start()
     {
-        duration = 1.0f;
+        duration = 0.6f;
         timer = duration;
         m_playerStats = GetComponent<PlayerStats>();
         m_rigidBody = GetComponent<Rigidbody>();
