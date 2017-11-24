@@ -50,8 +50,10 @@ public class PlayerStats : MonoBehaviour {
     public string PlayerBoostChargeString { get; set; }
     public string PlayerBoostActiveString { get; set; }
     public string PlayerBigHitState {get; set;}
-#endregion
+    public string PlayerRespawnState { get; set; }
+    #endregion
 
+    public float m_respawnTime;
     public Color colourdull;
     public Color colour;
     //A colour for our bullets [cam]
@@ -105,6 +107,7 @@ public class PlayerStats : MonoBehaviour {
         PlayerBoostChargeString = "boostCharge";
         PlayerJumpStateString = "jump";
         PlayerBigHitState = "bigHit";
+        PlayerRespawnState = "respawnState";
 
         //Request a colour from our bullet colours [cam]
         Debug.Log("Player Made");

@@ -51,7 +51,9 @@ public class KnockOut : MonoBehaviour {
         // Reset m_HitLastBy for respawning [Jack]
         m_PlayerStats.m_HitLastBy = null;
 
+        
         ResetPlayer();
+        
 
         // Logging
         l_deaths++;
@@ -60,9 +62,9 @@ public class KnockOut : MonoBehaviour {
     void ResetPlayer()
     {
         m_rigidBody.ResetInertiaTensor();
-        transform.position = new Vector3(12, 11, 0);
-        m_rigidBody.velocity = new Vector3(0f, 0f, 0f);
+        m_rigidBody.velocity = Vector3.zero;
+        m_rigidBody.position = new Vector3(200, 200, 200);
+        m_shield.ResetShield();
         m_StateManager.ResetPlayer();
-        m_shield.ResetShield();//
     }
 }
