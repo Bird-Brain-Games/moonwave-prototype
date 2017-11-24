@@ -18,6 +18,9 @@ public class Spawn : MonoBehaviour {
 
     public Vector3 getSpawnPoint()
     {
+        int[] available = new int[4];
+        int size = 0;
+
         int leastCollisions = 0;
         int spot = 0;
         for (int i = 0; i < spawners.Length; i++)
@@ -25,13 +28,19 @@ public class Spawn : MonoBehaviour {
             int tempColliders = spawners[i].GetNumColliders();
             if (tempColliders == 0)
             {
-                return spawnPoints[i];
+                available[size] = i;
+                size++;
             }
             else if (tempColliders < leastCollisions)
             {
                 spot = i;
                 leastCollisions = tempColliders;
             }
+        }
+        if (size > 1)
+        {
+            int temp = Random.Range(0, size);
+            return spawnPoints[available[temp]];
         }
         return spawnPoints[spot];
     }
