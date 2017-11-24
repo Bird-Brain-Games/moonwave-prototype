@@ -8,6 +8,9 @@ public class Shoot : MonoBehaviour {
     //players rigidBody
     public Rigidbody bullet;
 
+    // Animator component of the player
+    Animator m_Animator;
+
     //The impact a bullet has on a player
     public float m_bulletImpact;
 
@@ -40,8 +43,9 @@ public class Shoot : MonoBehaviour {
     
     void Start () {
         controls = GetComponent<Controls>();
-        m_playerStats = gameObject.GetComponent<PlayerStats>();
-        m_Shotgun = gameObject.GetComponent<Shotgun>();
+        m_playerStats = GetComponent<PlayerStats>();
+        m_Shotgun = GetComponent<Shotgun>();
+        m_Animator = GetComponentInChildren<Animator>();
         l_bullets = 0;
     }
 	
@@ -110,6 +114,9 @@ public class Shoot : MonoBehaviour {
                 GetComponent<Collider>());
 
             clone.GetComponent<MeshRenderer>().material.color = m_playerStats.ColourOfBullet;
+
+            // Tell the animator to fire the bullet
+            m_Animator.SetTrigger("Shoot");
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots

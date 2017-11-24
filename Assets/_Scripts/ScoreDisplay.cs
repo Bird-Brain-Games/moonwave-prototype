@@ -15,7 +15,7 @@ public class ScoreDisplay : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-        manager = GameObject.Find("Players").GetComponent<PlayerManager>();   // COULD BE RISKY
+        manager = GameObject.Find("Players and spawns").GetComponent<PlayerManager>();   // COULD BE RISKY
         numPlayers = manager.GetNumPlayers();
         playerScores = manager.GetPlayerScores();
         playerColours = manager.GetPlayerColours();
