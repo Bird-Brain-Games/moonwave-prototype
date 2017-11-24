@@ -482,11 +482,13 @@ MonoBehaviour:
   m_shieldState: 0
   m_CriticalMultipier: 2
   driftMoveForce: 10
+  maxDriftMoveForce: 50
   walkMoveForce: 30
   jumpForce: 300
   maxJumpTime: 1.25
   fallGravMultiplier: 1
-  maxStunTime: 1
+  maxShotgunStunTime: 0.5
+  maxBoostStunTime: 1.5
   m_Shoot:
     shotgunDuration: 0.2
     shotgunCooldown: 0.75

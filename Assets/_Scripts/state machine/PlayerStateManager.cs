@@ -87,7 +87,7 @@ public class PlayerStateManager : MonoBehaviour
     void StunPlayer()
     {
         playerStats.stunTrigger = false;
-        stunTimer = playerStats.maxStunTime;
+        stunTimer = playerStats.StunTimer;
         movementStates.enabled = false;
         GetComponent<Collider>().material.bounciness = 1.0f;
         GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Maximum;

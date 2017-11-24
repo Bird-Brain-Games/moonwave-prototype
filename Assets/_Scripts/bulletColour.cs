@@ -46,7 +46,7 @@ public class bulletColour : MonoBehaviour
 
     void AddColours()
     {
-        colours.Add(COLOURS.red, new Color(190.0f / 255.0f, 98 / 255.0f, 85 / 255.0f));
+        colours.Add(COLOURS.red, new Color(250.0f / 255.0f, 79 / 255.0f, 32 / 255.0f));
 
         counter++;
         colours.Add(COLOURS.blue, new Color(79 / 255.0f, 187 / 255.0f, 255 / 255.0f));

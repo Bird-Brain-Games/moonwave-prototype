@@ -41,7 +41,10 @@ public class ShotgunShot : Projectile {
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
-            collideWithPlayer(other);
+            if (other.transform.GetComponent<PlayerStats>().Invincible == false)
+            {
+                collideWithPlayer(other);
+            }
 		}
 	}
 

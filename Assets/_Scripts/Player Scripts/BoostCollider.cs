@@ -81,40 +81,43 @@ public class BoostCollider : MonoBehaviour
                 //basically switch to the playerBigHitState;
                 Debug.Log("boost collider with player other than themselves");
                 //Set hitlastby
-                collider.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_stats;
-
-                if (collider.transform.GetComponent<PlayerStats>().GetShieldState() == false)
+                if (collider.transform.GetComponent<PlayerStats>().Invincible == false)
                 {
-                    Debug.Log("boost collider without shield");
+                    collider.gameObject.GetComponent<PlayerStats>().m_HitLastBy = m_stats;
+
+                    if (collider.transform.GetComponent<PlayerStats>().GetShieldState() == false)
+                    {
+                        Debug.Log("boost collider without shield");
 
 
-                    // SFX
-                    FindObjectOfType<AudioManager>().Play("Crit");
+                        // SFX
+                        FindObjectOfType<AudioManager>().Play("Crit");
 
-                    //get the colliders BigHitState
-                    m_tempState = collider.transform.GetComponentInParent<PLayerBigHitState>();
+                        //get the colliders BigHitState
+                        m_tempState = collider.transform.GetComponentInParent<PLayerBigHitState>();
 
-                    //calculate the force acting on the hit player
-                    var Force = collider.transform.position - m_stats.transform.position;
-                    m_state.Direction = Force;  
-                    m_tempState.Direction = -Force;
-                    Force.Normalize();
+                        //calculate the force acting on the hit player
+                        var Force = collider.transform.position - m_stats.transform.position;
+                        m_state.Direction = Force;
+                        m_tempState.Direction = -Force;
+                        Force.Normalize();
 
-                    //Adds the force to the player we collided with
-                    Force = (Force
-                        * m_stats.m_boost.MaxForce
-                        * m_stats.m_boost.boostCriticalHit);
+                        //Adds the force to the player we collided with
+                        Force = (Force
+                            * m_stats.m_boost.MaxForce
+                            * m_stats.m_boost.boostCriticalHit);
 
-                    collider.GetComponent<StateManager>().ChangeState(m_stats.PlayerBigHitState);
+                        collider.GetComponent<StateManager>().ChangeState(m_stats.PlayerBigHitState);
 
 
-                    m_tempState.Force = Force;
+                        m_tempState.Force = Force;
 
-                    m_state.GetComponent<StateManager>().ChangeState(m_stats.PlayerBigHitState);
-                    m_state.isTarget = false;
+                        m_state.GetComponent<StateManager>().ChangeState(m_stats.PlayerBigHitState);
+                        m_state.isTarget = false;
 
-                    m_BoxCollider.enabled = false;
-                    m_MeshRender.enabled =false;
+                        m_BoxCollider.enabled = false;
+                        m_MeshRender.enabled = false;
+                    }
                 }
             }
             else

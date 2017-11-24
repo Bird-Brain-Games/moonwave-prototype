@@ -58,6 +58,7 @@ public class PlayerStats : MonoBehaviour {
     public Color colour;
     //A colour for our bullets [cam]
     public Color ColourOfBullet { get; set; }
+    public bool Invincible { get; set; }
 
     // Score Calculations
     public int m_PlayerID;
@@ -73,6 +74,7 @@ public class PlayerStats : MonoBehaviour {
 
     // Drift based variables
     public float driftMoveForce;
+    public float maxDriftMoveForce;
     public float walkMoveForce;
 
     // Jump based variables
@@ -80,7 +82,13 @@ public class PlayerStats : MonoBehaviour {
     public float maxJumpTime;
     public float fallGravMultiplier;
 
-	public float maxStunTime;
+    //these are used to set stunTimer;
+	public float maxShotgunStunTime;
+    public float maxBoostStunTime;
+
+    //This is what is fetched by stun timer.
+    public float StunTimer { get; set; }
+
     public Shoot m_Shoot;
     public Boost m_boost;
 
@@ -99,7 +107,7 @@ public class PlayerStats : MonoBehaviour {
         CanBoost = true;
         l_killedBy = new int[4];
         stunTrigger = false;
-
+        Invincible = false;
         // Making them small strings, easier to compare (probably change to ints) [Graham]
         PlayerOnPlanetStateString = "onPlanet";
         PlayerDriftStateString = "drift";
