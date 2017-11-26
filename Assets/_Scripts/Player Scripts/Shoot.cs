@@ -112,15 +112,14 @@ public class Shoot : MonoBehaviour {
             //setting the bullets speed
             //forward *= m_bulletSpeed;
             clone.velocity = forward * m_bulletSpeed;
-            Bullet temp = clone.GetComponent<Bullet>();
-            temp.setVelocity(forward * m_bulletSpeed);
             // Initialize the bullet
-            temp.GetComponent<Bullet>().Init(
+            clone.GetComponent<Bullet>().GetComponent<Bullet>().Init(
                 forward, m_bulletImpact, m_playerStats);
             Physics.IgnoreCollision(
                 clone.GetComponent<Collider>(), 
                 GetComponent<Collider>());
 
+            //clone.GetComponent<Bullet>().setVelocity(clone.velocity);
             clone.GetComponent<MeshRenderer>().material.color = m_playerStats.ColourOfBullet;
 
             // Tell the animator to fire the bullet

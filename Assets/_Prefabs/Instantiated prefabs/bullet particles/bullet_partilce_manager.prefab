@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emmiterFreqeuncy: 0.1
-  maxEmmit: 1
+  maxEmmit: 3
   maxDur: 2
   random: {x: 0, y: 0, z: 0}
   m_SpawnableObject: {fileID: 1878687377990620, guid: a56d062a2228f704dbabd01d0fa1f8ac,

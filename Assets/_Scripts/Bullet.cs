@@ -11,16 +11,17 @@ public class Bullet : Projectile {
 		m_Rigidbody = GetComponent<Rigidbody>();
         m_particleManager = Instantiate<GameObject>(m_particleManager);
         m_bulletParticles = m_particleManager.GetComponent<BulletParticles>();
-        
+        m_bulletParticles.velocity = -GetComponent<Rigidbody>().velocity;
+        m_bulletParticles.transform.position = transform.position;
+        m_bulletParticles.random = -m_bulletParticles.velocity.normalized;
     }
-    public void setVelocity(Vector3 vel)
-    {
-        m_bulletParticles.velocity = vel;
-    }
+
+
+    
 
     private void Update()
     {
-        
+        m_bulletParticles.transform.position = transform.position;
     }
 
     public void BulletOutOfBounds()
@@ -44,6 +45,7 @@ public class Bullet : Projectile {
         else if (layer == m_PlayerLayer)
         {
             collideWithPlayer(collision);
+            m_bulletParticles.Live = false;
 			Destroy(gameObject, 0);
         }
     }

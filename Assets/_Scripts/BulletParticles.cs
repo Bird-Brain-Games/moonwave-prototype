@@ -20,9 +20,9 @@ public class BulletParticles : MonoBehaviour
     public Sprite[] m_Sprites;
     public COLOUR m_spriteColour;
     public float emissionSpeed;
+    public bool Live { get; set; }
     int size;
 
-    public Vector3 Position { get; set; }
 
 
     #region dllImports
@@ -73,9 +73,11 @@ public class BulletParticles : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Live = true;
         //velocity = -GetComponent<Rigidbody>().velocity * emissionSpeed;
         //Since the times dont sync up perfectly im just multiplying by 1.5 to add some buffer room. 1.5 is probably way more than enough
         size = (int)(maxEmmit * (maxDur + 1) * (1 / emmiterFreqeuncy));
+        Debug.Log(size);
         g_Arr = new Particle[size];
         particleArr = new GameObject[size];
         for (int i = 0; i < size; i++)
@@ -87,13 +89,11 @@ public class BulletParticles : MonoBehaviour
             if (rand == 1)
             {
                 int temp = Random.Range((int)m_spriteColour * 3, (int)m_spriteColour * 3 + 3);
-                Debug.Log(temp);
                 particleArr[i].GetComponent<SpriteRenderer>().sprite = m_Sprites[temp];
             }
             else
             {
                 int temp = Random.Range((12 + (int)m_spriteColour * 6), (12 + (int)m_spriteColour * 6 + 6));
-                Debug.Log(temp);
                 particleArr[i].GetComponent<SpriteRenderer>().sprite = m_Sprites[temp];
             }
 
@@ -103,6 +103,11 @@ public class BulletParticles : MonoBehaviour
 
         initParticles(g_Arr, convert(transform.position), convert(velocity));
         setRand(convert(random));
+    }
+
+    public void InitParticles()
+    {
+        updateEmmiter(convert(transform.position), convert(velocity));
     }
 
 
@@ -136,7 +141,7 @@ public class BulletParticles : MonoBehaviour
     void Update()
     {
         updateAllPartPos(g_Arr, Time.deltaTime);
-        updateEmmiter(convert(Position), convert(velocity));
+        updateEmmiter(convert(transform.position), convert(velocity));
         setPosition();
         if (Input.GetKey(KeyCode.Space))
         {
