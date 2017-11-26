@@ -10,6 +10,9 @@ public class CountIn : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // SFX
+        FindObjectOfType<AudioManager>().Play("321_Start");
+
         countText = animator.GetComponent<Text>();
         countText.enabled = true;
     }
@@ -36,6 +39,9 @@ public class CountIn : StateMachineBehaviour {
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // SFX
+        FindObjectOfType<AudioManager>().Play("Time");
+        
         // Start the timer and trigger the next animation [Graham]
         countText.text = "Time!";
         countText.enabled = false;

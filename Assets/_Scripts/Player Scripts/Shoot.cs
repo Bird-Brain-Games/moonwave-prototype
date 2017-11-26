@@ -137,7 +137,6 @@ public class Shoot : MonoBehaviour {
         // Tell the animator to fire the bullet
         m_Animator.SetTrigger("Shoot Laser");
 
-        // SFX
-        FindObjectOfType<AudioManager>().Play("Shotgun");
+
     }
 }
