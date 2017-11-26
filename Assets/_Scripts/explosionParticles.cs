@@ -70,15 +70,25 @@ public class explosionParticles : MonoBehaviour
 
     void setPosition()
     {
+        bool destroy = true;
         for (int i = 0; i < m_numParticles; i++)
         {
             if (particleArr[i] != null)
+            {
                 particleArr[i].transform.position = new Vector3(particleArray[i].Pos.x, particleArray[i].Pos.y, particleArray[i].Pos.z);
+                destroy = false;
+            }
         }
+        if (destroy == true)
+        {
+            Destroy(gameObject, 0);
+        }
+
     }
 
     public void initParticles()
     {
+        Debug.Log(m_numParticles);
         for (int i = 0; i < m_numParticles; i++)
         {
             particleArr[i] = Instantiate<GameObject>(m_SpawnableObject);
@@ -104,10 +114,7 @@ public class explosionParticles : MonoBehaviour
                 
             }
         }
-        if (particleArr.Length == 0)
-        {
-            Destroy(gameObject, 0);
-        }
+
     }
 
 }

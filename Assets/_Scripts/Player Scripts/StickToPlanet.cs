@@ -276,8 +276,8 @@ public class StickToPlanet : MonoBehaviour
         {
             // SFX
             FindObjectOfType<AudioManager>().Play("Lava Death");
-            
-            GetComponent<KnockOut>().PlayerKnockedOut();
+            Debug.Log("hazard");
+            GetComponent<KnockOut>().ResetPlayer();
         }
     }
 
