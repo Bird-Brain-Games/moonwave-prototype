@@ -104,7 +104,8 @@ public class BoostCollider : MonoBehaviour
                         m_tempState = collider.transform.GetComponentInParent<PLayerBigHitState>();
 
                         //calculate the force acting on the hit player
-                        var Force = collider.transform.position - m_stats.transform.position;
+                        //var Force = collider.transform.position - m_stats.transform.position;
+                        var Force = m_offset;
                         m_state.Direction = Force;
                         m_tempState.Direction = -Force;
                         Force.Normalize();

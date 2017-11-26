@@ -24,7 +24,7 @@ public class KnockOut : MonoBehaviour {
 
 	public void PlayerKnockedOut ()
     {
-
+        Debug.Log("death");
         // SFX
         if (m_PlayerStats.m_PlayerID == 1) { FindObjectOfType<AudioManager>().Play("Death"); }
         else if (m_PlayerStats.m_PlayerID == 2) { FindObjectOfType<AudioManager>().Play("Death2"); }
@@ -59,7 +59,7 @@ public class KnockOut : MonoBehaviour {
         l_deaths++;
     }
 
-    void ResetPlayer()
+    public void ResetPlayer()
     {
         m_rigidBody.ResetInertiaTensor();
         m_rigidBody.velocity = Vector3.zero;
