@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : Projectile {
-	public Vector3 m_InitialVelocity;
+    public GameObject m_particleManager;
+    BulletParticles m_bulletParticles;
 
 	void Start()
 	{
-
-		
 		m_Rigidbody = GetComponent<Rigidbody>();
+        m_particleManager = Instantiate<GameObject>(m_particleManager);
+        m_bulletParticles = m_particleManager.GetComponent<BulletParticles>();
+        
+    }
+    public void setVelocity(Vector3 vel)
+    {
+        m_bulletParticles.velocity = vel;
+    }
+
+    private void Update()
+    {
         
     }
 
-	public void BulletOutOfBounds()
+    public void BulletOutOfBounds()
     {
             //Debug.Log("bullet out of bounds");
             Destroy(gameObject, 0.0f); 
