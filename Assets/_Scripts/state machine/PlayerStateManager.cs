@@ -15,6 +15,7 @@ public class PlayerStateManager : MonoBehaviour
     bool isCountingDown;
 
     bool m_renableCollisions;
+    bool m_roundStart;
     Collider m_c1;
     Collider m_c2;
 
@@ -30,6 +31,7 @@ public class PlayerStateManager : MonoBehaviour
 
     void Awake()
     {
+        m_roundStart = true;
         m_renableCollisions = true;
         movementStates = gameObject.AddComponent<StateManager>();
         driftState = gameObject.AddComponent<PlayerDriftState>();
@@ -85,7 +87,11 @@ public class PlayerStateManager : MonoBehaviour
             m_Animator.SetFloat("Stun Timer", stunTimer);
 
             // Cause the stunned player to be affected by gravity[Graham]
-            //m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
+            if (m_roundStart)
+            {
+                m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
+
+            }
         }
     }
 
@@ -112,6 +118,7 @@ public class PlayerStateManager : MonoBehaviour
         m_Animator.SetFloat("Stun Timer", stunTimer);
         GetComponent<Collider>().material.bounciness = 0.0f;
         GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Average;
+        m_roundStart = false;
         if (m_renableCollisions == false)
         {
             Physics.IgnoreCollision(m_c1, m_c2, m_renableCollisions);
@@ -129,5 +136,10 @@ public class PlayerStateManager : MonoBehaviour
     public void ChangeState(string a_State)
     {
         movementStates.ChangeState(a_State);
+    }
+
+    public void resetRound()
+    {
+        m_roundStart = true;
     }
 }
