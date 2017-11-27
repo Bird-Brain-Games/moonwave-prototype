@@ -672,6 +672,7 @@ GameObject:
   - component: {fileID: 1028900093}
   - component: {fileID: 1028900094}
   - component: {fileID: 1028900095}
+  - component: {fileID: 1028900096}
   m_Layer: 0
   m_Name: Players and spawns
   m_TagString: Untagged
@@ -735,6 +736,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca90f5daf1eb374a82d692eb3553a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1028900096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1028900091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29ffe751d7808934592e4f9010ca161a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1121579565
@@ -867,12 +879,12 @@ Prefab:
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 478.5
+      value: 376
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 269.5
+      value: 279.5
       objectReference: {fileID: 0}
     - target: {fileID: 224423459185039302, guid: dd0503115b3f82249ae75bee8ed1c86c,
         type: 2}
