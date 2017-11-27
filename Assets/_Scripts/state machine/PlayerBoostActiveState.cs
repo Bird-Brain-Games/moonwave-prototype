@@ -9,6 +9,7 @@ public class PlayerBoostActiveState : State
     PlayerStats m_PlayerStats;
     Controls m_Controls;
     PlayerBoost m_Boost;
+    Animator m_Animator;
 
     // Use this for initialization
     void Start()
@@ -17,12 +18,14 @@ public class PlayerBoostActiveState : State
         m_PlayerStats = GetComponent<PlayerStats>();
         m_Controls = GetComponent<Controls>();
         m_Boost = GetComponent<PlayerBoost>();
+        m_Animator = GetComponentInChildren<Animator>();
     }
 
     override public void StateEnter()
     {
         //setup variables.
         //m_Boost.EntryBoost();
+        m_Animator.SetTrigger("Boost Fired");
     }
 
     public override void StateExit()
@@ -34,7 +37,10 @@ public class PlayerBoostActiveState : State
     {
         
         if (m_Boost.BoostDuration())
+        {
+            m_Animator.SetTrigger("Boost Finished");
             ChangeState(m_PlayerStats.PlayerDriftStateString);
+        }
 
     }
 

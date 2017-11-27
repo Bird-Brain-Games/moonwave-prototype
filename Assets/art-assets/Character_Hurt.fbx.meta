@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 847a3d12936f3514f8b3b56055386da6
-timeCreated: 1511559189
+guid: 41b8d33722d7301468a737a8b44ed946
+timeCreated: 1511752937
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -118,15 +118,15 @@ ModelImporter:
       name: Character|CharacterAction
       takeName: Character|CharacterAction
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -146,7 +146,7 @@ ModelImporter:
       name: Character|GunAction
       takeName: Character|GunAction
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -155,10 +155,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -174,19 +174,19 @@ ModelImporter:
       name: Gun|GunAction
       takeName: Gun|GunAction
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0

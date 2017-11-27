@@ -76,7 +76,8 @@ public class PlayerOnPlanetState : State {
 			ChangeState(m_PlayerStats.PlayerBoostChargeString);
 		}
 
-		m_Animator.SetFloat("WalkSpeed", m_Direction.sqrMagnitude > 0.0f ? 2 : 0);		// TEMP, to be changed
+		// Update the animator properties
+		m_Animator.SetFloat("WalkSpeed", m_RigidBody.velocity.magnitude);
 	}
 
 	override public void StateExit()
