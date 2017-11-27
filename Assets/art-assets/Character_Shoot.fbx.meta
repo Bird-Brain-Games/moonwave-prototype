@@ -138,8 +138,72 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Alien
+        weight: 1
+      - path: Character
+        weight: 1
+      - path: Character/Bone
+        weight: 1
+      - path: Character/Bone/Arm_IK.L
+        weight: 1
+      - path: Character/Bone/Arm_IK.L/Hand.L
+        weight: 1
+      - path: Character/Bone/Arm_IK.R
+        weight: 1
+      - path: Character/Bone/Arm_IK.R/Hand.R
+        weight: 1
+      - path: Character/Bone/Elbow_Control.L
+        weight: 1
+      - path: Character/Bone/Elbow_Control.R
+        weight: 1
+      - path: Character/Bone/Knee_Control.L
+        weight: 0
+      - path: Character/Bone/Knee_Control.R
+        weight: 0
+      - path: Character/Bone/Leg_IK.L
+        weight: 0
+      - path: Character/Bone/Leg_IK.L/Foot.L
+        weight: 0
+      - path: Character/Bone/Leg_IK.R
+        weight: 0
+      - path: Character/Bone/Leg_IK.R/Foot.R
+        weight: 0
+      - path: Character/Bone/Spine_Base
+        weight: 1
+      - path: Character/Bone/Spine_Base/Bicep.L
+        weight: 1
+      - path: Character/Bone/Spine_Base/Bicep.L/Forearm.L
+        weight: 1
+      - path: Character/Bone/Spine_Base/Bicep.R
+        weight: 1
+      - path: Character/Bone/Spine_Base/Bicep.R/Forearm.R
+        weight: 1
+      - path: Character/Bone/Spine_Base/Spine_Mid
+        weight: 1
+      - path: Character/Bone/Spine_Base/Spine_Mid/Spine_Top
+        weight: 1
+      - path: Character/Bone/Spine_Base/Spine_Mid/Spine_Top/Neck
+        weight: 1
+      - path: Character/Bone/Spine_Base/Spine_Mid/Spine_Top/Neck/Head
+        weight: 1
+      - path: Character/Bone/Spine_Base/Thigh.L
+        weight: 1
+      - path: Character/Bone/Spine_Base/Thigh.L/Shin.L
+        weight: 0
+      - path: Character/Bone/Spine_Base/Thigh.R
+        weight: 1
+      - path: Character/Bone/Spine_Base/Thigh.R/Shin.R
+        weight: 0
+      - path: Gun
+        weight: 1
+      - path: Gun/Bone 1
+        weight: 1
+      - path: Gun.001
+        weight: 1
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16

@@ -9,7 +9,10 @@ public class Shotgun : MonoBehaviour {
 	PlayerStats m_PlayerStats;
 	int m_PlayerNum;
 	Vector3 aimDir;
-	float m_ShotgunCurrentCooldown;	// Cooldown until you can fire the shotgun again [Graham]
+    // Animator component of the player
+    Animator m_Animator;
+
+    float m_ShotgunCurrentCooldown;	// Cooldown until you can fire the shotgun again [Graham]
 	float m_ShotgunMaxCooldown;
 
 	float m_ShotDistance;
@@ -20,8 +23,9 @@ public class Shotgun : MonoBehaviour {
 	void Start () {
 		controls = GetComponent<Controls>();
 		m_PlayerStats = GetComponent<PlayerStats>();
+        m_Animator = GetComponentInChildren<Animator>();
 
-		m_ShotgunMaxCooldown = m_PlayerStats.m_Shoot.shotgunCooldown;
+        m_ShotgunMaxCooldown = m_PlayerStats.m_Shoot.shotgunCooldown;
 		m_ShotDistance = m_PlayerStats.m_Shoot.shotgunDistance;
 		m_ShotDuration = m_PlayerStats.m_Shoot.shotgunDuration;
 		m_ShotForce = m_PlayerStats.m_Shoot.shotgunForce;
@@ -43,11 +47,17 @@ public class Shotgun : MonoBehaviour {
 	{
 		if (m_ShotgunCurrentCooldown != 0f) return;	// Don't allow shoot if in cooldown [Graham]
 
+        Debug.Log("Shotgun");
         // SFX
         FindObjectOfType<AudioManager>().Play("Shotgun");
-		
-		// Get the rotation of the object [Graham]
-		aimDir = controls.GetAim();
+
+
+        // Tell the animator to fire the bullet
+        m_Animator.SetTrigger("Shoot Shotgun");
+
+
+        // Get the rotation of the object [Graham]
+        aimDir = controls.GetAim();
 		if (aimDir.sqrMagnitude == 0f) 
 			{
 				if (controls.GetMove().sqrMagnitude == 0f)
