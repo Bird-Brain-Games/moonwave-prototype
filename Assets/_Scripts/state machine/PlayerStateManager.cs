@@ -14,6 +14,10 @@ public class PlayerStateManager : MonoBehaviour
     float stunTimer;
     bool isCountingDown;
 
+    bool m_renableCollisions;
+    Collider m_c1;
+    Collider m_c2;
+
     #region movementStates
     PlayerDriftState driftState;
     PlayerJumpState jumpState;
@@ -26,6 +30,7 @@ public class PlayerStateManager : MonoBehaviour
 
     void Awake()
     {
+        m_renableCollisions = true;
         movementStates = gameObject.AddComponent<StateManager>();
         driftState = gameObject.AddComponent<PlayerDriftState>();
         jumpState = gameObject.AddComponent<PlayerJumpState>();
@@ -107,6 +112,18 @@ public class PlayerStateManager : MonoBehaviour
         m_Animator.SetFloat("Stun Timer", stunTimer);
         GetComponent<Collider>().material.bounciness = 0.0f;
         GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Average;
+        if (m_renableCollisions == false)
+        {
+            Physics.IgnoreCollision(m_c1, m_c2, m_renableCollisions);
+            m_renableCollisions = true;
+        }
+    }
+
+    public void SetCollider(Collider c1, Collider c2)
+    {
+        m_c1 = c1;
+        m_c2 = c2;
+        m_renableCollisions = false;
     }
 
     public void ChangeState(string a_State)
