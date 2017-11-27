@@ -5,11 +5,12 @@ using UnityEngine;
 
 public enum COLOUR
 {
-    blue,
     red,
+    blue,
     green,
-    yello
+    purple
 }
+
 public class BulletParticles : MonoBehaviour
 {
     public float emmiterFreqeuncy;
@@ -20,7 +21,7 @@ public class BulletParticles : MonoBehaviour
     public Sprite[] m_Sprites;
     public COLOUR m_spriteColour;
     public float emissionSpeed;
-    public bool Live { get; set; }
+    public bool Alive { get; set; }
     int size;
 
 
@@ -31,6 +32,7 @@ public class BulletParticles : MonoBehaviour
     {
         public float x, y, z;
     }
+    [System.Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct Particle
     {
@@ -45,13 +47,13 @@ public class BulletParticles : MonoBehaviour
     [DllImport("particle_bullet")]
     public static extern void updateEmitterPos(float px, float py, float pz, float vx, float vy, float vz);
     [DllImport("particle_bullet")]
-    public static extern void updateAllPartPos(Particle[] p, float dt);
+    public static extern void updateAllPartPos(Particle[] p, float dt, bool alive = true);
     [DllImport("particle_bullet")]
     public static extern void setRandomness(float rx, float ry, float rz);
 
     public void initParticles(Particle[] p, Vec pos, Vec vel)
     {
-        initAllParticle(g_Arr, pos.x, pos.y, pos.z, vel.x, vel.y, vel.z);
+        initAllParticle(p, pos.x, pos.y, pos.z, vel.x, vel.y, vel.z);
     }
     public void updateEmmiter(Vec pos, Vec vel)
     {
@@ -60,7 +62,6 @@ public class BulletParticles : MonoBehaviour
 
     public void setRand(Vec rand)
     {
-        Debug.Log("set rand");
         setRandomness(rand.x, rand.y, rand.z);
     }
     #endregion
@@ -73,23 +74,21 @@ public class BulletParticles : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Live = true;
+        Alive = true;
         //velocity = -GetComponent<Rigidbody>().velocity * emissionSpeed;
-        //Since the times dont sync up perfectly im just multiplying by 1.5 to add some buffer room. 1.5 is probably way more than enough
-        size = (int)(maxEmmit * (maxDur + 1) * (1 / emmiterFreqeuncy));
-        Debug.Log(size);
+        size = (int)(maxEmmit * (maxDur) * (1 / emmiterFreqeuncy));
         g_Arr = new Particle[size];
         particleArr = new GameObject[size];
         for (int i = 0; i < size; i++)
         {
-            //Random.Range((int)(m_spriteColour + 1) * 11, ((int)m_spriteColour + 1) * 11 + 6);
-            //This is a cool rand on blue, makes a cool effect.
             particleArr[i] = Instantiate<GameObject>(m_SpawnableObject);
+            particleArr[i].GetComponent<Renderer>().enabled = false;
             int rand = Random.Range(0, 3);
             if (rand == 1)
             {
                 int temp = Random.Range((int)m_spriteColour * 3, (int)m_spriteColour * 3 + 3);
                 particleArr[i].GetComponent<SpriteRenderer>().sprite = m_Sprites[temp];
+
             }
             else
             {
@@ -100,14 +99,9 @@ public class BulletParticles : MonoBehaviour
         }
         //init statements
         initSystem(maxEmmit, maxDur, size, emmiterFreqeuncy);
-
+        updateEmmiter(convert(transform.position), convert(velocity));
         initParticles(g_Arr, convert(transform.position), convert(velocity));
         setRand(convert(random));
-    }
-
-    public void InitParticles()
-    {
-        updateEmmiter(convert(transform.position), convert(velocity));
     }
 
 
@@ -121,12 +115,14 @@ public class BulletParticles : MonoBehaviour
     }
     void setPosition()
     {
+        int count = 0;
         for (int i = 0; i < size; i++)
         {
 
             //if the particle isnt active disable the render
             if (g_Arr[i].duration == -10)
             {
+                count++;
                 particleArr[i].GetComponent<Renderer>().enabled = false;
             }
             //if it is active enable the render
@@ -136,18 +132,22 @@ public class BulletParticles : MonoBehaviour
                 particleArr[i].transform.position = new Vector3(g_Arr[i].Pos.x, g_Arr[i].Pos.y, g_Arr[i].Pos.z);
             }
         }
+        if (count == size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                Destroy(particleArr[i]);
+            }
+            Destroy(this.gameObject);
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        updateAllPartPos(g_Arr, Time.deltaTime);
         updateEmmiter(convert(transform.position), convert(velocity));
+        updateAllPartPos(g_Arr, Time.deltaTime, Alive);
         setPosition();
-        if (Input.GetKey(KeyCode.Space))
-        {
 
-            setRand(convert(random));
-        }
     }
 
     private void OnDestroy()
@@ -156,7 +156,6 @@ public class BulletParticles : MonoBehaviour
         {
 
             Destroy(particleArr[i]);
-
         }
     }
 }

@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Bullet : Projectile {
     public GameObject m_particleManager;
-    BulletParticles m_bulletParticles;
+    public BulletParticles m_bulletParticles { get; set; }
 
-	void Start()
-	{
-		m_Rigidbody = GetComponent<Rigidbody>();
+    private void Awake()
+    {
+        m_Rigidbody = GetComponent<Rigidbody>();
         m_particleManager = Instantiate<GameObject>(m_particleManager);
         m_bulletParticles = m_particleManager.GetComponent<BulletParticles>();
-        m_bulletParticles.velocity = -GetComponent<Rigidbody>().velocity;
         m_bulletParticles.transform.position = transform.position;
+        m_bulletParticles.velocity = -GetComponent<Rigidbody>().velocity / 5;
         m_bulletParticles.random = -m_bulletParticles.velocity.normalized;
+
     }
+
 
 
     
@@ -45,7 +47,6 @@ public class Bullet : Projectile {
         else if (layer == m_PlayerLayer)
         {
             collideWithPlayer(collision);
-            m_bulletParticles.Live = false;
 			Destroy(gameObject, 0);
         }
     }
@@ -76,4 +77,9 @@ public class Bullet : Projectile {
             m_shield.ShieldHit(Shield.BULLET_TYPE.plasma);
         }
 	}
+
+    private void OnDestroy()
+    {
+        m_bulletParticles.Alive = false;
+    }
 }
