@@ -68,7 +68,49 @@ public class Shoot : MonoBehaviour {
 
         aimDir = controls.GetAim();
         moveDir = controls.GetMove();
-	}
+
+        /////// Shooting Animation Stuff /////////
+
+        
+
+        float angle = Vector3.Dot(transform.up, Vector3.up);
+        // Caculate the direction of the animation
+
+        float shootingAngle = ((aimDir.y + 1) / 2);
+
+        // If the angle is below zero the player is upside down
+        if (angle < 0)
+        {
+            // Checks what side they are shooting on and changes scale accordingly
+            if (aimDir.x < 0)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f); //(c# code)
+            }
+            // Swap 0 to 1, blend values for upside down
+            shootingAngle =  1 - shootingAngle;
+
+        }
+        else
+        {
+            // Flipped scale when not upside down
+            if (aimDir.x > 0)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f); //(c# code)
+            }
+        }
+
+        m_Animator.SetFloat("Aim Direction Y", shootingAngle);
+        m_Animator.SetBool("Shooting Laser", false);
+
+    }
 
     public void ShootLaser()
     {
@@ -98,7 +140,10 @@ public class Shoot : MonoBehaviour {
                 if (moveDir.sqrMagnitude == 0f)
                     aimDir = transform.up;	// If not aiming or moving, fire straight up
                 else
+                {
                     aimDir = moveDir;
+                }
+                    
             }
             Vector3 forward = new Vector3(aimDir.x + m_randomX, aimDir.y + m_randomY);
             forward.Normalize();
@@ -123,14 +168,13 @@ public class Shoot : MonoBehaviour {
 
             //clone.GetComponent<Bullet>().setVelocity(clone.velocity);
             clone.GetComponent<MeshRenderer>().material.color = m_playerStats.ColourOfBullet;
-            
-            // Tell the animator to fire the bullet
-            m_Animator.SetFloat("Shooting Angle", aimDir.y);
-            m_Animator.SetTrigger("Shoot Laser");
 
             // Log total shots fired [Jack]
             l_bullets++; // Take a note of how many player shots
         }
+
+        // Tell the animator to fire the bullet
+        m_Animator.SetBool("Shooting Laser", true);
     }
 
     public void ShootShotgun()
@@ -138,9 +182,9 @@ public class Shoot : MonoBehaviour {
         m_Shotgun.Shoot();
 
         float shootingAngle = (aimDir.y + 1) / 2;
+        
         // Tell the animator to fire the bullet
-        m_Animator.SetFloat("Shooting Angle", shootingAngle);
-        m_Animator.SetTrigger("Shoot Laser");
+        m_Animator.SetTrigger("Shoot Shotgun");
 
 
     }
