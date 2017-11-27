@@ -116,7 +116,8 @@ public class BoostCollider : MonoBehaviour
                             * m_stats.m_boost.boostCriticalHit);
 
                         collider.GetComponent<StateManager>().ChangeState(m_stats.PlayerBigHitState);
-
+                        Physics.IgnoreCollision(m_stats.GetComponent<Collider>(), collider, true);
+                        collider.GetComponent<PlayerStateManager>().SetCollider(m_stats.GetComponent<Collider>(), collider);
 
                         m_tempState.Force = Force;
 

@@ -66,4 +66,14 @@ public class PlayerManager : MonoBehaviour {
     {
         return playerColours;
     }
+
+    public void roundReset()
+    {
+        PlayerStateManager[] list;
+        list = GetComponentsInChildren<PlayerStateManager>();
+        foreach(PlayerStateManager element in list)
+        {
+            element.resetRound();
+        }
+    }
 }

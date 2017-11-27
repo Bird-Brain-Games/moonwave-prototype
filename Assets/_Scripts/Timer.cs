@@ -29,6 +29,8 @@ public class Timer : MonoBehaviour {
             {
                 m_Time = 0.0f;
                 m_OutOfTime = true;
+                //TODO reset playerStateManagers
+
             }
         }
 
