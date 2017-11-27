@@ -2667,7 +2667,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867229374592362}
-  m_LocalRotation: {x: -0.34770417, y: -0.5556795, z: 0.7426585, w: 0.13704164}
+  m_LocalRotation: {x: -0.3477042, y: -0.55567956, z: 0.74265856, w: 0.13704166}
   m_LocalPosition: {x: 0.02805575, y: 0.032621052, z: -0.00072950765}
   m_LocalScale: {x: 0.9999998, y: 1, z: 1}
   m_Children:
@@ -2834,7 +2834,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145541208189994}
-  m_LocalRotation: {x: -0.34770417, y: -0.5556795, z: 0.7426585, w: 0.13704164}
+  m_LocalRotation: {x: -0.3477042, y: -0.55567956, z: 0.74265856, w: 0.13704166}
   m_LocalPosition: {x: 0.02805575, y: 0.032621052, z: -0.00072950765}
   m_LocalScale: {x: 0.9999998, y: 1, z: 1}
   m_Children:
@@ -2947,7 +2947,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1698840437111602}
-  m_LocalRotation: {x: -0.34770417, y: -0.5556795, z: 0.7426585, w: 0.13704164}
+  m_LocalRotation: {x: -0.3477042, y: -0.55567956, z: 0.74265856, w: 0.13704166}
   m_LocalPosition: {x: 0.02805575, y: 0.032621052, z: -0.00072950765}
   m_LocalScale: {x: 0.9999998, y: 1, z: 1}
   m_Children:
@@ -4313,7 +4313,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1642970246776678}
-  m_LocalRotation: {x: -0.34770417, y: -0.5556795, z: 0.7426585, w: 0.13704164}
+  m_LocalRotation: {x: -0.3477042, y: -0.55567956, z: 0.74265856, w: 0.13704166}
   m_LocalPosition: {x: 0.02805575, y: 0.032621052, z: -0.00072950765}
   m_LocalScale: {x: 0.9999998, y: 1, z: 1}
   m_Children:
@@ -5378,7 +5378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602b97ff98fef8a44b4f0eb722c5ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setOffset: 10
+  setOffset: 5
 --- !u!114 &114079346975348818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5482,7 +5482,7 @@ MonoBehaviour:
     shotgunForce: 50
     shotgunDistance: 20
     shotgunRadius: 15
-    shotgunCriticalMultiplier: 12.5
+    shotgunCriticalMultiplier: 20
     shotgunDamage: 15
   m_boost:
     BaseForce: 400
@@ -5532,7 +5532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602b97ff98fef8a44b4f0eb722c5ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setOffset: 10
+  setOffset: 5
 --- !u!114 &114189042202249000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5621,7 +5621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602b97ff98fef8a44b4f0eb722c5ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setOffset: 10
+  setOffset: 5
 --- !u!114 &114293633797618938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5757,7 +5757,7 @@ MonoBehaviour:
     shotgunForce: 50
     shotgunDistance: 20
     shotgunRadius: 15
-    shotgunCriticalMultiplier: 12.5
+    shotgunCriticalMultiplier: 20
     shotgunDamage: 15
   m_boost:
     BaseForce: 400
@@ -6177,7 +6177,7 @@ MonoBehaviour:
     shotgunForce: 50
     shotgunDistance: 20
     shotgunRadius: 15
-    shotgunCriticalMultiplier: 12.5
+    shotgunCriticalMultiplier: 20
     shotgunDamage: 15
   m_boost:
     BaseForce: 400
@@ -6200,7 +6200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602b97ff98fef8a44b4f0eb722c5ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setOffset: 7
+  setOffset: 5
 --- !u!114 &114897364472467618
 MonoBehaviour:
   m_ObjectHideFlags: 1
