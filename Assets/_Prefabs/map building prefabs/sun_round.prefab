@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54169158684174494}
   - component: {fileID: 135889638235994090}
   - component: {fileID: 114048669963799532}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: sun_round
   m_TagString: Hazard
   m_Icon: {fileID: 0}

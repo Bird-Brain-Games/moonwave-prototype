@@ -10,6 +10,7 @@ public abstract class Projectile : MonoBehaviour {
 	// Collision Layers [Graham]
 	protected int m_PlanetLayer = 8;
 	protected int m_PlayerLayer = 9;
+    protected int m_SunsLayer = 12;
 	protected int m_ProjectileLayer = 10;
 
 	// member variables [Graham]
