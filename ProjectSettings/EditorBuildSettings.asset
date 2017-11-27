@@ -11,27 +11,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Graham_Debug.unity
     guid: d61de0352f28c8e4c8ebe7c7da529aa9
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Completed Maps/1planet4suns.unity
     guid: 916552df1943b77458ae413798e1107d
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Completed Maps/Death middle.unity
     guid: c259a643d8909ef40819e68eee38e48b
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Completed Maps/Simple Big.unity
     guid: c6bf3f07f67baf24a9f3a7a65617ad8c
-  - enabled: 0
-    path: Assets/_Scenes/etc/BlackHole.unity
-    guid: 895bc3053e2d63a49890c91e53d9d3d5
-  - enabled: 0
-    path: Assets/_Scenes/etc/Orbit.unity
-    guid: 8c7955f7a75d75e4f95d7d09402ba633
-  - enabled: 0
-    path: Assets/_Scenes/etc/Rocket.unity
-    guid: 70727b74131e24845bf4e5bbafccd54e
-  - enabled: 0
-    path: Assets/_Scenes/etc/SolarFlare.unity
-    guid: 45f65f0af5076f34f91c670f3c38fcd2
-  - enabled: 0
-    path: Assets/_Scenes/etc/Wall.unity
-    guid: 9d9a6766efea6dc439ff5a6a92494f5e
+  - enabled: 1
+    path: Assets/_Scenes/Completed Maps/One Sun.unity
+    guid: dd6e227139827c24e87cf57b7a2e8a3c
+  - enabled: 1
+    path: Assets/_Scenes/Completed Maps/One Planet.unity
+    guid: 5e5f5342b9b7f6c46ba6e44644fd085c
