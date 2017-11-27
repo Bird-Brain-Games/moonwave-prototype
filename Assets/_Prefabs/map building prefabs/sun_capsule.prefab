@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23018234212332080}
   - component: {fileID: 136280847251932674}
   - component: {fileID: 114826697174830834}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: sun_capsule
   m_TagString: Hazard
   m_Icon: {fileID: 0}

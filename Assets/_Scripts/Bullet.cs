@@ -38,7 +38,7 @@ public class Bullet : Projectile {
         int layer = collision.gameObject.layer;
 
         // If the bullet collides with a planet, destroy it [Robbie]
-        if (layer == m_PlanetLayer) // If the object is a planet
+        if (layer == m_PlanetLayer || layer == m_SunsLayer) // If the object is a planet
         {
             Destroy(gameObject, 0);  // Destroys bullets when they hit a planet
         }
