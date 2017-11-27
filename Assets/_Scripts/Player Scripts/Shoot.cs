@@ -123,6 +123,7 @@ public class Shoot : MonoBehaviour {
             clone.GetComponent<MeshRenderer>().material.color = m_playerStats.ColourOfBullet;
 
             // Tell the animator to fire the bullet
+            m_Animator.SetFloat("Shooting Angle", aimDir.y);
             m_Animator.SetTrigger("Shoot Laser");
 
             // Log total shots fired [Jack]
@@ -134,7 +135,9 @@ public class Shoot : MonoBehaviour {
     {
         m_Shotgun.Shoot();
 
+        float shootingAngle = (aimDir.y + 1) / 2;
         // Tell the animator to fire the bullet
+        m_Animator.SetFloat("Shooting Angle", shootingAngle);
         m_Animator.SetTrigger("Shoot Laser");
 
 
