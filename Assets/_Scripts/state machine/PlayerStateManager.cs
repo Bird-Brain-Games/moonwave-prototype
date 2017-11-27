@@ -9,6 +9,7 @@ public class PlayerStateManager : MonoBehaviour
     PlayerStats playerStats;
     StickToPlanet m_Gravity;
     Rigidbody m_RigidBody;
+    Animator m_Animator;
 
     float stunTimer;
     bool isCountingDown;
@@ -41,6 +42,7 @@ public class PlayerStateManager : MonoBehaviour
         playerStats = GetComponent<PlayerStats>();
         m_Gravity = GetComponent<StickToPlanet>();
         m_RigidBody = GetComponent<Rigidbody>();
+        m_Animator = GetComponentInChildren<Animator>();
 
         movementStates.AttachDefaultState(playerStats.PlayerDriftStateString, driftState);
         movementStates.AttachDefaultState(playerStats.PlayerJumpStateString, jumpState);
@@ -61,6 +63,7 @@ public class PlayerStateManager : MonoBehaviour
         if (playerStats.stunTrigger)
         {
             StunPlayer();
+            m_Animator.SetTrigger("Hurt");
         }
 
         // If the player is stunned
@@ -72,6 +75,9 @@ public class PlayerStateManager : MonoBehaviour
             {
                 UnStunPlayer();
             }
+
+            // Update the animator
+            m_Animator.SetFloat("Stun Timer", stunTimer);
 
             // Cause the stunned player to be affected by gravity[Graham]
             //m_RigidBody.AddForce(m_Gravity.DriftingUpdate() * 0.5f);
@@ -98,6 +104,7 @@ public class PlayerStateManager : MonoBehaviour
         movementStates.enabled = true;
         movementStates.ResetToDefaultState();
         stunTimer = 0f;
+        m_Animator.SetFloat("Stun Timer", stunTimer);
         GetComponent<Collider>().material.bounciness = 0.0f;
         GetComponent<Collider>().material.bounceCombine = PhysicMaterialCombine.Average;
     }
