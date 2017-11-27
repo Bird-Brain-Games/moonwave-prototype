@@ -51,13 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02878271f3d50b418e0355a3541f3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Attraction: -5
+  m_Attraction: -2
   m_SpawnDistance: 0.5
-  m_DistanceVariance: 0.2
-  m_AngleVariance: 0.1
-  m_numParticles: 50
+  m_DistanceVariance: 0
+  m_AngleVariance: 0
+  m_numParticles: 40
   m_lockZ: 1
   m_lifeSpanMax: 0.2
-  m_lifeSpanMin: 0.1
+  m_lifeSpanMin: 0.15
   m_SpawnableObject: {fileID: 1446921683111280, guid: 0b34b1cce2304e1458e40ce7f3ed46c3,
     type: 2}
