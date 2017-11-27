@@ -283,10 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: p1_joystickH
-  m_VerticalAxis: p1_joystickV
-  m_SubmitButton: p1_jump
-  m_CancelButton: p1_shoot
+  m_HorizontalAxis: horizontal
+  m_VerticalAxis: vertical
+  m_SubmitButton: confirm
+  m_CancelButton: back
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
