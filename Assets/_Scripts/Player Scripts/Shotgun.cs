@@ -43,6 +43,9 @@ public class Shotgun : MonoBehaviour {
 	{
 		if (m_ShotgunCurrentCooldown != 0f) return;	// Don't allow shoot if in cooldown [Graham]
 
+        // SFX
+        FindObjectOfType<AudioManager>().Play("Shotgun");
+		
 		// Get the rotation of the object [Graham]
 		aimDir = controls.GetAim();
 		if (aimDir.sqrMagnitude == 0f) 

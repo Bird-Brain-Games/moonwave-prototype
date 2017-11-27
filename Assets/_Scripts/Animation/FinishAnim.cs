@@ -10,6 +10,9 @@ public class FinishAnim : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // SFX
+        FindObjectOfType<AudioManager>().Play("Finish");
+
         countText = animator.GetComponent<Text>();
         countText.enabled = true;
         countText.text = "Finsh!";
