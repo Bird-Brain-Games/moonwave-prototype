@@ -179,12 +179,12 @@ public class Shoot : MonoBehaviour {
 
     public void ShootShotgun()
     {
+        
         m_Shotgun.Shoot();
 
         float shootingAngle = (aimDir.y + 1) / 2;
         
-        // Tell the animator to fire the bullet
-        m_Animator.SetTrigger("Shoot Shotgun");
+
 
 
     }
