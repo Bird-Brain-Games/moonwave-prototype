@@ -52,7 +52,7 @@ public class PlayerStateManager : MonoBehaviour
         m_Animator = GetComponentInChildren<Animator>();
 
         movementStates.AttachDefaultState(playerStats.PlayerDriftStateString, driftState);
-        movementStates.AttachDefaultState(playerStats.PlayerJumpStateString, jumpState);
+        movementStates.AttachState(playerStats.PlayerJumpStateString, jumpState);
         movementStates.AttachState(playerStats.PlayerOnPlanetStateString, onPlanetState);
         movementStates.AttachState(playerStats.PlayerBoostActiveString, boostActiveState);
         movementStates.AttachState(playerStats.PlayerBoostChargeString, boostChargeState);
