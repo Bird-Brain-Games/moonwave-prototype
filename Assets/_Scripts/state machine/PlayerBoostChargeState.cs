@@ -33,7 +33,7 @@ public class PlayerBoostChargeState : State
         Debug.Log("Pre instantiant");
         m_chargeParticles = Instantiate(m_PlayerStats.m_Particles);
         m_chargeParticles.transform.position = m_PlayerStats.transform.position;
-        //m_chargeParticles.m_spriteColour = (COLOUR)m_PlayerStats.m_PlayerID;
+        m_chargeParticles.m_spriteColour = (COLOUR)m_PlayerStats.m_PlayerID;
         m_chargeParticles.velocity = -m_Boost.m_Direction * 25;
         Vector3 direction = -m_Boost.m_Direction.normalized;
         bulletRand = direction + m_rigidbody.transform.right;
