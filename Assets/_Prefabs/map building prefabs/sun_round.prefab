@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54169158684174494}
   - component: {fileID: 135889638235994090}
   - component: {fileID: 114048669963799532}
+  - component: {fileID: 114715662411594338}
   m_Layer: 12
   m_Name: sun_round
   m_TagString: Hazard
@@ -38,13 +39,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995069326950748}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -99.4, y: -56, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_LocalRotation: {x: -0.66655236, y: -0.23602545, z: -0.66655236, w: 0.23602544}
+  m_LocalPosition: {x: -34.32097, y: -146.11378, z: 0.000000029802322}
+  m_LocalScale: {x: 108.5775, y: 108.577484, z: 108.577484}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: -141.002, y: -90, z: 0}
 --- !u!23 &23431035920537342
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -113,6 +114,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GravityStrength: 450
+--- !u!114 &114715662411594338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1995069326950748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 484fc94be1e0d954f910b84c24c4bbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollX: 0.05
+  scrollY: 0.02
 --- !u!135 &135880481262066128
 SphereCollider:
   m_ObjectHideFlags: 1

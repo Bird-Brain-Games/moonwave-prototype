@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54943466762260796}
   - component: {fileID: 135125449761278524}
   - component: {fileID: 114978988977496036}
+  - component: {fileID: 114336377487770628}
   m_Layer: 8
   m_Name: moon
   m_TagString: Planet
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937186469697286}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -65.1, y: -7, z: 0}
+  m_LocalPosition: {x: -53.9, y: 19.7, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,6 +102,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114336377487770628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1937186469697286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23bf4f816b7375e428fbf9e918d17b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotX: 0.2
 --- !u!114 &114978988977496036
 MonoBehaviour:
   m_ObjectHideFlags: 1
