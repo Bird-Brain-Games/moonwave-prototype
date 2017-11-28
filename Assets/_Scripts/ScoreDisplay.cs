@@ -31,20 +31,17 @@ public class ScoreDisplay : MonoBehaviour {
             //if (i == 1)
             //playerScoreText[i].color = manager.players[1].colour;
             playerScoreText[i].text = playerScores[i].ToString();
-            Debug.Log("Initializing colours");
         }
         
 	}
 	
 	// Late update is called once per frame, after the other updates. Used for UI. [Graham]
 	void LateUpdate () {
-        manager = GameObject.Find("Players and spawns").GetComponent<PlayerManager>();
-        playerScores = manager.GetPlayerScores();
 
         // Update the player texts
         for (int i = 0; i < numPlayers; i++)
         {
-            playerScoreText[i].color = manager.players[i].colour;
+            playerScoreText[i].color = manager.players[i].colour; //bad but needs to be done because of initlization order
             playerScoreText[i].text = playerScores[i].ToString();
         }
     }

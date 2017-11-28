@@ -281,7 +281,6 @@ public class Controls : MonoBehaviour
     void Start()
     {
         playerNumber = GetComponent<PlayerStats>().m_PlayerID;
-        Debug.Log("Player number: " + playerNumber);
         if (!CreateController(playerNumber))
         {
             Debug.Log("error this controller already exists");

@@ -60,9 +60,13 @@ public class BulletParticles : MonoBehaviour
         updateEmitterPos(pos.x, pos.y, pos.z, vel.x, vel.y, vel.z);
     }
 
-    public void setRand(Vec rand)
+    void setRand(Vec rand)
     {
         setRandomness(rand.x, rand.y, rand.z);
+    }
+    public void SetRand(Vector3 rand)
+    {
+        setRand(convert(rand));
     }
     #endregion
 
@@ -75,10 +79,10 @@ public class BulletParticles : MonoBehaviour
     void Start()
     {
         Alive = true;
-        //velocity = -GetComponent<Rigidbody>().velocity * emissionSpeed;
         size = (int)(maxEmmit * (maxDur) * (1 / emmiterFreqeuncy));
         g_Arr = new Particle[size];
         particleArr = new GameObject[size];
+        Debug.Log("Size: " + size);
         for (int i = 0; i < size; i++)
         {
             particleArr[i] = Instantiate<GameObject>(m_SpawnableObject);
@@ -152,6 +156,7 @@ public class BulletParticles : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log("destroy");
         for (int i = 0; i < size; i++)
         {
 

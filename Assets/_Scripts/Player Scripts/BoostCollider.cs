@@ -48,7 +48,7 @@ public class BoostCollider : MonoBehaviour
     public void setCollider(Vector3 transform, Quaternion rotation, bool collision = true)
     {
         m_rotation = rotation;
-        m_offset = transform;
+        m_offset = transform.normalized;
         fixedUpdate = true;
         //hacky way to update the position and then make it visisble.
         FixedUpdate();
@@ -79,14 +79,11 @@ public class BoostCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("boost collider");
         if (collider.gameObject.tag == "Player")
         {
-            Debug.Log("boost collider with player");
             if (collider.transform != m_parentTransform)
             {
                 //basically switch to the playerBigHitState;
-                Debug.Log("boost collider with player other than themselves");
                 //Set hitlastby
                 if (collider.transform.GetComponent<PlayerStats>().Invincible == false)
                 {
@@ -94,7 +91,6 @@ public class BoostCollider : MonoBehaviour
 
                     if (collider.transform.GetComponent<PlayerStats>().GetShieldState() == false)
                     {
-                        Debug.Log("boost collider without shield");
 
 
                         // SFX
@@ -128,12 +124,6 @@ public class BoostCollider : MonoBehaviour
                         m_MeshRender.enabled = false;
                     }
                 }
-            }
-            else
-            {
-                Debug.Log("Collision with ourselves");
-                Debug.Log(collider.transform.GetInstanceID());
-                Debug.Log(m_parentTransform.GetInstanceID());
             }
         }
     }
