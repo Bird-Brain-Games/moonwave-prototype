@@ -55,7 +55,7 @@ public class PlayerStats : MonoBehaviour {
 
     public float m_respawnTime;
     public Color colourdull;
-    public Color colour;
+    public Color colour { get; set; }
     //A colour for our bullets [cam]
     public Color ColourOfBullet { get; set; }
     public bool Invincible { get; set; }

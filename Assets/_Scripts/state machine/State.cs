@@ -13,7 +13,6 @@ public abstract class State : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        Debug.Log("Base State created");
         stateManager = GetComponent<StateManager>();
     }
 
