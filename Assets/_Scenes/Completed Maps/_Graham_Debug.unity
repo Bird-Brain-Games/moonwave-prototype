@@ -562,7 +562,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -21
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
       propertyPath: m_LocalPosition.z
@@ -592,21 +592,10 @@ Prefab:
       propertyPath: m_Name
       value: Planet_Round (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+    - target: {fileID: 135125449761278524, guid: 0d98679bdf1691d41a31687c2aa2b4cd,
+        type: 2}
+      propertyPath: m_Radius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
@@ -621,12 +610,12 @@ Prefab:
     - target: {fileID: 224046520887083648, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 364
+      value: 358
       objectReference: {fileID: 0}
     - target: {fileID: 224046520887083648, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 205
+      value: 201.5
       objectReference: {fileID: 0}
     - target: {fileID: 224046520887083648, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
@@ -711,12 +700,12 @@ Prefab:
     - target: {fileID: 224446037790812634, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 528.00006
+      value: 528
       objectReference: {fileID: 0}
     - target: {fileID: 224446037790812634, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 431.84265
+      value: 432.25906
       objectReference: {fileID: 0}
     - target: {fileID: 224446037790812634, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
@@ -726,7 +715,7 @@ Prefab:
     - target: {fileID: 224446037790812634, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000019073
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224446037790812634, guid: 3e589af603a5aea4da835cdfe6eeb049,
         type: 2}
@@ -1035,7 +1024,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 19.7
+      value: 20.3
       objectReference: {fileID: 0}
     - target: {fileID: 4838866698015538, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1064,6 +1053,11 @@ Prefab:
     - target: {fileID: 1937186469697286, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
       propertyPath: m_Name
       value: Planet_Round (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 135125449761278524, guid: 0d98679bdf1691d41a31687c2aa2b4cd,
+        type: 2}
+      propertyPath: m_Radius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d98679bdf1691d41a31687c2aa2b4cd, type: 2}
