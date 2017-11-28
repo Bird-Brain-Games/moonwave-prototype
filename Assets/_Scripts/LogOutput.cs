@@ -21,7 +21,7 @@ public class LogOutput : MonoBehaviour
 
 
     // On application quit the player data log is updated to include the new player info from the play session
-    void OnApplicationQuit()
+    void OnDestroy()
     {
         String dateAndTime = System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
 
@@ -29,10 +29,10 @@ public class LogOutput : MonoBehaviour
 
         for (int i = 4; i < transform.childCount; i++) // Writes the data for each player to the file
         {
-            Log(transform.name, "PlayerDataLog", 
+            Log(transform.name, "PlayerDataLog",
                 (i - 3).ToString(),
 
-                transform.GetChild(i).GetChild(0).GetComponent<StickToPlanet>().l_hangTime.ToString(), 
+                transform.GetChild(i).GetChild(0).GetComponent<StickToPlanet>().l_hangTime.ToString(),
                 transform.GetChild(i).GetChild(0).GetComponent<StickToPlanet>().l_groundTime.ToString(),
                 transform.GetChild(i).GetChild(0).GetComponent<Shoot>().l_bullets.ToString(),
                 transform.GetChild(i).GetChild(0).GetComponent<PlayerBoost>().l_boosts.ToString(),

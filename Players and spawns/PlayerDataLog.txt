@@ -1,0 +1,33 @@
+
+*******************************
+***** 2017/11/28 12:33:56 *****
+*******************************
+
+**** PLAYER 1 ****
+Total Hang Time: 3.016173
+Total Time Grounded: 178.4646
+Total Bullets Shot: 0
+Total Boosts Used: 0
+Total Deaths: 0
+
+**** PLAYER 2 ****
+Total Hang Time: 156.0608
+Total Time Grounded: 14.46231
+Total Bullets Shot: 0
+Total Boosts Used: 7
+Total Deaths: 6
+
+**** PLAYER 3 ****
+Total Hang Time: 3.016173
+Total Time Grounded: 178.4646
+Total Bullets Shot: 0
+Total Boosts Used: 0
+Total Deaths: 0
+
+**** PLAYER 4 ****
+Total Hang Time: 3.016173
+Total Time Grounded: 178.4646
+Total Bullets Shot: 0
+Total Boosts Used: 0
+Total Deaths: 0
+

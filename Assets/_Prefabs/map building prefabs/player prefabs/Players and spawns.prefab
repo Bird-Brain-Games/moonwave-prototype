@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114346659908000876}
   - component: {fileID: 114801687975203010}
   - component: {fileID: 114038922114572346}
+  - component: {fileID: 114358470180524236}
   m_Layer: 0
   m_Name: Players and spawns
   m_TagString: Untagged
@@ -67,6 +68,17 @@ MonoBehaviour:
   players: []
   playerScores: 
   playerColours: []
+--- !u!114 &114358470180524236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1016229052574966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ede76acf4d26241821749f6a4f0e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114801687975203010
 MonoBehaviour:
   m_ObjectHideFlags: 1
