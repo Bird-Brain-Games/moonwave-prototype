@@ -21,7 +21,7 @@ public class LogOutput : MonoBehaviour
 
 
     // On application quit the player data log is updated to include the new player info from the play session
-    void OnApplicationQuit()
+    void OnDestroy()
     {
         String dateAndTime = System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
 
