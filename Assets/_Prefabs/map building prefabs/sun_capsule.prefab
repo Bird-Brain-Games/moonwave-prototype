@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23018234212332080}
   - component: {fileID: 136280847251932674}
   - component: {fileID: 114826697174830834}
+  - component: {fileID: 114277463017260684}
   m_Layer: 12
   m_Name: sun_capsule
   m_TagString: Hazard
@@ -38,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1845338069734064}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2, y: -59, z: 0}
-  m_LocalScale: {x: 20, y: 50, z: 8.5}
+  m_LocalPosition: {x: 0, y: -73, z: 0}
+  m_LocalScale: {x: 49.641373, y: 124.10335, z: 21.097559}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -85,6 +86,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1845338069734064}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114277463017260684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845338069734064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 484fc94be1e0d954f910b84c24c4bbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollX: 0.2
+  scrollY: 0.1
 --- !u!114 &114826697174830834
 MonoBehaviour:
   m_ObjectHideFlags: 1
