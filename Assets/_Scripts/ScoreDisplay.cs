@@ -27,9 +27,9 @@ public class ScoreDisplay : MonoBehaviour {
         {
             playerScoreText[i] = Instantiate(playerScorePrefab, transform);
             //if (i == 0)
-                playerScoreText[i].color = manager.players[i].colour;  // Broken for some reason [Graham]
+            playerScoreText[i].color = manager.players[i].colour;  // Broken for some reason [Graham]
             //if (i == 1)
-                //playerScoreText[i].color = manager.players[1].colour;
+            //playerScoreText[i].color = manager.players[1].colour;
             playerScoreText[i].text = playerScores[i].ToString();
             Debug.Log("Initializing colours");
         }
@@ -38,6 +38,7 @@ public class ScoreDisplay : MonoBehaviour {
 	
 	// Late update is called once per frame, after the other updates. Used for UI. [Graham]
 	void LateUpdate () {
+        manager = GameObject.Find("Players and spawns").GetComponent<PlayerManager>();
         playerScores = manager.GetPlayerScores();
 
         // Update the player texts

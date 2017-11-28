@@ -69,7 +69,6 @@ public class PlayerBoost : MonoBehaviour
         m_controls = GetComponent<Controls>();
         l_boosts = 0;
         //Set player colour for boost reset.
-        m_PlayerStats.colour = m_Rend.material.color;
         m_startCooldown = false;
         //Get the boost big hit collider [cam]
         m_BoostCollider = GetComponentInParent<Unique>().GetComponentInChildren<BoostCollider>();
