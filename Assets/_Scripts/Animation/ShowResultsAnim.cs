@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShowResultsAnim : StateMachineBehaviour {
 
-	public UnityEngine.UI.Button backToMenuPrefab;
+	//public UnityEngine.UI.Button backToMenuPrefab;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -53,7 +53,7 @@ public class ShowResultsAnim : StateMachineBehaviour {
 		{
 			int winningNum = int.Parse(resultString[1].ToString());
 			resultString += " wins";
-			//resultText.color = players.GetPlayerColours()[winningNum - 1];	// Colour is bugged
+			resultText.color = players.players[winningNum - 1].colour;	// Colour is bugged
 		}
 
 		// Change the text to show the winner(s) [Graham]	
