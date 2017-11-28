@@ -36,9 +36,10 @@ public class PlayerBoost : MonoBehaviour
     float m_TimeCharging;
 
     //advancded direction variable
-    Vector3 m_Direction;
+    public Vector3 m_Direction { get; set; }
     Vector3 m_DirectionSelected;
 
+    //particles stuff
 
     // Logging  l_ is used to indicate a variable is for logging
     public int l_boosts;
@@ -114,7 +115,6 @@ public class PlayerBoost : MonoBehaviour
         m_move = m_controls.GetMove();
         if (m_move.x == 0 && m_move.y == 0)
         {
-            Debug.Log(m_DirectionSelected);
             m_Direction = m_DirectionSelected;
         }
         else

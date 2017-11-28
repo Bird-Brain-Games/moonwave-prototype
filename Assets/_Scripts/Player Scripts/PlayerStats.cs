@@ -60,6 +60,8 @@ public class PlayerStats : MonoBehaviour {
     public Color ColourOfBullet { get; set; }
     public bool Invincible { get; set; }
 
+    public BulletParticles m_Particles;
+
     // Score Calculations
     public int m_PlayerID;
     public PlayerStats m_HitLastBy;
@@ -125,7 +127,6 @@ public class PlayerStats : MonoBehaviour {
         ColourData temp = GetComponentInParent<bulletColour>().GetNextAvailableColour();
         if (temp.isFree == true)
         {
-            Debug.Log("Setting Colour");
             ColourOfBullet = temp.colour;
             colour = temp.colour;
             GetComponentInChildren<SkinnedMeshRenderer>().material.color = colour;
